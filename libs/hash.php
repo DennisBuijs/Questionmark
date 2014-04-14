@@ -8,8 +8,8 @@ class Hash {
    * @param type $salt The salt, should probably be same throughout the system
    * @return type
    */
-  static function create($algo, $data) {
-    $context = hash_init($algo, HASH_HMAC, HASH_PASSWORD_KEY);
+  static function create($data) {
+    $context = hash_init('sha512', HASH_HMAC, HASH_PASSWORD_KEY);
     hash_update($context, $data);
     return hash_final($context);
   }
