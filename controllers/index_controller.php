@@ -4,7 +4,7 @@ class Index_Controller extends Controller {
 
   function __construct() {
     parent::__construct();
-    Auth::handleLogin();
+    Auth::handle_login();
   }
 
 
