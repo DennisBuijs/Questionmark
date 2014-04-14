@@ -4,6 +4,7 @@ class Index_Controller extends Controller {
 
   function __construct() {
     parent::__construct();
+    Auth::handleLogin();
   }
 
 
@@ -16,6 +17,6 @@ class Index_Controller extends Controller {
     $this->view->render('index/index');
     $this->view->render('footer');
   }
-  
+
 
 }
