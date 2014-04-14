@@ -2,7 +2,7 @@
 
 	<div class="col-md-8 col-md-push-2">
 		
-		<form action="login/run" method="post">
+		<form action="login/run">
 			
 			<div class="row">
 
