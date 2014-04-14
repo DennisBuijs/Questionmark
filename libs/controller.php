@@ -18,6 +18,11 @@ class Controller {
   }
 
 
+  public function logout() {
+    Session::destroy();
+    header("Location: " . URL . "/login");
+    exit;
+  }
 
 
 }
