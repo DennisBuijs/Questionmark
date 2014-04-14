@@ -1,6 +1,6 @@
 <?php
 
-class Index_Controller extends Controller {
+class Login_Controller extends Controller {
 
   function __construct() {
     parent::__construct();
@@ -10,11 +10,15 @@ class Index_Controller extends Controller {
   public function index() {
 
     $this->view->seo = $this->model->get_seo();
-    $this->view->enquetes = $this->model->get_all_enquetes();
 
     $this->view->render('header');
-    $this->view->render('index/index');
+    $this->view->render('login/index');
     $this->view->render('footer');
   }
 
+  public function run(){
+    $this->model->run(); 
+  }
+  
+  
 }
