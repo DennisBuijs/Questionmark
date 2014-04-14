@@ -11,19 +11,4 @@
     <link rel="stylesheet" href="public/css/style.css">
 
   </head>
-
   <body>
-
-  	<div class="container">
-
-  		<div class="row">
-  			
-  			<div class="col-md-8 col-md-push-2">
-  				
-  				<h1>QuestionFriet?</h1>
-
-  			</div>
-
-  		</div>
-  
-    
