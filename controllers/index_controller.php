@@ -12,11 +12,10 @@ class Index_Controller extends Controller {
     $this->view->seo = $this->model->get_seo();
     $this->view->enquetes = $this->model->get_all_enquetes();
 
-
-    $this->view->render('index/header');
+    $this->view->render('header');
     $this->view->render('index/index');
-    $this->view->render('index/footer');
+    $this->view->render('footer');
   }
-
+  
 
 }

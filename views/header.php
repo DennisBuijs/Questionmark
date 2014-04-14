@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
   <head>
 
     <title>
@@ -13,6 +14,16 @@
 
   <body>
 
-  	<h1>Questionmark?</h1>
+  	<div class="container">
+
+  		<div class="row">
+  			
+  			<div class="col-md-12">
+  				
+  				<h1>Questionmark?</h1>
+
+  			</div>
+
+  		</div>
   
     
