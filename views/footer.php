@@ -1,8 +1,12 @@
-			<footer class="col-md-8 col-md-push-2">
+			<div class="row">
 
-			  wow footer 
-			  
-			</footer>
+				<footer class="col-md-8 col-md-push-2">
+
+				  wow footer 
+				  
+				</footer>
+
+			</div>
 
 		</container>
 

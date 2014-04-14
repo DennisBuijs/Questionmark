@@ -1,22 +1,40 @@
-<div class="row">
+<div class="row content">
 
 	<div class="col-md-8 col-md-push-2">
 		
 		<form action="login/run" method="post">
 			
-			<p>
-				<label>Gebruikersnaam</label><br>
-				<input class="form-control" name="login_username" type="text">
-			</p>
+			<div class="row">
 
-			<p>
-				<label>Wachtwoord</label><br>
-				<input class="form-control" name="login_password" type="password">
-			</p>
+				<div class="col-md-6 col-md-push-3">
 
-			<p>
-				<input class="btn btn-primary" type="submit" value="Inloggen">
-			</p>
+					<label>Gebruikersnaam</label><br>
+					<input class="form-control" name="login_username" type="text">
+
+				</div>
+
+			</div>
+
+			<div class="row">
+
+				<div class="col-md-6 col-md-push-3">
+
+					<label>Wachtwoord</label><br>
+					<input class="form-control" name="login_password" type="password">
+
+				</div>
+
+			</div>
+
+			<div class="row">
+
+				<div class="col-md-6 col-md-push-3">
+
+					<input class="btn btn-primary" type="submit" value="Inloggen">
+
+				</div>
+
+			</div>
 
 		</form>
 
