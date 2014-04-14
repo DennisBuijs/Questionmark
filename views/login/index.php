@@ -16,10 +16,10 @@
 			
 			<div class="row">
 
-				<div class="col-md-12">
+				<div class="col-md-12 form-group">
 
-					<label>Gebruikersnaam</label><br>
-					<input class="form-control" name="login_username" type="text" placeholder="Gebruikersnaam" required="required">
+					<label class="control-label" for="login_username">Gebruikersnaam</label><br>
+					<input class="form-control" id="login_username" name="login_username" type="text" data-placeholder="Gebruikersnaam" data-required="required">
 
 				</div>
 
@@ -27,10 +27,10 @@
 
 			<div class="row">
 
-				<div class="col-md-12">
+				<div class="col-md-12 form-group">
 
-					<label>Wachtwoord</label><br>
-                    <input class="form-control" name="login_password" type="password" placeholder="Wachtwoord" required="required">
+					<label class="control-label" for="login_password">Wachtwoord</label><br>
+          <input class="form-control" id="login_password" name="login_password" type="password" data-placeholder="Wachtwoord" data-required="required">
 
 				</div>
 

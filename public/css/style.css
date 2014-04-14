@@ -10,3 +10,7 @@
 .login-container .row:last-child {
 	margin-bottom: 0;
 }
+
+.login-container .error {
+	border: 1px solid #F00;
+}

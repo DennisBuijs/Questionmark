@@ -2,21 +2,19 @@ $(document).ready(function() {
 
   $('form').on('submit', function() {
     var iNumOfInvalidValues = 0;
-    $('[required=required]').each(function() {
+    $('[data-required=required]').each(function() {
       var $this = $(this);
 
       if (this.value === '') {
-        if (!$this.hasClass('invalid-value')) {
-          $this.after('<p>' + $this.attr('placeholder') + ' is verplicht</p>');
-        }
-        $this.addClass('invalid-value');
+        $("body").append("DINGEN KLOPPEN NIET");
+        $this.parent().addClass('has-error');
 
         iNumOfInvalidValues++;
 
       }
       else if ($this.hasClass('invalid-value')) {
         $this.removeClass('invalid-value');
-        $('+ p', this).remove();
+        $('+ div', this).remove();
       }
     });
 
