@@ -6,7 +6,9 @@ class Login_Model extends Model {
     return array('title' => 'Login');
   }
 
-
+  /**
+   * Run
+   */
   public function run() {
 
     $data = array(":name" => $_POST["login_username"], ":password" => Hash::create($_POST["login_password"]));
