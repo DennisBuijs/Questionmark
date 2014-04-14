@@ -20,5 +20,9 @@ class Login_Controller extends Controller {
     $this->model->run(); 
   }
   
+  public function error(){
+    $this->view->error = true;
+  }
+  
   
 }

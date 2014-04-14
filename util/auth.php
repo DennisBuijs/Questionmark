@@ -2,21 +2,14 @@
 
 class Auth {
 
-  public static function handle_login($check_if_admin = false) {
+  public static function handle_login() {
     @session_start();
-    if (!isset($_SESSION['logged_in'])) {
+    if (!isset($_SESSION['logged_on'])) {
       session_destroy();
-      header("Location: login");
+      header("Location: " . URL . "login");
       exit;
     }
-
-    if ($check_if_admin) {
-      if ($_SESSION['user_type'] != 'admin') {
-        session_destroy();
-        header("Location: login");
-        exit;
-      }
-    }
   }
+
 
 }
