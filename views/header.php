@@ -20,7 +20,7 @@
   			
   			<div class="col-md-8 col-md-push-2">
   				
-  				<h1>Questionmark?</h1>
+  				<h1>QuestionFriet?</h1>
 
   			</div>
 
