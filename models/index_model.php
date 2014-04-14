@@ -3,7 +3,7 @@
 class Index_Model extends Model {
 
   public function get_seo() {
-    return array('title' => 'Questionmark, jeweetzelf ouwe');
+    return array('title' => 'Questionmark :: Vraag uw klant!!');
   }
 
 
