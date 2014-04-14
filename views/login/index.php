@@ -6,12 +6,12 @@
 			
 			<p>
 				<label>Gebruikersnaam</label><br>
-				<input type="text" class="form-control">
+				<input class="form-control" name="login_username" type="text">
 			</p>
 
 			<p>
 				<label>Wachtwoord</label><br>
-				<input type="password" class="form-control">
+				<input class="form-control" name="login_password" type="password">
 			</p>
 
 			<p>
