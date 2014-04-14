@@ -1,4 +1,4 @@
-			<footer>
+			<footer class="col-md-8 col-md-push-2">
 
 			  wow footer 
 			  
