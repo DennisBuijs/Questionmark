@@ -19,7 +19,7 @@
 				<div class="col-md-12">
 
 					<label>Gebruikersnaam</label><br>
-					<input class="form-control" name="login_username" type="text">
+					<input class="form-control" name="login_username" type="text" placeholder="Gebruikersnaam" required="required">
 
 				</div>
 
@@ -30,7 +30,7 @@
 				<div class="col-md-12">
 
 					<label>Wachtwoord</label><br>
-					<input class="form-control" name="login_password" type="password">
+                    <input class="form-control" name="login_password" type="password" placeholder="Wachtwoord" required="required">
 
 				</div>
 
