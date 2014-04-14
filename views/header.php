@@ -18,7 +18,7 @@
 
   		<div class="row">
   			
-  			<div class="col-md-12">
+  			<div class="col-md-8 col-md-push-2">
   				
   				<h1>Questionmark?</h1>
 

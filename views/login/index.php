@@ -1,10 +1,8 @@
 <div class="row">
-	
-	<div class="col-md-2"></div>
 
-	<div class="col-md-8">
+	<div class="col-md-8 col-md-push-2">
 		
-		<form action="/login/run">
+		<form action="login/run">
 			
 			<p>
 				<label>Gebruikersnaam</label><br>
@@ -23,7 +21,5 @@
 		</form>
 
 	</div>
-
-	<div class="col-md-2"></div>
 
 </div>
