@@ -12,6 +12,6 @@ define('HASH_PASSWORD_KEY', 'jhqfi3b1n-94u9qupbielr');
 // Database
 $config['database']['username'] = 'root';
 $config['database']['password'] = 'root';
-$config['database']['database'] = 'Questionmark';
+$config['database']['database'] = 'questionmark';
 $config['database']['host']     = 'localhost';
 

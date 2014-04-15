@@ -8,6 +8,7 @@ class Login_Model extends Model {
 
   /**
    * Run
+   * Data moet nog worden gevalideerd
    */
   public function run() {
 

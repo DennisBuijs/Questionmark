@@ -80,3 +80,10 @@ class Database extends PDO {
 
 
 }
+
+$config['database']['username'] = 'root';
+$config['database']['password'] = 'root';
+$config['database']['database'] = 'Questionmark';
+$config['database']['host'] = 'localhost';
+
+$db = new Database($config['database']);
