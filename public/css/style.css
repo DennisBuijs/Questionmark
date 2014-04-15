@@ -3,6 +3,8 @@
 	margin-top: 30px;
 }
 
+/* Login */
+
 .login-container .row {
 	margin-bottom: 15px;
 }
@@ -13,4 +15,12 @@
 
 .login-container .error {
 	border: 1px solid #F00;
+}
+
+/* Alerts */
+
+.alert-fixed-top {
+	border-radius: 0;
+	display: none;
+	text-align: center;
 }
