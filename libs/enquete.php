@@ -1,7 +1,5 @@
 <?php
 
-require './database.php';
-
 class Enquete {
 
   public $id, $name, $introduction, $creation_date, $start_date, $end_date, $questions;
@@ -34,7 +32,8 @@ class Enquete {
     global $db;
     $sql = "SELECT * FROM Enquetes WHERE id = :id";
     $data = $db->select($sql, array(":id" => $this->id));
-    print_r($data);
+    $this->name = $data['name'];
+    print_r($this->name);
     // TODO: data uit database moet object eigenschap worden
   }
 
