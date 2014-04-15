@@ -9,7 +9,9 @@ class Error_Controller extends Controller {
   
   public function index(){
     
+    $this->view->render('header');
     $this->view->render('error/index');
+    $this->view->render('footer');
   }
   
   

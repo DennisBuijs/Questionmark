@@ -28,3 +28,9 @@
 .enquete-meta .button-group {
 	margin: 15px 0;
 }
+
+/* Links */
+
+a:hover {
+	cursor: pointer;
+}

@@ -1,8 +1,23 @@
-<!DOCTYPE html>
-<html>
-  <head>
-  </head>
-  <body>
-    <h1>404</h1>
-  </body>
-</html>
+<div class="row">
+	
+	<div class="col-md-6 col-md-push-3">
+		
+		<h1>Questionmark?</h1>
+
+	</div>
+
+</div>
+
+<div class="row">
+	
+	<div class="col-md-6 col-md-push-3 content">
+		
+		<h2>Deze pagina bestaat niet!</h2>
+
+		<p>
+			Ga terug <a href="index/">naar de homepage</a> of <a onclick="history.go(-1);">de vorige pagina</a>.
+		</p>
+
+	</div>
+
+</div>
