@@ -32,14 +32,17 @@ class Enquete {
     global $db;
     $sql = "SELECT * FROM Enquetes WHERE id = :id";
     $data = $db->select($sql, array(":id" => $this->id));
-    $this->name = $data['name'];
-    print_r($this->name);
+    // $this->name = $data["name"];
+    // $this->introduction = $data["introduction"];
+    // $this->creation_date = $data["creation_date"];
+    // $this->questions = $data["questions"];
+    // print_r($this);
     // TODO: data uit database moet object eigenschap worden
   }
 
 
 }
 
-echo "<pre>";
+// echo "<pre>";
 $enquete = Enquete::get_all();
-print_r($enquete);
+// print_r($enquete);

@@ -24,3 +24,7 @@
 	display: none;
 	text-align: center;
 }
+
+.enquete-meta .button-group {
+	margin: 15px 0;
+}
