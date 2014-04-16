@@ -18,6 +18,8 @@
 
         <?php
 
+          print_r($this->enquetes);
+        
           $enquete->id = "1";
           $enquete->name = "Testenquete";
           $enquete->introduction = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos omnis ea dolore hic beatae error at consectetur numquam praesentium maiores.";

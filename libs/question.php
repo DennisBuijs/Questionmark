@@ -12,4 +12,9 @@ class Question {
   }
 
 
+  public static function get_questions_by_enquete_id() {
+    return array();
+  }
+
+
 }

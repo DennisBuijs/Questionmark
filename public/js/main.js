@@ -35,9 +35,8 @@ $(document).ready(function() {
     });
 
     if (iNumOfInvalidValues !== 0)
-
-      show_alert("danger", "De logingegevens zijn niet correct.");
-      return false;
+      //show_alert("danger", "De logingegevens zijn niet correct.");
+    return false;
 
   });
 

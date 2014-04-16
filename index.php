@@ -7,6 +7,7 @@ require_once 'libs/view.php';
 require_once 'libs/model.php';
 require_once 'libs/database.php';
 require_once 'libs/enquete.php';
+require_once 'libs/question.php';
 require_once 'libs/session.php';
 require_once 'libs/hash.php';
 require_once 'libs/debug.php';

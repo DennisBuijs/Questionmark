@@ -4,8 +4,8 @@ class Enquete {
 
   public $id, $name, $introduction, $creation_date, $start_date, $end_date, $questions;
 
-  public function __construct() {
-    $this->init();
+  public function __construct($id) {
+    $this->init($id);
   }
 
 
@@ -19,6 +19,7 @@ class Enquete {
     foreach ($data as $key => $value) {
       $enquetes[] = new self($value['id']);
     }
+    echo "<pre>";
     return $enquetes;
   }
 
@@ -28,21 +29,20 @@ class Enquete {
   }
 
 
-  private function init() {
+  private function init($id) {
     global $db;
+    $this->id = $id;
+
     $sql = "SELECT * FROM Enquetes WHERE id = :id";
     $data = $db->select($sql, array(":id" => $this->id));
-    // $this->name = $data["name"];
-    // $this->introduction = $data["introduction"];
-    // $this->creation_date = $data["creation_date"];
-    // $this->questions = $data["questions"];
-    // print_r($this);
-    // TODO: data uit database moet object eigenschap worden
+
+    $this->name = $data[0]['name'];
+    $this->introduction = $data[0]['description'/* 'introduction' */];
+    $this->creation_date = $data[0]['creation_date'];
+    $this->start_date = $data[0]['start_date'];
+    $this->end_date = $data[0]['end_date'];
+    $this->questions = Question::get_questions_by_enquete_id();
   }
 
 
 }
-
-// echo "<pre>";
-$enquete = Enquete::get_all();
-// print_r($enquete);
