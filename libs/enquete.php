@@ -1,8 +1,11 @@
 <?php
 
+/**
+ * @todo set all properties!!
+ */
 class Enquete {
 
-  public $id, $name, $introduction, $creation_date, $start_date, $end_date, $questions;
+  public $id, $name, $introduction, $creation_date, $start_date, $end_date, $questions; // SESSIEONS G
 
   public function __construct($id) {
     $this->init($id);
@@ -19,7 +22,7 @@ class Enquete {
     foreach ($data as $key => $value) {
       $enquetes[] = new self($value['id']);
     }
-    
+
     return $enquetes;
   }
 
@@ -41,8 +44,13 @@ class Enquete {
     $this->creation_date = $data[0]['creation_date'];
     $this->start_date = $data[0]['start_date'];
     $this->end_date = $data[0]['end_date'];
-    $this->questions = Question::get_questions_by_enquete_id();
+    $this->questions = Question::get_questions_by_enquete_id($id);
   }
 
 
 }
+
+
+echo "<pre>";
+$enquete = Enquete::get_enquete_by_id(1);
+print_r($enquete);
