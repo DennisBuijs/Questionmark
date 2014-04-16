@@ -15,7 +15,7 @@
 		<h2>Deze pagina bestaat niet!</h2>
 
 		<p>
-			Ga terug <a href="index/">naar de homepage</a> of <a onclick="history.go(-1);">de vorige pagina</a>.
+			Ga terug <a href="<?= URL; ?>">naar de homepage</a> of <a onclick="history.go(-1);">de vorige pagina</a>.
 		</p>
 
 	</div>

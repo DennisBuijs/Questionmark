@@ -20,22 +20,22 @@
               <div class="panel-heading">
                 <h4 class="panel-title">
                   <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                    <?php echo $enquete->name; ?>
+                    <?= $enquete->name; ?>
                   </a>
                 </h4>
               </div>
               <div id="collapseOne" class="panel-collapse in" style="height: auto;">
                 <div class="panel-body">
                   <div class="col-md-12" style="margin: 0 0 15px 0; padding:0">
-                    <?php echo $enquete->introduction; ?>
+                    <?= $enquete->introduction; ?>
                   </div>
                   <div class="col-md-6" style="margin: 0 0 15px 0; padding:0">
                     <strong>Aantal keer bekeken:</strong> [[AANTAL KEER BEKEKEN]]<br>
                     <strong>Aantal keer ingevuld:</strong> [[AANTAL KEER INGEVULD]]<br>
                   </div>
                   <div class="col-md-6" style="margin: 0 0 15px 0; padding:0">
-                    <strong>Gestart op:</strong> <?php echo $enquete->start_date; ?><br>
-                    <strong>Eindigt op:</strong> <?php echo $enquete->end_date; ?><br>
+                    <strong>Gestart op:</strong> <?= $enquete->start_date; ?><br>
+                    <strong>Eindigt op:</strong> <?= $enquete->end_date; ?><br>
                   </div>
 
                   <div class="button-group">
@@ -50,7 +50,7 @@
                   </div>
 
                   <div class="input-group">
-                    <input type="text" class="input-sm form-control" value="<?php echo URL; ?>enquete/<?php echo $enquete->id; ?>">
+                    <input type="text" class="input-sm form-control" value="<?= URL; ?>enquete/<?= $enquete->id; ?>">
                     <a href="verzenden.html" class="btn btn-default btn-sm input-group-addon">Verzenden</a>
                   </div> 
                 </div>

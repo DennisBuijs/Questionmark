@@ -17,6 +17,46 @@
 	border: 1px solid #F00;
 }
 
+/* Homepage - Enquête overzicht */
+
+.enquete-meta .button-group {
+	margin: 15px 0;
+}
+
+/* Enquete - Edit */
+
+.enquete-elements-container {
+	max-height: calc(100% - 200px);
+	overflow-y: scroll;
+	position: fixed;
+	width: 375px;
+}
+
+.enquete-elements-container .page-header {
+	background: #f5f5f5;
+	border-bottom: 1px solid #e3e3e3;
+	margin-top: -19px;
+	padding-top: 19px;
+	position: fixed;
+	width: 335px;
+}
+
+.enquete-elements {
+	margin-top: 50px;
+}
+
+.enquete-element {
+	border-bottom: 1px solid #e3e3e3;
+	margin-bottom: 15px;
+	padding-bottom: 15px;
+}
+
+.enquete-element:last-child {
+	border-bottom: 0;
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
 /* Alerts */
 
 .alert-fixed-top {
@@ -25,12 +65,14 @@
 	text-align: center;
 }
 
-.enquete-meta .button-group {
-	margin: 15px 0;
-}
-
 /* Links */
 
 a:hover {
 	cursor: pointer;
+}
+
+/*  */
+
+*[contenteditable="true"] {
+	cursor: text;
 }
