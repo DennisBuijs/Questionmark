@@ -1,3 +1,9 @@
+<?php 
+
+	$enquete = $this->enquete; 
+
+?>
+
   <div class="row">
 
     <div class="col-md-12">
@@ -45,7 +51,7 @@
     
     <div class="col-md-8">
     	
-			<h1 contenteditable="true">Enquêtenaam</h1>
+			<h1 contenteditable="true"><?= $enquete->name; ?></h1>
 
     </div>
 

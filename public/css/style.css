@@ -70,9 +70,3 @@
 a:hover {
 	cursor: pointer;
 }
-
-/*  */
-
-*[contenteditable="true"] {
-	cursor: text;
-}
