@@ -15,18 +15,6 @@
       <div class="panel-group" id="accordion">
 
       <? foreach ($this->enquetes as $enquete) : ?> 
-
-        <?php
-
-          print_r($this->enquetes);
-        
-          $enquete->id = "1";
-          $enquete->name = "Testenquete";
-          $enquete->introduction = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos omnis ea dolore hic beatae error at consectetur numquam praesentium maiores.";
-          $enquete->start_date = "16-04-2014";
-          $enquete->end_date = "23-04-2014";
-
-        ?>
       
         <div class="panel panel-default enquete-meta">
               <div class="panel-heading">

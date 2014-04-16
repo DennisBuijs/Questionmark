@@ -19,7 +19,7 @@ class Enquete {
     foreach ($data as $key => $value) {
       $enquetes[] = new self($value['id']);
     }
-    echo "<pre>";
+    
     return $enquetes;
   }
 
@@ -37,7 +37,7 @@ class Enquete {
     $data = $db->select($sql, array(":id" => $this->id));
 
     $this->name = $data[0]['name'];
-    $this->introduction = $data[0]['description'/* 'introduction' */];
+    $this->introduction = $data[0]['introduction'];
     $this->creation_date = $data[0]['creation_date'];
     $this->start_date = $data[0]['start_date'];
     $this->end_date = $data[0]['end_date'];

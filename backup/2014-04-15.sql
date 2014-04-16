@@ -36,7 +36,7 @@ CREATE TABLE `Answers` (
 CREATE TABLE `Enquetes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `description` text,
+  `introduction` text,
   `creation_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
   `start_date` date DEFAULT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE `Enquetes` (
 -- Gegevens worden geëxporteerd voor tabel `Enquetes`
 --
 
-INSERT INTO `Enquetes` (`id`, `name`, `description`, `creation_date`, `end_date`, `start_date`, `Users_id`) VALUES
+INSERT INTO `Enquetes` (`id`, `name`, `introduction`, `creation_date`, `end_date`, `start_date`, `Users_id`) VALUES
 (1, 'Tevredenheidsonderzoek', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis lacus ac est porta, sit amet lobortis turpis pharetra. Mauris ut turpis in arcu venenatis semper at sit amet purus. Duis consequat convallis purus a commodo. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed lobortis mi a ante luctus, ac varius augue porttitor. Aenean nec justo lobortis, elementum mi ut, rhoncus eros. Vivamus porttitor interdum posuere. Sed lacinia vitae mauris et varius. Nullam facilisis turpis orci, facilisis lobortis nisi dictum non. Proin venenatis massa ligula, sit amet sagittis felis lacinia eu. Etiam vitae posuere nibh, ut elementum neque. Phasellus placerat magna at adipiscing venenatis.\r\n', '2014-04-15', '2014-06-30', '2014-04-13', 1);
 
 -- --------------------------------------------------------
