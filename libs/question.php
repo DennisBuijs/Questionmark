@@ -62,9 +62,12 @@ class Question {
 
   private function get_attributes() {
     global $db;
-    $sql = "SELECT attribute, Question_Attribute_Types_id "
-            . "FROM Question_Attributes "
-            . "WHERE `Questions_id` = :id";
+    $sql = "SELECT attr_types.attribute_type, question_attrs.attribute "
+            . "FROM Question_Attribute_Types as attr_types "
+            . "LEFT JOIN Question_Attributes as question_attrs "
+            . "ON attr_types.id = question_attrs.Question_Attribute_types_id "
+            . "WHERE question_attrs.Questions_id = :id";
+
     $data = $db->select($sql, array(":id" => $this->id));
 
     return $data;
