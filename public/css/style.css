@@ -23,6 +23,24 @@
 	margin: 15px 0;
 }
 
+/* Enquete - Invullen */
+
+.enquete-form {
+	margin: 30px 0;
+}
+
+.question {
+	margin-bottom: 30px;
+}
+
+.question .form-control {
+	resize: none;
+}
+
+.question textarea {
+	height: 200px;
+}
+
 /* Enquete - Edit */
 
 .enquete-elements-container {

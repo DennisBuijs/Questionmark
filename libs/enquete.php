@@ -49,8 +49,3 @@ class Enquete {
 
 
 }
-
-
-echo "<pre>";
-$enquete = Enquete::get_enquete_by_id(1);
-print_r($enquete);
