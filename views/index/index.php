@@ -19,12 +19,12 @@
         <div class="panel panel-default enquete-meta">
               <div class="panel-heading">
                 <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?= $enquete->id; ?>">
                     <?= $enquete->name; ?>
                   </a>
                 </h4>
               </div>
-              <div id="collapseOne" class="panel-collapse in" style="height: auto;">
+              <div id="collapse<?= $enquete->id; ?>" class="panel-collapse in" style="height: auto;">
                 <div class="panel-body">
                   <div class="col-md-12" style="margin: 0 0 15px 0; padding:0">
                     <?= $enquete->introduction; ?>
