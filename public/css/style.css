@@ -64,7 +64,7 @@
 }
 
 .enquete-elements-container {
-	max-height: calc(100% - 200px);
+	height: calc(100% - 159px);
 	overflow-y: scroll;
 	position: fixed;
 	width: 375px;
@@ -95,16 +95,27 @@
 }
 
 .enquete-container {
-	height: 500px;
+	height: calc(100% - 208px);
 	margin-bottom: 15px;
-	max-height: 500px;
+	max-height: calc(100% - 208px);
 	overflow-y: scroll;
+	position: fixed;
+	width: 750px;
 }
 
 .drop-placeholder {
   background: #ff8;
   min-height: 45px;
   margin-bottom: 20px;
+}
+
+.enquete-save-container {
+	text-align: right;
+}
+
+.enquete-save {
+	position: fixed;
+	top: calc(100% - 89px);
 }
 
 /* Alerts */

@@ -57,13 +57,13 @@
     
     <div class="col-md-8">
 
-    	<div class="enquete-container" style="min-height:400px;">
+    	<div class="enquete-container">
 
 
 
 	  	</div>
 
-	  	<a href="enquete/save/" class="btn btn-primary pull-right">Opslaan</a>
+	  	<a href="<?= URL; ?>enquete/save/" class="btn btn-primary enquete-save">Opslaan</a>
 
     </div>
 
