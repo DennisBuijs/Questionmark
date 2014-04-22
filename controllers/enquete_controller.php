@@ -10,7 +10,6 @@ class Enquete_Controller extends Controller {
 
   public function index($id) {
 
-    $this->view->seo = $this->model->get_seo();
     $this->view->enquete = $this->model->get_enquete_by_id($id);
 
     $this->view->render('header');
@@ -20,7 +19,6 @@ class Enquete_Controller extends Controller {
 
   public function edit($id) {
 
-    $this->view->seo = $this->model->get_seo();
     $this->view->enquete = $this->model->get_enquete_by_id($id);
 
     $this->view->render('header');

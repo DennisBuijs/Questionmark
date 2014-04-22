@@ -13,8 +13,6 @@ class Login_Controller extends Controller {
 
   public function index() {
 
-    $this->view->seo = $this->model->get_seo();
-
     $this->view->render('header');
     $this->view->render('login/index');
     $this->view->render('footer');
