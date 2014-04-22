@@ -45,6 +45,36 @@ class Enquete {
   }
 
 
+  static function delete($id) {
+    global $db;
+    $db->delete("Enquetes", " id = $id");
+  }
+
+/**
+ *  DEZE FUNCTIE IS NOG NIET AF!!! ZELFS, SHIT WERKT WSS NIET
+ */
+  static function edit($name, $introduction, $start_date, $end_date, $questions, $deleted_questions, $enquete_id, $user_id) {
+    global $db;
+
+    $data = array(
+        "name" => $name,
+        "introduction" => $introduction,
+        "start_date" => $start_date,
+        "end_date" => $end_date,
+        "user_id" => $user_id
+    );
+
+    $db->update('Enquete', $data, "Enquete_id = $enquete_id");
+
+    foreach ($questions as $question) {
+      Question::edit($question);
+    }
+    foreach ($deleted_questions as $deleted_question) {
+      Question::delete($deleted_question);
+    }
+  }
+
+
   private function init($id) {
     global $db;
     $this->id = $id;

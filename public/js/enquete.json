@@ -20,5 +20,7 @@
               ],
       "required": true
     }
-  ]
+  ],
+  "deleted": [3, 5, 7, 8]
+
 }
