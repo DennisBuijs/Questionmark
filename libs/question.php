@@ -70,7 +70,17 @@ class Question {
 
     $data = $db->select($sql, array(":id" => $this->id));
 
-    return $data;
+    if (count($data) < 1) {
+      $data = '';
+      $attr = '';
+    } else {
+      $attr = '';
+      foreach ($data as $key => $value) {
+        $attr[$value['attribute_type']][] = $value['attribute'];
+      }
+    }
+
+    return $attr;
   }
 
 

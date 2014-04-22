@@ -10,7 +10,6 @@ class Index_Controller extends Controller {
 
   public function index() {
 
-    $this->view->seo = $this->model->get_seo();
     $this->view->enquetes = $this->model->get_all_enquetes();
 
     $this->view->render('header');

@@ -15,7 +15,6 @@ class Enquete {
   public static function get_all() {
     global $db;
 
-
     $sql = "SELECT id FROM Enquetes";
     $data = $db->select($sql);
 
@@ -29,6 +28,20 @@ class Enquete {
 
   public static function get_enquete_by_id($id) {
     return new self($id);
+  }
+
+
+  static function make($name, $introduction, $start_date, $end_date, $user_id) {
+    global $db;
+    $data = array(
+        "name" => $name,
+        "introduction" => $introduction,
+        "creation_date" => date("Y-m-d"),
+        "start_date" => $start_date,
+        "end_date" => $end_date,
+        "Users_id" => $user_id
+    );
+    $db->insert('Enquetes', $data);
   }
 
 
@@ -49,8 +62,3 @@ class Enquete {
 
 
 }
-
-
-echo "<pre>";
-$enquete = Enquete::get_enquete_by_id(1);
-print_r($enquete);

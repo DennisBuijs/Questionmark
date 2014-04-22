@@ -6,7 +6,9 @@
   	<meta charset="UTF-8">
 
     <title>
-      <?= $this->seo['title'] ?>
+      <?= $this->seo['title']?>
+      
+      
     </title> 
 
     <link rel="stylesheet" href="<?= URL; ?>public/css/bootstrap.min.css">

@@ -2,10 +2,6 @@
 
 class Login_Model extends Model {
 
-  public function get_seo() {
-    return array('title' => 'Questionmark?');
-  }
-
   /**
    * Run
    * Data moet nog worden gevalideerd

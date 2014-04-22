@@ -43,8 +43,8 @@
                     <a class="btn btn-primary btn-sm" href="results/">Resultaten</a>
 
                     <div class="btn-group pull-right">
-                      <a class="btn btn-primary btn-sm" href="enquete/edit">Bewerken</a> 
-                      <a class="btn btn-primary btn-sm" href="enquete/delete">Verwijderen</a>
+                      <a class="btn btn-primary btn-sm" href="enquete/edit/<?= $enquete->id; ?>">Bewerken</a> 
+                      <a class="btn btn-primary btn-sm" href="enquete/delete/<?= $enquete->id; ?>">Verwijderen</a>
                     </div>
 
                   </div>
