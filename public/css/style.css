@@ -83,7 +83,7 @@
 	margin-top: 50px;
 }
 
-.enquete-element {
+.enquete-elements .enquete-element {
 	margin-bottom: 15px;
 	padding-bottom: 15px;
 }
@@ -109,8 +109,18 @@
   margin-bottom: 20px;
 }
 
-.enquete-save-container {
-	text-align: right;
+.enquete-container .enquete-element {
+	margin: 10px;
+	padding: 10px;
+}
+
+.enquete-container .enquete-element:hover {
+	background: #ff8;
+}
+
+.enquete-container .enquete-element:hover,
+.enquete-container .enquete-element *:hover {
+	cursor: pointer;
 }
 
 .enquete-save {
@@ -130,4 +140,10 @@
 
 a:hover {
 	cursor: pointer;
+}
+
+/* Forms */
+
+.enquete-element input[type="radio"] {
+	margin-left: -17px;
 }

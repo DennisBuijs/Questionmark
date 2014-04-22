@@ -42,13 +42,13 @@ $(document).ready(function() {
   });
 
   // Functionaliteit voor het slepen van formulierelementen naar het formulier
-  $(".enquete-element").draggable({
+  $(".enquete-elements .enquete-element").draggable({
       connectToSortable: ".enquete-container",
       revert: "invalid",
       ghosting: true, 
       appendTo: document.body,
       helper: function(e, ui) {
-        return $(this).clone().css('width', $(".enquete-container").width());
+        return $(this).clone().css('width', $(".enquete-container").width()-40);
       }
   });
   $(".enquete-container").droppable().sortable({
@@ -57,10 +57,14 @@ $(document).ready(function() {
       ui.placeholder.height(ui.helper.height());
     }
   });
-  // $(".enquete-element").disableSelection();
+  $(".enquete-element").disableSelection();
 
-  $(".enquete-element *").on("focus", function() {
+  $(".enquete-element, .enquete-element *").on("focus", function() {
     $(this).blur();
   });
+
+  $(".enquete-container .enquete-element, .enquete-container .enquete-element *").on("click", function() {
+    alert("Modal");
+  })
 
 });

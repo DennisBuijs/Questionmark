@@ -39,46 +39,61 @@
               switch($question->type) {
 
                 case "textfield": ?>
-                  <label><?= $question->question ?></label>
-                  <input class="form-control" type="text" name="question_<?= $question->order; ?>">
+                  <div class="enquete-element">
+                    <label><?= $question->question ?></label>
+                    <input class="form-control" type="text" name="question_<?= $question->order; ?>" 
+                    placeholder="<?php if(!empty($question->attributes['placeholder'][0])) { 
+                      echo $question->attributes['placeholder'][0]; 
+                    } ?>">
+                  </div>
                 <? break;
 
                 case "textarea": ?>
-                  <label><?= $question->question ?></label>
-                  <textarea class="form-control" name="question_<?= $question->order; ?>" resizable="false"></textarea>
+                  <div class="enquete-element">
+                    <label><?= $question->question ?></label>
+                    <textarea class="form-control" name="question_<?= $question->order; ?>" resizable="false" placeholder="<?php if(!empty($question->attributes['placeholder'][0])) { 
+                        echo $question->attributes['placeholder'][0]; 
+                      } ?>"></textarea>
+                  </div>
                 <? break;
 
                 case "checkbox": ?>
-                  <label><?= $question->question ?></label>
-                  <? foreach ($question->attributes as $attribute) : ?>
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox" name="question_<?= $question->order; ?>">
-                          <?= $attribute['attribute'] ?>
-                        </label>
-                      </div>
-                  <? endforeach ?>
+                  <div class="enquete-element">
+                    <label><?= $question->question ?></label>
+                    <? foreach ($question->attributes['options'] as $attribute) : ?>
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" name="question_<?= $question->order; ?>">
+                            <?= $attribute; ?>
+                          </label>
+                        </div>
+                    <? endforeach ?>
+                  </div>
                 <? break;
 
                 case "radio": ?>
-                  <label><?= $question->question ?></label>
-                  <? foreach ($question->attributes as $attribute) : ?>
-                      <div class="radio">
-                        <label>
-                          <input type="radio" name="question_<?= $question->order; ?>">
-                          <?= $attribute['attribute'] ?>
-                        </label>
-                      </div>
-                  <? endforeach ?>
+                  <div class="enquete-element">
+                    <label><?= $question->question ?></label>
+                    <? foreach ($question->attributes['option'] as $attribute) : ?>
+                        <div class="radio">
+                          <label>
+                            <input type="radio" name="question_<?= $question->order; ?>">
+                            <?= $attribute; ?>
+                          </label>
+                        </div>
+                    <? endforeach ?>
+                  </div>
                 <? break;
 
                 case "select": ?>
-                  <label><?= $question->question ?></label>
-                  <select class="form-control" name="question_<?= $question->order; ?>">
-                    <? foreach ($question->attributes as $attribute) : ?>
-                      <option><?= $attribute['attribute'] ?></option>
-                    <? endforeach ?>
-                  </select>
+                  <div class="enquete-element">
+                    <label><?= $question->question ?></label>
+                    <select class="form-control" name="question_<?= $question->order; ?>">
+                      <? foreach ($question->attributes['option'] as $attribute) : ?>
+                        <option><?= $attribute; ?></option>
+                      <? endforeach ?>
+                    </select>
+                  </div>
                 <? break;
 
               }
@@ -100,4 +115,3 @@
 	  </form>
 
   </div>
-
