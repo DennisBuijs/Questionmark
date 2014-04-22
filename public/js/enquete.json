@@ -1,0 +1,24 @@
+{
+  "name": "Kwaliteitsonderzoek",
+  "introduction": "Middels dit onderzoek proberen wij te weten te komen wat hen vindt van ons product!",
+  "end_date": "",
+  "start_date": "",
+  "questions": [
+    {
+      "question": "Hoe graag kijkt u naar ons product?",
+      "type": "textfield",
+      "placeholder": "bv, goed of niet goed",
+      "required": true
+    },
+    {
+      "question": "wat is uw geslacht?",
+      "type": "radio",
+      "options":
+              [
+                "man",
+                "vrouw"
+              ],
+      "required": true
+    }
+  ]
+}
