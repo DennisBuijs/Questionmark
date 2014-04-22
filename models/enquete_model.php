@@ -7,4 +7,9 @@ class Enquete_Model extends Model {
   }
 
 
+  public function delete($id) {
+    Enquete::delete($id);
+  }
+
+
 }

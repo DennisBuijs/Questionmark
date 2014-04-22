@@ -17,6 +17,7 @@ class Enquete_Controller extends Controller {
     $this->view->render('footer');
   }
 
+
   public function edit($id) {
 
     $this->view->enquete = $this->model->get_enquete_by_id($id);
@@ -24,7 +25,12 @@ class Enquete_Controller extends Controller {
     $this->view->render('header');
     $this->view->render('enquete/edit');
     $this->view->render('footer');
+  }
 
+
+  public function delete($id) {
+    $this->model->delete($id);
+    header('Location: ' . URL);
   }
 
 
