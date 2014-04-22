@@ -17,6 +17,7 @@ $(document).ready(function() {
 
   }
 
+
   $('form').on('submit', function() {
     var iNumOfInvalidValues = 0;
     $('[data-required=required]').each(function() {
@@ -40,6 +41,26 @@ $(document).ready(function() {
 
   });
 
+  // Functionaliteit voor het slepen van formulierelementen naar het formulier
+  $(".enquete-element").draggable({
+      connectToSortable: ".enquete-container",
+      revert: "invalid",
+      ghosting: true, 
+      appendTo: document.body,
+      helper: function(e, ui) {
+        return $(this).clone().css('width', $(".enquete-container").width());
+      }
+  });
+  $(".enquete-container").droppable().sortable({
+    placeholder: "drop-placeholder",
+    start: function (event, ui) {
+      ui.placeholder.height(ui.helper.height());
+    }
+  });
+  // $(".enquete-element").disableSelection();
 
+  $(".enquete-element *").on("focus", function() {
+    $(this).blur();
+  });
 
 });

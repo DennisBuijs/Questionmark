@@ -6,9 +6,15 @@
 
   <div class="row">
 
-    <div class="col-md-12">
+    <div class="col-md-4">
 
       <h1>Questionmark?</h1>
+
+    </div>
+
+    <div class="col-md-8">
+    	
+			<input class="enquete-title" type="text" value="<?= $enquete->name; ?>">
 
     </div>
 
@@ -29,11 +35,6 @@
 					</div>
 
 					<div class="enquete-element">
-						<label for="">Lange tekst</label>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, odit itaque deleniti similique aspernatur ut eaque perspiciatis ullam beatae officia.</p>
-					</div>
-
-					<div class="enquete-element">
 						<label for="">Open vraag</label>
 						<input class="form-control" type="text">
 					</div>
@@ -43,6 +44,11 @@
 						<textarea class="form-control" rows="5"></textarea>
 					</div>
 
+					<div class="enquete-element">
+						<label for="">Checkbox</label>
+						<input type="checkbox"> 
+					</div>
+
 				</div>
 
     	</div>
@@ -50,8 +56,14 @@
     </div>
     
     <div class="col-md-8">
-    	
-			<h1 contenteditable="true"><?= $enquete->name; ?></h1>
+
+    	<div class="enquete-container" style="min-height:400px;">
+
+
+
+	  	</div>
+
+	  	<a href="enquete/save/" class="btn btn-primary pull-right">Opslaan</a>
 
     </div>
 

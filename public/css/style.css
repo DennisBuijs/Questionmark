@@ -43,6 +43,26 @@
 
 /* Enquete - Edit */
 
+.enquete-title {
+	border: 0;
+	color: inherit;
+	font-family: inherit;
+	font-size: 36px;
+	font-weight: 500;
+	line-height: 1.1;
+	margin-bottom: 5px;
+	margin-left: -10px;
+	margin-top: 15px;
+	outline: 0;
+	padding: 5px 10px;
+	width: 100%;
+}
+
+.enquete-title:focus,
+.enquete-title:hover {
+	background: #ff8;
+}
+
 .enquete-elements-container {
 	max-height: calc(100% - 200px);
 	overflow-y: scroll;
@@ -64,7 +84,6 @@
 }
 
 .enquete-element {
-	border-bottom: 1px solid #e3e3e3;
 	margin-bottom: 15px;
 	padding-bottom: 15px;
 }
@@ -73,6 +92,19 @@
 	border-bottom: 0;
 	margin-bottom: 0;
 	padding-bottom: 0;
+}
+
+.enquete-container {
+	height: 500px;
+	margin-bottom: 15px;
+	max-height: 500px;
+	overflow-y: scroll;
+}
+
+.drop-placeholder {
+  background: #ff8;
+  min-height: 45px;
+  margin-bottom: 20px;
 }
 
 /* Alerts */
