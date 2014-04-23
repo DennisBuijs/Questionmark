@@ -8,26 +8,7 @@ class Enquete {
   public $id, $name, $introduction, $creation_date, $start_date, $end_date, $questions; // SESSIEONS G
 
   public function __construct($id) {
-    $this->init($id);
-  }
-
-
-  public static function get_all() {
-    global $db;
-
-    $sql = "SELECT id FROM Enquetes";
-    $data = $db->select($sql);
-
-    foreach ($data as $key => $value) {
-      $enquetes[] = new self($value['id']);
-    }
-
-    return $enquetes;
-  }
-
-
-  public static function get_enquete_by_id($id) {
-    return new self($id);
+    $this->init($id);    
   }
 
 
@@ -50,10 +31,9 @@ class Enquete {
     $db->delete("Enquetes", " id = $id");
   }
 
-/**
- *  DEZE FUNCTIE IS NOG NIET AF!!! ZELFS, SHIT WERKT WSS NIET
- */
+
   static function edit($name, $introduction, $start_date, $end_date, $questions, $deleted_questions, $enquete_id, $user_id) {
+
     global $db;
 
     $data = array(
@@ -67,8 +47,14 @@ class Enquete {
     $db->update('Enquete', $data, "Enquete_id = $enquete_id");
 
     foreach ($questions as $question) {
-      Question::edit($question);
+      if (isset($question->id)) {
+        Question::update($question);
+      }
+      else {
+        Question::make($question);
+      }
     }
+
     foreach ($deleted_questions as $deleted_question) {
       Question::delete($deleted_question);
     }
@@ -88,6 +74,25 @@ class Enquete {
     $this->start_date = $data[0]['start_date'];
     $this->end_date = $data[0]['end_date'];
     $this->questions = Question::get_questions_by_enquete_id($id);
+  }
+
+
+  public static function get_all() {
+    global $db;
+
+    $sql = "SELECT id FROM Enquetes";
+    $data = $db->select($sql);
+
+    foreach ($data as $key => $value) {
+      $enquetes[] = new self($value['id']);
+    }
+
+    return $enquetes;
+  }
+
+
+  public static function get_enquete_by_id($id) {
+    return new self($id);
   }
 
 

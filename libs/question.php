@@ -8,7 +8,7 @@ class Question {
   public $question, $type, $attributes;
 
   public function __construct($id) {
-    $this->init($id);
+    $this->init($id);    
   }
 
 
@@ -18,6 +18,30 @@ class Question {
     $this->attributes = $this->get_attributes();
     $this->type = $this->get_type();
     $this->order = $this->get_order();
+  }
+
+
+  public static function edit($question) {
+    global $db;
+
+    $data = array(
+        "question" => $question['question'],
+        "order" => $question['order'],
+        "required" => $question['required'],
+        "Question_Types_id" => $db->select("SELECT id FROM Question_Types WHERE type = '{$question['type']}'")[0]['id'],
+    );
+    $db->update('Questions', $data);
+  }
+
+
+  public static function make($question) {
+    global $db;
+  }
+
+
+  public static function delete($id) {
+    global $db;
+    $db->delete("Questions", " id = $id");
   }
 
 
@@ -62,25 +86,14 @@ class Question {
 
   private function get_attributes() {
     global $db;
-    $sql = "SELECT attr_types.attribute_type, question_attrs.attribute "
+    $sql = "SELECT attr_types.attribute_type, question_attrs.attribute, question_attrs.id "
             . "FROM Question_Attribute_Types as attr_types "
             . "LEFT JOIN Question_Attributes as question_attrs "
             . "ON attr_types.id = question_attrs.Question_Attribute_types_id "
             . "WHERE question_attrs.Questions_id = :id";
 
     $data = $db->select($sql, array(":id" => $this->id));
-
-    if (count($data) < 1) {
-      $data = '';
-      $attr = '';
-    } else {
-      $attr = '';
-      foreach ($data as $key => $value) {
-        $attr[$value['attribute_type']][] = $value['attribute'];
-      }
-    }
-
-    return $attr;
+    return $data;
   }
 
 
