@@ -62,7 +62,7 @@
         <?php $temp_id = 0; ?>
 
 				<? foreach ($enquete->questions as $question) : ?>
-
+        
             <?php
 
               $temp_id++;
@@ -131,11 +131,11 @@
                 case "radio": ?>
                   <div class="enquete-element">
                     <label><?= $question->question ?></label>
-                    <? foreach ($question->attributes['option'] as $attribute) : ?>
+                    <? foreach ($question->attributes as $attribute) : ?>
                         <div class="radio">
                           <label>
                             <input type="radio" name="question_<?= $question->order; ?>">
-                            <?= $attribute; ?>
+                            <?= $attribute['attribute']; ?>
                           </label>
                         </div>
                     <? endforeach ?>
@@ -146,8 +146,8 @@
                   <div class="enquete-element">
                     <label><?= $question->question ?></label>
                     <select class="form-control" name="question_<?= $question->order; ?>">
-                      <? foreach ($question->attributes['option'] as $attribute) : ?>
-                        <option><?= $attribute; ?></option>
+                      <? foreach ($question->attributes as $attribute) : ?>
+                        <option><?= $attribute['attribute']; ?></option>
                       <? endforeach ?>
                     </select>
                   </div>
@@ -185,4 +185,4 @@
       </div>
     </div>
   </div>
-</div>  
+</div>
