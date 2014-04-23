@@ -8,7 +8,7 @@ class Question {
   public $question, $type, $attributes;
 
   public function __construct($id) {
-    $this->init($id);    
+    $this->init($id);
   }
 
 
@@ -31,6 +31,15 @@ class Question {
         "Question_Types_id" => $db->select("SELECT id FROM Question_Types WHERE type = '{$question['type']}'")[0]['id'],
     );
     $db->update('Questions', $data);
+
+    foreach ($question['attribute'] as $attr) {
+      if (isset($question['attribute']['id'])) {
+        self::update_attribute();
+      }
+      else {
+        self::make_attribute();
+      }
+    }
   }
 
 
@@ -42,6 +51,11 @@ class Question {
   public static function delete($id) {
     global $db;
     $db->delete("Questions", " id = $id");
+  }
+
+
+  private static function make_attribute() {
+    global $db;
   }
 
 

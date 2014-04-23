@@ -13,14 +13,21 @@
     {
       "question": "wat is uw geslacht?",
       "type": "radio",
-      "options":
+      "attributes":
               [
-                "man",
-                "vrouw"
+                {
+                  "id": 4,
+                  "type": "placeholder",
+                  "attribute": "Weet ik veel, man of vrouw denk ik"
+                  
+                },
+                {
+                  
+                }
               ],
       "required": true
     }
   ],
-  "deleted": [3, 5, 7, 8]
-
+  "deleted_question": [3, 5, 7, 8],
+  "deleted_attributes": [3, 5, 6, 7]
 }
