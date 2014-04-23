@@ -5,7 +5,7 @@
  */
 class Question {
 
-  public $question, $type, $attributes;
+  public $question, $type, $attributes, $required, $order;
 
   public function __construct($id) {
     $this->init($id);
@@ -18,6 +18,7 @@ class Question {
     $this->attributes = $this->get_attributes();
     $this->type = $this->get_type();
     $this->order = $this->get_order();
+    $this->required = $this->get_required();
   }
 
 
@@ -34,7 +35,7 @@ class Question {
 
     foreach ($question['attribute'] as $attr) {
       if (isset($question['attribute']['id'])) {
-        self::update_attribute();
+        self::update_attribute($question['attribute']);
       }
       else {
         self::make_attribute();
@@ -118,5 +119,12 @@ class Question {
     return $data[0]['order'];
   }
 
+  private function get_required() {
+    global $db;
+    $sql = "SELECT `required` FROM Questions WHERE id = :id";
+    $data = $db->select($sql, array(":id" => $this->id));
+    return $data[0]['required'];
+  }
+  
 
 }
