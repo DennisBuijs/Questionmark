@@ -59,28 +59,58 @@
 
     	<div class="enquete-container">
 
+        <?php $temp_id = 0; ?>
+
 				<? foreach ($enquete->questions as $question) : ?>
 
             <?php
 
+              $temp_id++;
+
               switch($question->type) {
 
-                case "textfield": ?>
-                  <div class="enquete-element">
+                case "textfield": 
+
+                  $placeholder = (empty($question->attributes['placeholder'][0]) ? "" : $question->attributes['placeholder'][0]);
+                  $input_type = (empty($question->attributes['input_type'][0]) ? "" : $question->attributes['input_type'][0]);
+
+                  ?>
+
+                  <div class="enquete-element" onclick="show_edit_question_modal(<?= $temp_id ?>);">
                     <label><?= $question->question ?></label>
-                    <input class="form-control" type="text" name="question_<?= $question->order; ?>" 
-                    placeholder="<?php if(!empty($question->attributes['placeholder'][0])) { 
-                      echo $question->attributes['placeholder'][0]; 
-                    } ?>">
+                    <input 
+                      class="form-control" 
+                      type="text"
+                      placeholder="<?= $placeholder ?>"
+                      data-type="<?= $question->type ?>"
+                      data-placeholder="<?= $placeholder ?>"
+                      data-required="<?= $question->required ?>"
+                      data-question="<?= $question->question ?>"
+                      data-input-type="text"
+                      data-temp-id="<?= $temp_id ?>"
+                    >
                   </div>
                 <? break;
 
-                case "textarea": ?>
-                  <div class="enquete-element">
+                case "textarea": 
+
+                  $placeholder = (empty($question->attributes['placeholder'][0]) ? "" : $question->attributes['placeholder'][0]);
+
+                  ?>
+
+                  <div class="enquete-element" onclick="show_edit_question_modal(<?= $temp_id ?>);">
                     <label><?= $question->question ?></label>
-                    <textarea class="form-control" name="question_<?= $question->order; ?>" resizable="false" placeholder="<?php if(!empty($question->attributes['placeholder'][0])) { 
-                        echo $question->attributes['placeholder'][0]; 
-                      } ?>"></textarea>
+                    <textarea 
+                      class="form-control" 
+                      resizable="false" 
+                      class="form-control"
+                      placeholder="<?= $placeholder ?>"
+                      data-type="<?= $question->type ?>"
+                      data-placeholder="<?= $placeholder ?>"
+                      data-required="<?= $question->required ?>"
+                      data-question="<?= $question->question ?>"
+                      data-temp-id="<?= $temp_id ?>">
+                    </textarea>
                   </div>
                 <? break;
 
@@ -136,3 +166,23 @@
     </div>
 
   </div>
+
+<div class="modal fade" id="edit-question-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Bewerk vraag</h4>
+      </div>
+      <div class="modal-body">
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
+        <button type="button" class="btn btn-primary">Opslaan</button>
+      </div>
+    </div>
+  </div>
+</div>  

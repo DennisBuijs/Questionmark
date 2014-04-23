@@ -112,6 +112,7 @@
 .enquete-container .enquete-element {
 	margin: 10px;
 	padding: 10px;
+	z-index: 1000;
 }
 
 .enquete-container .enquete-element:hover {

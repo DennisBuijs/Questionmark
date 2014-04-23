@@ -59,12 +59,47 @@ $(document).ready(function() {
   });
   $(".enquete-element").disableSelection();
 
-  $(".enquete-element, .enquete-element *").on("focus", function() {
-    $(this).blur();
+  $(".enquete-container, .enquete-container *").on("focus, click", ".enquete-element", function(e) {
+    $(".enquete-container *").blur();
+    $("input, select, select *").blur();
+    e.preventDefault();
   });
 
-  $(".enquete-container .enquete-element, .enquete-container .enquete-element *").on("click", function() {
-    alert("Modal");
-  })
+  show_edit_question_modal = function(id) {
+    $("#edit-question-modal").modal();
+    $(".modal-body").empty();
+
+    var question = $("[data-temp-id="+id+"]").attr("data-question");
+    var type = $("[data-temp-id="+id+"]").attr("data-type");
+    var placeholder = $("[data-temp-id="+id+"]").attr("data-placeholder");
+    var required = $("[data-temp-id="+id+"]").attr("data-required");
+    var input_type = $("[data-temp-id="+id+"]").attr("data-input-type");
+
+    console.log(required);
+
+    var question_html = "<div class=\"form-group\"><label>Vraag</label><input class=\"form-control\" type=\"text\" value=\""+question+"\"></div>";
+    var input_type_html = "<div class=\"form-group\"><label>Soort veld</label><select class=\"form-control\"><option>Tekst</option><option>URL</option><option>Mail</option><option>Number</option></select></div>";
+    var placeholder_html = "<div class=\"form-group\"><label>Placeholder</label><input class=\"form-control\" type=\"text\" value=\""+placeholder+"\"></div>";
+    if(required == 1) {
+      var required_html = "<div class=\"form-group\"><input type=\"checkbox\" checked=\"checked\"> Required</div>";
+    } else {
+      var required_html = "<div class=\"form-group\"><input type=\"checkbox\"> Required</div>";
+    }
+
+    switch(type) {
+      case "textfield":
+        $(".modal-body").append(question_html);
+        $(".modal-body").append(input_type_html);
+        $(".modal-body").append(placeholder_html);
+        $(".modal-body").append("<div class=\"form-group\"><input type=\"checkbox\"> Required</div>");
+        break;
+      case "textarea":
+        $(".modal-body").append("<div class=\"form-group\"><label>Vraag</label><input class=\"form-control\" type=\"text\" value=\""+question+"\"></div>");
+        $(".modal-body").append("<div class=\"form-group\"><label>Placeholder</label><input class=\"form-control\" type=\"text\" value=\""+placeholder+"\"></div>");
+        $(".modal-body").append("<div class=\"form-group\"><input type=\"checkbox\"> Required</div>");
+        break;
+    }
+
+  }
 
 });
