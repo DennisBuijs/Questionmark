@@ -34,11 +34,11 @@ class Question {
     $db->update('Questions', $data);
 
     foreach ($question['attribute'] as $attr) {
-      if (isset($question['attribute']['id'])) {
-        self::update_attribute($question['attribute']);
+      if (isset($attr['id'])) {
+        self::update_attribute($attr);
       }
       else {
-        self::make_attribute();
+        self::make_attribute($attr);
       }
     }
   }
@@ -119,12 +119,13 @@ class Question {
     return $data[0]['order'];
   }
 
+
   private function get_required() {
     global $db;
     $sql = "SELECT `required` FROM Questions WHERE id = :id";
     $data = $db->select($sql, array(":id" => $this->id));
     return $data[0]['required'];
   }
-  
+
 
 }
