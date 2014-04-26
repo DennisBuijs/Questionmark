@@ -55,7 +55,7 @@ class Database extends PDO {
   public function update($table, $data, $where) {
     $field_details = NULL;
     foreach ($data as $key => $value) {
-      $fieldDetails .= "`$key` = :$key,";
+      $field_details .= "`$key` = :$key,";
     }
     $field_details = rtrim($field_details, ',');
     $sth = $this->prepare("UPDATE $table SET $field_details WHERE $where");
