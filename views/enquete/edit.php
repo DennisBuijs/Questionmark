@@ -59,58 +59,62 @@
 
     	<div class="enquete-container">
 
-        <?php $temp_id = 0; ?>
-
 				<? foreach ($enquete->questions as $question) : ?>
-        
-            <?php
 
-              $temp_id++;
+            <?php
 
               switch($question->type) {
 
-                case "textfield": 
-
-                  $placeholder = (empty($question->attributes['placeholder'][0]) ? "" : $question->attributes['placeholder'][0]);
-                  $input_type = (empty($question->attributes['input_type'][0]) ? "" : $question->attributes['input_type'][0]);
+                case "textfield":
 
                   ?>
 
-                  <div class="enquete-element" onclick="show_edit_question_modal(<?= $temp_id ?>);">
+                  <div class="enquete-element">
                     <label><?= $question->question ?></label>
                     <input 
-                      class="form-control" 
-                      type="text"
-                      placeholder="<?= $placeholder ?>"
+                      class="form-control"
                       data-type="<?= $question->type ?>"
-                      data-placeholder="<?= $placeholder ?>"
                       data-required="<?= $question->required ?>"
                       data-question="<?= $question->question ?>"
                       data-input-type="text"
-                      data-temp-id="<?= $temp_id ?>"
+                      data-temp-id=""
+                      <?php
+                        foreach($question->attributes as $attribute) {
+                          if($attribute['attribute_type'] == "placeholder") {
+                            echo "data-placeholder=\"".$attribute['attribute']."\"";
+                            echo "placeholder=\"".$attribute['attribute']."\"";
+                          } elseif($attribute['attribute_type'] == "input_type") {
+                            echo "data-input-type=\"".$attribute['attribute']."\"";
+                            echo "type=\"".$attribute['attribute']."\"";
+                          }
+                        }
+                      ?>
                     >
                   </div>
                 <? break;
 
                 case "textarea": 
 
-                  $placeholder = (empty($question->attributes['placeholder'][0]) ? "" : $question->attributes['placeholder'][0]);
-
                   ?>
 
-                  <div class="enquete-element" onclick="show_edit_question_modal(<?= $temp_id ?>);">
+                  <div class="enquete-element">
                     <label><?= $question->question ?></label>
                     <textarea 
                       class="form-control" 
-                      resizable="false" 
-                      class="form-control"
-                      placeholder="<?= $placeholder ?>"
+                      resizable="false"
                       data-type="<?= $question->type ?>"
-                      data-placeholder="<?= $placeholder ?>"
                       data-required="<?= $question->required ?>"
                       data-question="<?= $question->question ?>"
-                      data-temp-id="<?= $temp_id ?>">
-                    </textarea>
+                      data-temp-id=""
+                      <?php
+                        foreach($question->attributes as $attribute) {
+                          if($attribute['attribute_type'] == "placeholder") {
+                            echo "data-placeholder=\"".$attribute['attribute']."\"" ;
+                            echo "placeholder=\"".$attribute['attribute']."\"";
+                          }
+                        }
+                      ?>
+                    ></textarea>
                   </div>
                 <? break;
 
@@ -145,7 +149,13 @@
                 case "select": ?>
                   <div class="enquete-element">
                     <label><?= $question->question ?></label>
-                    <select class="form-control" name="question_<?= $question->order; ?>">
+                    <select 
+                      class="form-control"
+                      data-type="<?= $question->type ?>"
+                      data-required="<?= $question->required ?>"
+                      data-question="<?= $question->question ?>"
+                      data-temp-id=""
+                      >
                       <? foreach ($question->attributes as $attribute) : ?>
                         <option><?= $attribute['attribute']; ?></option>
                       <? endforeach ?>
@@ -181,7 +191,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
-        <button type="button" class="btn btn-primary">Opslaan</button>
+        <button type="button" class="btn btn-primary" id="save-question-modal" data-dismiss="modal">Opslaan</button>
       </div>
     </div>
   </div>

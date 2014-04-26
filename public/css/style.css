@@ -58,6 +58,14 @@
 	width: 100%;
 }
 
+.enquete-title:hover {
+	cursor: pointer;
+}
+
+.enquete-title:focus {
+	cursor: text;
+}
+
 .enquete-title:focus,
 .enquete-title:hover {
 	background: #ff8;
