@@ -114,7 +114,7 @@ class Question {
     $sql = "SELECT id FROM Questions WHERE Enquetes_id = :id";
     $data = $db->select($sql, array(":id" => $id));
 
-
+    $questions = '';
     foreach ($data as $key => $value) {
       $questions[] = new self($value['id']);
     }
