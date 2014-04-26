@@ -8,7 +8,7 @@ class Enquete {
   public $id, $name, $introduction, $creation_date, $start_date, $end_date, $questions; // SESSIEONS G
 
   public function __construct($id) {
-    $this->init($id);    
+    $this->init($id);
   }
 
 
@@ -32,7 +32,7 @@ class Enquete {
   }
 
 
-  static function edit($name, $introduction, $start_date, $end_date, $questions, $deleted_questions, $enquete_id, $user_id) {
+  static function edit($name, $introduction, $start_date, $end_date, $questions, $deleted_questions, $deleted_attributes, $enquete_id, $user_id) {
 
     global $db;
 
@@ -41,22 +41,25 @@ class Enquete {
         "introduction" => $introduction,
         "start_date" => $start_date,
         "end_date" => $end_date,
-        "user_id" => $user_id
+        "Users_id" => $user_id
     );
 
-    $db->update('Enquete', $data, "Enquete_id = $enquete_id");
+    $db->update('Enquetes', $data, "id = $enquete_id");
+
 
     foreach ($questions as $question) {
-      if (isset($question->id)) {
-        Question::update($question);
+      if (isset($question['id'])) {
+        Question::edit($question, $deleted_attributes);
       }
       else {
-        Question::make($question);
+        Question::make($question, $enquete_id);
       }
     }
 
-    foreach ($deleted_questions as $deleted_question) {
-      Question::delete($deleted_question);
+    if (!empty($deleted_questions) && count($deleted_questions) > 0) {
+      foreach ($deleted_questions as $deleted_question) {
+        Question::delete($deleted_question);
+      }
     }
   }
 

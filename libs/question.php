@@ -22,7 +22,7 @@ class Question {
   }
 
 
-  public static function edit($question) {
+  public static function edit($question, $deleted_attributes) {
     global $db;
 
     $data = array(
@@ -31,32 +31,80 @@ class Question {
         "required" => $question['required'],
         "Question_Types_id" => $db->select("SELECT id FROM Question_Types WHERE type = '{$question['type']}'")[0]['id'],
     );
-    $db->update('Questions', $data);
 
-    foreach ($question['attribute'] as $attr) {
+    $db->update('Questions', $data, "id = {$question['id']}");
+
+    foreach ($question['attributes'] as $attr) {
       if (isset($attr['id'])) {
-        self::update_attribute($attr);
+        self::edit_attribute($attr, $question['id']);
       }
       else {
-        self::make_attribute($attr);
+        self::make_attribute($attr, $question['id']);
+      }
+
+      if (!empty($deleted_attributes) && count($deleted_attributes) > 0) {
+        foreach ($deleted_attributes as $deleted_attribute) {
+          Question::delete_attribute($deleted_attribute);
+        }
       }
     }
   }
 
 
-  public static function make($question) {
+  public static function make($question, $enquete_id) {
     global $db;
+    $data = array(
+        "question" => $question['question'],
+        "order" => $question['order'],
+        "required" => $question['required'],
+        "Question_Types_id" => $db->select("SELECT id FROM Question_Types WHERE type = '{$question['type']}'")[0]['id'],
+        "Enquetes_id" => $enquete_id
+    );
+
+
+
+    $db->insert("Questions", $data, "Enquetes_id = $enquete_id");
+    $question_id = $db->lastInsertId();
+    if (!empty($question['attributes']) && count($question['attributes']) > 0) {
+      foreach ($question['attributes'] as $attr) {
+        Self::make_attribute($attr, $question_id);
+      }
+    }
   }
 
 
   public static function delete($id) {
     global $db;
     $db->delete("Questions", " id = $id");
+    $db->delete("Question_Attributes", " Questions_id = $id");
   }
 
 
-  private static function make_attribute() {
+  private static function make_attribute($attr, $question_id) {
     global $db;
+    $data = array(
+        "attribute" => $attr['attribute'],
+        "Questions_id" => $question_id,
+        "Question_Attribute_Types_id" => $db->select("SELECT id FROM Question_Attribute_Types WHERE attribute_type = '{$attr['type']}'")[0]['id']
+    );
+    $db->insert("Question_Attributes", $data);
+  }
+
+
+  private static function edit_attribute($attr, $question_id) {
+    global $db;
+    $data = array(
+        "attribute" => $attr['attribute'],
+        "Questions_id" => $question_id,
+        "Question_Attribute_Types_id" => $db->select("SELECT id FROM Question_Attribute_Types WHERE attribute_type = '{$attr['type']}'")[0]['id']
+    );
+    $db->update("Question_Attributes", $data, "id = {$attr['id']}");
+  }
+
+
+  private static function delete_attribute($attr_id) {
+    global $db;
+    $db->delete("Question_Attributes", "id = $attr_id");
   }
 
 
