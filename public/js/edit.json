@@ -1,0 +1,79 @@
+{
+  "id": 1,
+  "name": "Kwaliteitsonderzoek",
+  "introduction": "Middels dit onderzoek proberen wij te weten te komen wat hen vindt van ons product!",
+  "end_date": "",
+  "start_date": "",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Hoe graag kijkt u naar ons product?!",
+      "order": 1,
+      "type": "textfield",
+      "attributes":
+              [
+                {
+                  "id": 1,
+                  "type": "placeholder",
+                  "attribute": "bv, goed of niet goed"
+                }
+              ],
+      "required": false
+    },
+    {
+      "id": 2,
+      "question": "wat is uw d?",
+      "type": "radio",
+      "order": 2,
+      "attributes":
+              [
+                {
+                  "id": 2,
+                  "type": "option",
+                  "attribute": "Weet ik veel, man of vrouw denk ik"
+
+                },
+                {
+                  "id": 3,
+                  "type": "option",
+                  "attribute": "Ja"
+
+                }
+              ],
+      "required": true
+    },
+    {
+      "id": 3,
+      "question": "Hoeveel voeten heeft u?",
+      "type": "select",
+      "order": 3,
+      "attributes":
+              [
+                {
+                  "id": 4,
+                  "type": "option",
+                  "attribute": "20"
+                }
+              ],
+      "required": true
+    },
+    {
+      "id": 4,
+      "question": "Hoe gaat het nu g?",
+      "type": "textarea",
+      "order": 4,
+      "attributes":
+              [
+                {
+                  "id": 7,
+                  "type": "placeholder",
+                  "attribute": "Gewoon asdfiets"
+                }
+              ],
+      "required": true
+    }
+
+  ],
+  "deleted_question": [5],
+  "deleted_attributes": [5, 6]
+}

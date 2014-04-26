@@ -1,0 +1,111 @@
+{
+  "id": 1,
+  "name": "Kwaliteitsonderzoek",
+  "introduction": "Middels dit onderzoek proberen wij te weten te komen wat hen vindt van ons product!",
+  "end_date": "",
+  "start_date": "",
+  "questions": [
+    {
+      
+      "question": "Hoe graag kijkt u naar ons product?!",
+      "order": 1,
+      "type": "textfield",
+      "attributes":
+              [
+                {
+                 
+                  "type": "placeholder",
+                  "attribute": "bv, goed of niet goed"
+                }
+              ],
+      "required": false
+    },
+    {
+      
+      "question": "wat is uw geslacht?",
+      "type": "radio",
+      "order": 2,
+      "attributes":
+              [
+                {
+                  
+                  "type": "option",
+                  "attribute": "Weet ik veel, man of vrouw denk ik"
+
+                },
+                {
+                  
+                  "type": "option",
+                  "attribute": "Ja"
+
+                }
+              ],
+      "required": true
+    },
+    {
+     
+      "question": "Hoeveel voeten heeft u?",
+      "type": "select",
+      "order": 3,
+      "attributes":
+              [
+                {
+                  
+                  "type": "option",
+                  "attribute": "20"
+                },
+                {
+                  
+                  "type": "option",
+                  "attribute": "4"
+                },
+                {
+                 
+                  "type": "option",
+                  "attribute": "6"
+                }
+              ],
+      "required": true
+    },
+    {
+      
+      "question": "Hoe gaat het nu g?",
+      "type": "textarea",
+      "order": 4,
+      "attributes":
+              [
+                {
+                 
+                  "type": "placeholder",
+                  "attribute": "Gewoon asdfiets"
+                }
+              ],
+      "required": true
+    },
+    {
+      
+      "question": "Wilt u zich klsdjf op onze nieuwsbrief",
+      "type": "checkbox",
+      "order": 5,
+      "attributes":
+              [
+                {
+                 
+                  "type": "option",
+                  "attribute": "ldsahfjk"
+                },
+                {
+                  "type": "option",
+                  "attribute": "Jasdfa"
+                },
+                {
+                  "type": "option",
+                  "attribute": "Misschien"
+                }
+              ],
+      "required": false
+    }
+  ],
+  "deleted_question": null,
+  "deleted_attributes": null
+}
