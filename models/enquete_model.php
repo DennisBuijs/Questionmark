@@ -33,4 +33,14 @@ class Enquete_Model extends Model {
   }
 
 
+  public function get_all_contacts() {
+    return $this->db->select("SELECT id, first_name, last_name, email FROM Contacts");
+  }
+
+
+  public function send() {
+    print_r($_POST);
+  }
+
+
 }

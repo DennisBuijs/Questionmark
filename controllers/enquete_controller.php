@@ -34,4 +34,31 @@ class Enquete_Controller extends Controller {
   }
 
 
+  public function send() {
+
+    $this->view->contacts = $this->model->get_all_contacts();
+
+    $this->view->render('header');
+    $this->view->render('enquete/send');
+    $this->view->render('footer');
+  }
+
+
+  public function run() {
+   
+    
+    switch ($_POST['type']) {
+      case 'send' :
+        $this->model->send();
+        break;
+      case 'edit' :
+        break;
+      case 'vulin'/* MOET NOG GOEIE NAAM BEDENKEN */ :
+        break;
+      default :
+        break;
+    }
+  }
+
+
 }
