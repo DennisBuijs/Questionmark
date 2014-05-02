@@ -133,3 +133,15 @@ $(document).ready(function() {
   $(".enquete-element").disableSelection();
 
 });
+
+$(document).ready(function() {
+  /**
+   * Link dat formulier submit.
+   * '.run-form' is class van de link die een bepaald formulier moet submitten
+   * '$(this).attr("data-action")' is een class van het formulier wat gesubmit moet worden door de link
+   */
+  $(".run-form").on("click", function(e) {
+    $("." + $(this).attr("data-action")).submit();
+    e.preventDefault();
+  });
+});
