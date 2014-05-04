@@ -34,8 +34,9 @@ class Enquete_Controller extends Controller {
   }
 
 
-  public function send() {
+  public function send($id) {
 
+    $this->view->form_id = $id;
     $this->view->contacts = $this->model->get_all_contacts();
 
     $this->view->render('header');
@@ -45,11 +46,10 @@ class Enquete_Controller extends Controller {
 
 
   public function run() {
-   
-    
     switch ($_POST['type']) {
       case 'send' :
         $this->model->send();
+        header("Location: " . URL );
         break;
       case 'edit' :
         break;

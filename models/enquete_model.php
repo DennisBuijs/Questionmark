@@ -38,8 +38,33 @@ class Enquete_Model extends Model {
   }
 
 
+  public function get_contact_by_id($id) {
+    return $this->db->select("SELECT id, first_name, last_name, email FROM Contacts WHERE id = :id", array(":id" => $id))[0];
+  }
+
+
   public function send() {
-    print_r($_POST);
+
+    $message = $_POST['message'];
+    foreach ($_POST['contacts'] as $contact_id) {
+
+      $message_temp = $message;
+      $data = $this->get_contact_by_id($contact_id);
+
+      $first_name = $data["first_name"];
+      $last_name = $data['last_name'];
+      $email = $data['email'];
+      $id = $data['id'];
+
+      $message_temp = str_replace("{{first_name}}", $first_name, $message_temp);
+      $message_temp = str_replace("{{last_name}}", $last_name, $message_temp);
+      $message_temp = str_replace("{{email}}", $email, $message_temp);
+      $message_temp = str_replace("{{id}}", $last_name, $message_temp);
+
+      // mail();
+    }
+
+     header("Location: " . URL);
   }
 
 
