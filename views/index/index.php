@@ -51,7 +51,7 @@
 
                   <div class="input-group">
                     <input type="text" class="input-sm form-control" value="<?= URL; ?>enquete/<?= $enquete->id; ?>">
-                    <a href="verzenden.html" class="btn btn-default btn-sm input-group-addon">Verzenden</a>
+                    <a href="<?= URL . "enquete/send/" . $enquete->id; ?>" class="btn btn-default btn-sm input-group-addon">Verzenden</a>
                   </div> 
                 </div>
               </div>
