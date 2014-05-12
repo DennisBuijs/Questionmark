@@ -31,10 +31,6 @@
 				<div class="enquete-elements">
 
 					<div class="enquete-element">
-						<label for="">Tekst</label>
-					</div>
-
-					<div class="enquete-element">
 						<label for="">Open vraag</label>
 						<input class="form-control" type="text">
 					</div>
@@ -45,8 +41,15 @@
 					</div>
 
 					<div class="enquete-element">
-						<label for="">Checkbox</label>
-						<input type="checkbox"> 
+            <label for="">Checkbox</label>
+          </div>
+
+          <div class="enquete-element">
+            <label for="">Radio</label>
+          </div>
+
+          <div class="enquete-element">
+						<label for="">Select</label>
 					</div>
 
 				</div>
@@ -59,6 +62,11 @@
 
     	<div class="enquete-container">
 
+        <div class="form-group">
+          <label for="">Introductietekst</label>
+          <textarea class="form-control enquete-introduction"><?= $enquete->introduction; ?></textarea>
+        </div>
+
 				<? foreach ($enquete->questions as $question) : ?>
 
             <?php
@@ -69,27 +77,40 @@
 
                   ?>
 
-                  <div class="enquete-element">
-                    <label><?= $question->question ?></label>
-                    <input 
-                      class="form-control"
-                      data-type="<?= $question->type ?>"
-                      data-required="<?= $question->required ?>"
-                      data-question="<?= $question->question ?>"
-                      data-input-type="text"
-                      data-temp-id=""
-                      <?php
-                        foreach($question->attributes as $attribute) {
-                          if($attribute['attribute_type'] == "placeholder") {
-                            echo "data-placeholder=\"".$attribute['attribute']."\"";
-                            echo "placeholder=\"".$attribute['attribute']."\"";
-                          } elseif($attribute['attribute_type'] == "input_type") {
-                            echo "data-input-type=\"".$attribute['attribute']."\"";
-                            echo "type=\"".$attribute['attribute']."\"";
-                          }
+                  <div 
+                    class="panel panel-default enquete-element"
+                    data-type="<?= $question->type ?>"
+                    data-required="<?= $question->required ?>"
+                    data-question="<?= $question->question ?>"
+                    data-id="<?= $question->id ?>"
+                    <?php
+                      foreach($question->attributes as $attribute) {
+                        if($attribute['attribute_type'] == "placeholder") {
+                          echo "data-placeholder=\"".$attribute['attribute']."\"";
+                        } elseif($attribute['attribute_type'] == "input_type") {
+                          echo "data-input-type=\"".$attribute['attribute']."\"";
                         }
-                      ?>
+                      }
+                    ?>
                     >
+                    <div class="panel-heading"><input class="question-label" value="<?= $question->question ?>"></label></div>
+                    <div class="panel-body">
+                      <strong>Open vraag</strong><br><br>
+
+                      <div class="form-group">
+                        <label for="">Plaatshouder</label>
+                        <input 
+                          class="form-control"
+                          <?php
+                            foreach($question->attributes as $attribute) {
+                              if($attribute['attribute_type'] == "placeholder") {
+                                echo "value=\"".$attribute['attribute']."\"";
+                              }
+                            }
+                          ?>
+                        >
+                      </div>
+                    </div>
                   </div>
                 <? break;
 
@@ -97,69 +118,87 @@
 
                   ?>
 
-                  <div class="enquete-element">
-                    <label><?= $question->question ?></label>
-                    <textarea 
-                      class="form-control" 
-                      resizable="false"
-                      data-type="<?= $question->type ?>"
-                      data-required="<?= $question->required ?>"
-                      data-question="<?= $question->question ?>"
-                      data-temp-id=""
-                      <?php
-                        foreach($question->attributes as $attribute) {
-                          if($attribute['attribute_type'] == "placeholder") {
-                            echo "data-placeholder=\"".$attribute['attribute']."\"" ;
-                            echo "placeholder=\"".$attribute['attribute']."\"";
-                          }
-                        }
-                      ?>
-                    ></textarea>
+                  <div
+                    class="panel panel-default enquete-element"
+                    data-type="<?= $question->type ?>"
+                    data-required="<?= $question->required ?>"
+                    data-question="<?= $question->question ?>"
+                    data-id="<?= $question->id ?>"
+                    <?php
+                      foreach($question->attributes as $attribute) {
+                        if($attribute['attribute_type'] == "placeholder") {
+                          echo "data-placeholder=\"".$attribute['attribute']."\"" ;                        }
+                      }
+                    ?>>
+                    <div class="panel-heading"><input class="question-label" value="<?= $question->question ?>"></div>
+                    <div class="panel-body">
+                      <strong>Open vraag (lang)</strong><br><br>
+
+                      <div class="form-group">
+                        <label for="">Plaatshouder</label>
+                        <input 
+                          class="form-control"
+                          <?php
+                            foreach($question->attributes as $attribute) {
+                              if($attribute['attribute_type'] == "placeholder") {
+                                echo "value=\"".$attribute['attribute']."\"";
+                              }
+                            }
+                          ?>
+                        >
+                      </div>
+                    </div>
                   </div>
                 <? break;
 
-                case "checkbox": ?>
-                  <div class="enquete-element">
-                    <label><?= $question->question ?></label>
-                    <? foreach ($question->attributes['options'] as $attribute) : ?>
-                        <div class="checkbox">
-                          <label>
-                            <input type="checkbox" name="question_<?= $question->order; ?>">
-                            <?= $attribute; ?>
-                          </label>
-                        </div>
-                    <? endforeach ?>
-                  </div>
-                <? break;
-
-                case "radio": ?>
-                  <div class="enquete-element">
-                    <label><?= $question->question ?></label>
-                    <? foreach ($question->attributes as $attribute) : ?>
-                        <div class="radio">
-                          <label>
-                            <input type="radio" name="question_<?= $question->order; ?>">
-                            <?= $attribute['attribute']; ?>
-                          </label>
-                        </div>
-                    <? endforeach ?>
-                  </div>
-                <? break;
-
+                
+                case "checkbox":
+                case "radio":
                 case "select": ?>
-                  <div class="enquete-element">
-                    <label><?= $question->question ?></label>
-                    <select 
-                      class="form-control"
-                      data-type="<?= $question->type ?>"
-                      data-required="<?= $question->required ?>"
-                      data-question="<?= $question->question ?>"
-                      data-temp-id=""
-                      >
-                      <? foreach ($question->attributes as $attribute) : ?>
-                        <option><?= $attribute['attribute']; ?></option>
-                      <? endforeach ?>
-                    </select>
+                  <div 
+                    class="panel panel-default enquete-element"
+                    data-type="<?= $question->type ?>"
+                    data-required="<?= $question->required ?>"
+                    data-question="<?= $question->question ?>"
+                    data-id="<?= $question->id ?>">
+                    <div class="panel-heading">
+                      <input class="question-label" value="<?= $question->question ?>">
+                    </div>
+                    <div class="panel-body">
+                      <div class="option-group">
+                        <? foreach ($question->attributes as $attribute) : ?>
+                          <div class="input-group">
+                            <input class="form-control" value="<?= $attribute['attribute']; ?>" data-option-id="<?= $attribute['id']; ?>">
+                            <span class="input-group-btn">
+                              <button class="btn btn-default delete-option" type="button">&times;</button>
+                            </span>
+                          </div>
+                        <? endforeach ?>
+                      </div>
+                      <button class="btn btn-default add-option">Optie toevoegen</button>
+
+                      <hr>
+
+                      <div class="question-meta">
+
+                        <div class="form-group col-md-6">
+                          <label for="">Type veld</label><br>
+                          <select class="form-control" name="" id="">
+                            <option value="">Checkbox</option>
+                            <option value="">Keuzerondje</option>
+                            <option value="">Select</option>
+                          </select>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                          <label for="">Verplicht</label><br>
+                          <input type="checkbox"> Verplicht
+                        </div>
+
+                      </div>
+                    
+                    </div>
+
                   </div>
                 <? break;
 

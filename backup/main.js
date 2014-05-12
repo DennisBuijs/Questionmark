@@ -1,3 +1,6 @@
+// TODO //
+// input[type]
+
 $(document).ready(function() {
 
   // This function shows an alert
@@ -16,7 +19,6 @@ $(document).ready(function() {
     });
 
   }
-
 
   $('form').on('submit', function() {
     var iNumOfInvalidValues = 0;
@@ -44,8 +46,14 @@ $(document).ready(function() {
   var temp_id = 1;
 
   $(".enquete-container .enquete-element").each(function() {
+    var option_temp_id = 1;
     $(this).attr("onclick", "show_edit_question_modal("+temp_id+")");
-    $(this).find("input, textarea, select").attr("data-temp-id", temp_id);
+    $(this).attr("data-temp-id", temp_id);
+    $(this).find("select option, input[type=\"radio\"]").each(function() {
+      $(this).attr("data-qid", temp_id);
+      $(this).attr("data-temp-option-id", option_temp_id);
+      option_temp_id = option_temp_id+1;
+    });
     temp_id = temp_id+1;
   });
 
@@ -54,6 +62,12 @@ $(document).ready(function() {
     $("input, select, select *").blur();
     e.preventDefault();
   });
+
+  // Options arrays
+  var options_delete_array = []; // send to json
+  var options_delete_temp_array = []; // delete from frontend
+  var options_add_array = []; // send to json
+  var options_add_temp_array = []; // delete from frontend
 
   show_edit_question_modal = function(id) {
     $("#edit-question-modal").modal();
@@ -84,34 +98,83 @@ $(document).ready(function() {
         break;
       case "textarea":
         $(".modal-body").append(question_html);
-        $(".modal-body").append(input_type_html);
         $(".modal-body").append(placeholder_html);
         $(".modal-body").append(required_html);
+        break;
+      case "radio":
+        $(".modal-body").append(question_html);
+        $(".modal-body").append(required_html);
+        $(".modal-body").append("<div class=\"form-group options-group\"><strong>Opties</strong><br>");
+        $("[data-qid="+id+"]").each(function() {
+          var temp_option_id = $(this).attr("data-temp-option-id");
+          $(".modal-body .options-group").append("<div class=\"input-group question-options-edit\" data-option-id=\"\"><input class=\"form-control\" value=\""+$(this).text()+"\"><span class=\"input-group-btn\"><button class=\"btn btn-default\" id=\"delete-option\" type=\"button\" data-delete-option-id=\""+temp_option_id+"\">&times;</button></span></div></div>");
+        });
+        $(".modal-body").append("<input class=\"btn btn-primary\" id=\"add-option\" type=\"button\" value=\"Toevoegen\">")
         break;
       case "select":
         $(".modal-body").append(question_html);
         $(".modal-body").append(required_html);
+        $(".modal-body").append("<div class=\"form-group options-group\"><strong>Opties</strong><br>");
+        $("[data-qid="+id+"]").each(function() {
+          var temp_option_id = $(this).attr("data-temp-option-id");
+          $(".modal-body .options-group").append("<div class=\"input-group question-options-edit\" data-option-id=\""+qid+"\"><input class=\"form-control\" value=\""+$(this).text()+"\"><span class=\"input-group-btn\"><button class=\"btn btn-default\" id=\"delete-option\" type=\"button\" data-delete-option-id=\""+temp_option_id+"\">&times;</button></span></div></div>");
+        });
+        $(".modal-body").append("<input class=\"btn btn-primary\" id=\"add-option\" type=\"button\" value=\"Toevoegen\">")
         break;
     }
 
+    $(".modal-body").on("click", "#delete-option", function() {
+      $(this).parent().parent().remove();
+      options_delete_temp_array.push($(this).attr("data-delete-option-id"));
+    });
+
   }
+
+  $(".modal-body").on("click", "#add-option", function() {
+    $(".modal-body .options-group").append("<div class=\"input-group question-options-edit\" data-option-id=\""+$("[data-temp-id="+id+"]")+"\"><input class=\"form-control\" value=\""+$(this).text()+"\"><span class=\"input-group-btn\"><button class=\"btn btn-default\" id=\"delete-option\" type=\"button\">&times;</button></span></div></div>");
+  });
 
   $("#save-question-modal").on("click", function() {
     var id = $("#edit-question-modal").attr("data-id");
     $("[data-temp-id="+id+"]").attr("data-question", $("#edit-question-question").val());
     $("[data-temp-id="+id+"]").attr("data-placeholder", $("#edit-question-placeholder").val());
-    $("[data-temp-id="+id+"]").attr("placeholder", $("#edit-question-placeholder").val());
-    $("[data-temp-id="+id+"]").attr("data-question", $("#edit-question-question").val());
+    $("[data-temp-id="+id+"]").find("input, textarea").attr("placeholder", $("#edit-question-placeholder").val());
+    // $("[data-temp-id="+id+"]").attr("data-type", $("#edit-question-type").val());
+    // $("[data-temp-id="+id+"]").find("input[type='text'], input[type='mail]', input[type='number'], input[type='url']").attr("type", $("#edit-question-type").val());
 
     if($("#edit-question-required").is(':checked')) {
-      console.log("checked");
       $("[data-temp-id="+id+"]").attr("data-required", 1);
     } else {
-      console.log("niet checked, yo");
       $("[data-temp-id="+id+"]").attr("data-required", 0);
     }
 
-    $("[data-temp-id="+id+"]").parent().find("label").text($("#edit-question-question").val());
+    $("[data-temp-id="+id+"]").find("label").text($("#edit-question-question").val());
+
+    for(var i=0; i<options_delete_temp_array.length; i++) {
+      options_delete_array.push(options_delete_temp_array[i]);
+      $("[data-temp-id="+id+"]").find("[data-temp-option-id="+options_delete_temp_array[i]+"]").remove();
+    }
+
+    var options_to_add = 0;
+    $(".options-group .question-options-edit").each(function() {
+      options_add_temp_array[options_to_add] = [];
+      options_add_temp_array[options_to_add]['id'] = $(this).find("select option").attr("data-option-id");
+      options_add_temp_array[options_to_add]['type'] = "option";
+      options_add_temp_array[options_to_add]['value'] = $(this).find("input").val();
+      console.log($(this).find("select option").attr("data-option-id"));
+      options_to_add++;
+    });
+
+    $("[data-temp-id="+id+"]").find("select").empty();
+    for(var i=0; i<options_add_temp_array.length; i++) {
+      $("[data-temp-id="+id+"]").find("select").append("<option data-option-id=\""+options_add_temp_array[i]['id']+"\">"+options_add_temp_array[i]['value']+"</option>")
+    }
+
+  });
+
+  $("#edit-question-modal [data-dismiss]").on("click", function() {
+    options_add_temp_array = [];
+    options_delete_temp_array = [];
   });
 
   // Functionaliteit voor het slepen van formulierelementen naar het formulier
@@ -132,9 +195,20 @@ $(document).ready(function() {
   }).attr("data-temp-id", temp_id);
   $(".enquete-element").disableSelection();
 
-});
 
-$(document).ready(function() {
+
+
+
+
+
+
+
+
+
+
+
+
+
   /**
    * Link dat formulier submit.
    * '.run-form' is class van de link die een bepaald formulier moet submitten
