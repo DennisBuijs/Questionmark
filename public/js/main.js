@@ -126,6 +126,8 @@ enquete["name"] = $(".enquete-title").val();
 enquete["introduction"] = $(".enquete-introduction").val();
 
 enquete["questions"] = {};
+enquete["deleted_question"] = {};
+enquete["deleted_attributes"] = {};
 
 var current_question = 0;
 
