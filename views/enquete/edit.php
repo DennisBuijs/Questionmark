@@ -210,7 +210,7 @@
 
 	  	</div>
 
-	  	<a href="<?= URL; ?>enquete/save/" class="btn btn-primary enquete-save">Opslaan</a>
+	  	<button class="btn btn-primary enquete-save">Opslaan</button>
 
     </div>
 
