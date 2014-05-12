@@ -114,7 +114,11 @@ $(document).ready(function() {
 
 
 
-/* THE LOOP */
+
+
+$(".enquete-save").on("click", function() {
+  
+  /* THE LOOP */
 
 enquete = {};
 
@@ -130,6 +134,7 @@ enquete["deleted_question"] = {};
 enquete["deleted_attributes"] = {};
 
 var current_question = 0;
+var current_attribute = 0;
 
 $(".enquete-container .enquete-element").each(function() {
 
@@ -138,27 +143,38 @@ $(".enquete-container .enquete-element").each(function() {
   enquete["questions"][current_question]["question"] = $(this).find(".panel-heading .question-label").val();
   enquete["questions"][current_question]["order"] = current_question+1;
   enquete["questions"][current_question]["type"] = $(this).attr("data-type");
+  enquete["questions"][current_question]["required"] = $(this).attr("data-required");
+
+  enquete["questions"][current_question]["attributes"] = {};
+
+  enquete["questions"][current_question]["attributes"][current_attribute] = {}
+  enquete["questions"][current_question]["attributes"][current_attribute]["id"] = $(this).attr("data-placeholder-id")
+  enquete["questions"][current_question]["attributes"][current_attribute]["type"] = "placeholder";
+  enquete["questions"][current_question]["attributes"][current_attribute]["attribute"] = $(this).attr("data-placeholder");
 
   $(this).find(".input-group").each(function() {
-    console.log(current_question + " Friet?");
+    enquete["questions"][current_question]["attributes"][current_attribute] = {}
+    enquete["questions"][current_question]["attributes"][current_attribute]["id"] = $(this).attr("data-attribute-id");
+    enquete["questions"][current_question]["attributes"][current_attribute]["type"] = "option";
+    enquete["questions"][current_question]["attributes"][current_attribute]["attribute"] = $(this).find("input").val();
+
+    current_attribute++;
   });
 
   current_question++;
 
 });
 
-  var json = JSON.stringify(enquete);
-  console.log(json);
+  json = JSON.stringify(enquete);
 
-$(".enquete-save").on("click", function() {
   $.ajax({
     type: "POST",
     url: "http://localhost:8888/Questionmark/enquete/run",
     data: { type: "edit", json: json }
   })
-  .done(function( msg ) {
-    alert( "Data Saved: " + msg );
-  });
+  // .done(function( msg ) {
+  //   $("body").append("<pre style=\"margin-top: 100px; clear:both; position:absolute; z-index:2000;\">"+msg+"</pre>");
+  // });
 });
 
 

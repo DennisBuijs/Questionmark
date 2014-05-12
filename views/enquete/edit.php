@@ -87,6 +87,7 @@
                       foreach($question->attributes as $attribute) {
                         if($attribute['attribute_type'] == "placeholder") {
                           echo "data-placeholder=\"".$attribute['attribute']."\"";
+                          echo "data-placeholder-id=\"".$attribute['id']."\"";
                         } elseif($attribute['attribute_type'] == "input_type") {
                           echo "data-input-type=\"".$attribute['attribute']."\"";
                         }
@@ -127,7 +128,8 @@
                     <?php
                       foreach($question->attributes as $attribute) {
                         if($attribute['attribute_type'] == "placeholder") {
-                          echo "data-placeholder=\"".$attribute['attribute']."\"" ;                        }
+                          echo "data-placeholder=\"".$attribute['attribute']."\"";
+                          echo "data-placeholder-id=\"".$attribute['id']."\"";                        }
                       }
                     ?>>
                     <div class="panel-heading"><input class="question-label" value="<?= $question->question ?>"></div>
@@ -159,7 +161,6 @@
                     class="panel panel-default enquete-element"
                     data-type="<?= $question->type ?>"
                     data-required="<?= $question->required ?>"
-                    data-question="<?= $question->question ?>"
                     data-id="<?= $question->id ?>">
                     <div class="panel-heading">
                       <input class="question-label" value="<?= $question->question ?>">
@@ -167,7 +168,7 @@
                     <div class="panel-body">
                       <div class="option-group">
                         <? foreach ($question->attributes as $attribute) : ?>
-                          <div class="input-group">
+                          <div class="input-group" data-attribute-id="<?= $attribute['id']; ?>">
                             <input class="form-control" value="<?= $attribute['attribute']; ?>" data-option-id="<?= $attribute['id']; ?>">
                             <span class="input-group-btn">
                               <button class="btn btn-default delete-option" type="button">&times;</button>
