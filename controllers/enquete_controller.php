@@ -52,6 +52,7 @@ class Enquete_Controller extends Controller {
         header("Location: " . URL );
         break;
       case 'edit' :
+        $this->model->edit();
         break;
       case 'vulin'/* MOET NOG GOEIE NAAM BEDENKEN */ :
         break;

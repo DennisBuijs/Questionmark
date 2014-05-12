@@ -16,7 +16,7 @@ class Enquete_Model extends Model {
 
 
     // JSON word ingeladen vanuit frontend
-    $json = file_get_contents("http://localhost:8888/Questionmark/public/js/edit.json");
+    $json = $_POST['json'];
     $enquete = json_decode($json, true);
 
     $name = $enquete['name'];
