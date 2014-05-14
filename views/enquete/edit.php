@@ -24,53 +24,91 @@
 
     <div class="col-md-4">
 
-    	<div class="well enquete-elements-container">
-    		
-				<h3 class="page-header">Formulierelementen</h3>
+      <div class="panel-group sidebar" id="accordion">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                Opties
+              </a>
+            </h4>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse">
+            <div class="panel-body">
+            
+              <div class="form-group">
+                <label for="">Introductietekst</label>
+                <textarea class="form-control enquete-introduction"><?= $enquete->introduction; ?></textarea>
+              </div>
 
-				<div class="enquete-elements">
+              <div class="form-group">
+                <label for="">Startdatum</label>
+                <input class="form-control enquete-startdate" type="text" placeholder="jjjj-mm-dd" value="<?= $enquete->start_date; ?>">
+              </div>
 
-					<div class="enquete-element enquete-new-question" data-add-type="textfield">
-						<label for="">Open vraag</label>
-						<input class="form-control" type="text">
-					</div>
+              <div class="form-group">
+                <label for="">Einddatum</label>
+                <input class="form-control enquete-enddate" type="text" placeholder="jjjj-mm-dd" value="<?= $enquete->end_date; ?>">
+              </div>
 
-					<div class="enquete-element enquete-new-question" data-add-type="textarea">
-						<label for="">Open vraag (lang)</label>
-						<textarea class="form-control" rows="5"></textarea>
-					</div>
+            </div>
+          </div>
+        </div>
 
-					<div class="enquete-element enquete-new-question" data-add-type="checkbox">
-            <label for="">Checkbox</label><br>
-            <input type="checkbox"> Checkbox
+        <div class="panel panel-default enquete-elements-container">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                Formulierelementen
+              </a>
+            </h4>
+          </div>
+          <div id="collapseTwo" class="panel-collapse collapse in">
+            <div class="panel-body">
+              <div class="enquete-elements">
+
+                <div class="enquete-element enquete-new-question" data-add-type="textfield">
+                  <label for="">Open vraag</label>
+                  <input class="form-control" type="text">
+                </div>
+
+                <div class="enquete-element enquete-new-question" data-add-type="textarea">
+                  <label for="">Open vraag (lang)</label>
+                  <textarea class="form-control" rows="5"></textarea>
+                </div>
+
+                <div class="enquete-element enquete-new-question" data-add-type="checkbox">
+                  <label for="">Checkbox</label><br>
+                  <input type="checkbox"> Checkbox
+                </div>
+
+                <div class="enquete-element enquete-new-question" data-add-type="radio">
+                  <label for="">Radio</label><br>
+                  <input type="radio"> Selectierondje
+                </div>
+
+                <div class="enquete-element enquete-new-question" data-add-type="select">
+                  <label for="">Selectieveld</label><br>
+                  <select>
+                    <option value="">Selectieveld</option>
+                  </select>
+                </div>
+
+              </div>
+
+            </div>
+
           </div>
 
-          <div class="enquete-element enquete-new-question" data-add-type="radio">
-            <label for="">Radio</label><br>
-            <input type="radio"> Selectierondje
-          </div>
+        </div>
 
-          <div class="enquete-element enquete-new-question" data-add-type="select">
-						<label for="">Selectieveld</label><br>
-            <select>
-              <option value="">Selectieveld</option>
-            </select>
-					</div>
-
-				</div>
-
-    	</div>
+      </div>
 
     </div>
     
     <div class="col-md-8">
 
     	<div class="enquete-container">
-
-        <div class="form-group">
-          <label for="">Introductietekst</label>
-          <textarea class="form-control enquete-introduction"><?= $enquete->introduction; ?></textarea>
-        </div>
 
 				<? foreach ($enquete->questions as $question) : ?>
 

@@ -24,8 +24,8 @@ class Enquete_Model extends Model {
 
     $name = $enquete['name'];
     $introduction = $enquete['introduction'];
-    $start_date = "2014-04-15" /* $enquete['start_date'] */;
-    $end_date = "2014-04-15" /* $enquete['end_date'] */;
+    $start_date = $enquete['start_date'];
+    $end_date = $enquete['end_date'];
     $questions = $enquete['questions'];
     $deleted_questions = $enquete['deleted_question'];
     $deleted_attributes = $enquete['deleted_attributes'];

@@ -1,3 +1,7 @@
+body {
+	height: 100%;
+}
+
 .content {
 	margin-bottom: 30px;
 	margin-top: 30px;
@@ -74,23 +78,14 @@
 }
 
 .enquete-elements-container {
-	height: calc(100% - 159px);
-	overflow-y: scroll;
+	max-height: calc(100% - 203px);
 	position: fixed;
-	width: 375px;
-}
-
-.enquete-elements-container .page-header {
-	background: #f5f5f5;
-	border-bottom: 1px solid #e3e3e3;
-	margin-top: -19px;
-	padding-top: 19px;
-	position: fixed;
-	width: 335px;
+	width: 360px;
 }
 
 .enquete-elements {
-	margin-top: 50px;
+	height: 100%;
+	overflow-y: scroll;
 }
 
 .enquete-elements .enquete-element {
@@ -159,10 +154,4 @@
 
 a:hover {
 	cursor: pointer;
-}
-
-/* Forms */
-
-.enquete-element input[type="radio"] {
-	margin-left: -17px;
 }

@@ -1,6 +1,3 @@
-// TODO //
-// input[type]
-
 $(document).ready(function() {
 
   enquete = {};
@@ -144,6 +141,8 @@ var id = id[id.length-1];
 enquete["id"] = id;
 enquete["name"] = $(".enquete-title").val();
 enquete["introduction"] = $(".enquete-introduction").val();
+enquete["start_date"] = $(".enquete-startdate").val();
+enquete["end_date"] = $(".enquete-enddate").val();
 
 var current_question = 0;
 var current_attribute = 0;
