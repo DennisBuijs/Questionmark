@@ -11,11 +11,14 @@ class Enquete_Model extends Model {
     Enquete::delete($id);
   }
 
+  
+  public function make(){
+    Enquete::make("Naamloze Enquete", '', '', '', Session::get('user_id'));
+  }
 
   public function edit() {
 
 
-    // JSON word ingeladen vanuit frontend
     $json = $_POST['json'];
     $enquete = json_decode($json, true);
 
