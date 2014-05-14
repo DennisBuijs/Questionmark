@@ -28,10 +28,14 @@ class User_Controller extends Controller {
 
   public function save() {
 
+    $password = $this->model->generate_password();
+
+    $this->model->mail($_POST['email'], $_POST['name'], $password);
+
     $data = array(
         "name" => $_POST['name'],
         "email" => $_POST['email'],
-        "password" => Hash::create($_POST['password'])
+        "password" => Hash::create($password)
     );
 
     if ($_POST['type'] == 'create') {
@@ -39,11 +43,6 @@ class User_Controller extends Controller {
     }
 
     if ($_POST['type'] == 'edit') {
-
-      if ($_POST['password'] == '') {
-        unset($data['password']);
-      }
-
       $this->model->edit($data, $_POST['id']);
     }
 

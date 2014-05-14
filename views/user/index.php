@@ -30,7 +30,6 @@
         <input type="hidden" class="form-control" name="type" value="create">
         <input type="text" class="form-control" placeholder="Naam" name="name"><!-- required -->
         <input type="email" class="form-control" placeholder="Email address" name="email">
-        <input type="password"class="form-control" placeholder="Wachtwoord" name="password">
         <button type="submit" class="btn btn-default">Registreer</button>
       </form>
 
