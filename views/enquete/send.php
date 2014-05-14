@@ -17,18 +17,7 @@
 
       <ul class="list-group">
         <form class="main-form" action="<?= URL ?>enquete/run" method="post">
-<textarea name="message"  class="form-control" style="width:100%;height:400px;box-sizing:border-box;padding:12px;">
-Beste meneer {{last_name}},
-
-Hoe gaat het eigelijk met u?
-
-Met mij goed hoor, bedankt!
-
-Maar uh, owja, kun je ff deze enquete invullen? owja en jou naam was trouwens {{first_name}} {{last_name}}. En uw email is tog {{email}}
-
-Cool!
-
-Doei
+<textarea name="message"  class="form-control" rows="12">
 </textarea>
           <div>U kunt de volgende tags gebruiken: <b>{{first_name}}</b>, <b>{{last_name}}</b> en <b>{{email}}</b></div><br>
           <input type="hidden" class="form-control" name="type" value="send">
