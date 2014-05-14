@@ -111,7 +111,7 @@ class Question {
   public static function get_questions_by_enquete_id($id) {
     global $db;
 
-    $sql = "SELECT id FROM Questions WHERE Enquetes_id = :id";
+    $sql = "SELECT id FROM Questions WHERE Enquetes_id = :id ORDER BY `order` ASC";
     $data = $db->select($sql, array(":id" => $id));
 
     $questions = '';
