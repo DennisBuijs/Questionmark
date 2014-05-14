@@ -13,7 +13,7 @@
 
       <ul class="list-group">
         <form class="main-form" action="<?= URL ?>enquete/run" method="post">
-<textarea name="message" style="width:100%;height:400px;box-sizing:border-box;padding:12px;">
+<textarea name="message"  class="form-control" style="width:100%;height:400px;box-sizing:border-box;padding:12px;">
 Beste meneer {{last_name}},
 
 Hoe gaat het eigelijk met u?

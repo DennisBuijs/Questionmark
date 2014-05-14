@@ -2,8 +2,9 @@
 
   <div class="col-md-4 col-md-push-4">
 
-    <h1>Questionmark?</h1>
+    <h1 class="pull-left">Questionmark?</h1>
 
+    
   </div>
 
 </div>

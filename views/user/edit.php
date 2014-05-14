@@ -1,10 +1,20 @@
 <div class="row">
 
-  <div class="col-md-8 col-md-push-2">
+<div class="col-md-8 col-md-push-2">
 
-    <h1>Questionmark?</h1>
+  <h1 class="pull-left">Questionmark?</h1>
 
-  </div>
+    <div class="btn-group btn-group-lg pull-right" style="margin-top:20px;">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        <span class="glyphicon glyphicon-wrench"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="<?= URL ?>">Home</a></li>
+        <li><a href="<?= URL . "contacts/index"?>">Bewerk contacten</a></li>
+        <li><a href="<?= URL . "index/logout"?>">Log uit</a></li>
+      </ul>
+    </div>
+</div>
 
 </div>
 

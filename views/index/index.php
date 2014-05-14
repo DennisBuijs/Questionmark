@@ -2,9 +2,29 @@
 
     <div class="col-md-8 col-md-push-2">
 
-      <h1>Questionmark?</h1>
+      <h1 class="pull-left">Questionmark?</h1>
+
+      <div class="btn-group btn-group-lg pull-right" style="margin-top:20px;">
+
+        <a href="<?= URL . "enquete/make"?>" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></a>
+
+        <div class="btn-group btn-group-lg">
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-wrench"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="<?= URL . "user/index"?>">Bewerk gebruikers</a></li>
+            <li><a href="<?= URL . "contacts/index"?>">Bewerk contacten</a></li>
+            <li><a href="<?= URL . "index/logout"?>">Log uit</a></li>
+          </ul>
+        </div>
+
+      </div>
 
     </div>
+
+    
+    
 
   </div>
 

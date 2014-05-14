@@ -1,11 +1,11 @@
 <div class="row">
-	
-	<div class="col-md-6 col-md-push-3">
-		
-		<h1>Questionmark?</h1>
 
-	</div>
+  <div class="col-md-8 col-md-push-2">
 
+    <h1 class="pull-left">Questionmark?</h1>
+
+  </div>
+ 
 </div>
 
 <div class="row">
