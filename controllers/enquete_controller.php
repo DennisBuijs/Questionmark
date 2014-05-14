@@ -49,22 +49,30 @@ class Enquete_Controller extends Controller {
     switch ($_POST['type']) {
       case 'send' :
         $this->model->send();
-        header("Location: " . URL );
+        header("Location: " . URL);
         break;
       case 'edit' :
         $this->model->edit();
         break;
-      case 'vulin'/* MOET NOG GOEIE NAAM BEDENKEN */ :
-        break;
-      default :
+      case 'normal' :
+        $this->model->save();
+        header("Location: " . URL . "enquete/thankyou");
         break;
     }
   }
 
-  public function make(){
+
+  public function thankyou() {
+    $this->view->render('header');
+    $this->view->render('enquete/thankyou');
+    $this->view->render('footer');
+  }
+
+
+  public function make() {
     $this->model->make();
     header("Location: " . URL);
   }
-  
+
 
 }

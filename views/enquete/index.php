@@ -28,10 +28,12 @@
 
 	  	<div class="col-md-8 col-md-push-2">
 
-        <form class="enquete-form" action="<?= URL; ?>enquete/<?= $enquete->id; ?>" method="post">
-  	  		
+        <form class="enquete-form" action="<?= URL; ?>enquete/run<? // echo $enquete->id; ?>" method="post">
+          <input type="hidden" name="type" value="normal">
+          <input type="hidden" name="enquete_name" value="<?= $enquete->name; ?>">
+            <? $counter = 0; ?>
   	  		<? foreach ($enquete->questions as $question) : ?> 
-
+            
           <div class="question">
 
     	  		<?php
@@ -41,10 +43,11 @@
                 case "textfield": ?>
                   <div class="enquete-element">
                     <label><?= $question->question ?></label>
+                  <input type="hidden" name="questions[<?= $counter ?>][question]" value="<?= $question->question ?>">
                     <input 
                       class="form-control" 
                       type="text" 
-                      name="question_<?= $question->order; ?>"
+                      name="questions[<?= $counter ?>][answer] ?>]"
                       <?php
                         foreach($question->attributes as $attribute) {
                           echo "placeholder=\"".$attribute['attribute']."\"";
@@ -57,9 +60,10 @@
                 case "textarea": ?>
                   <div class="enquete-element">
                     <label><?= $question->question ?></label>
+                  <input type="hidden" name="questions[<?= $counter ?>][question]" value="<?= $question->question ?>">
                     <textarea 
                       class="form-control" 
-                      name="question_<?= $question->order; ?>" 
+                      name="questions[<?= $counter ?>][answer]" 
                       resizable="false" 
                       <?php
                         foreach($question->attributes as $attribute) {
@@ -70,12 +74,13 @@
                 <? break;
 
                 case "checkbox": ?>
+                  <input type="hidden" name="questions[<?= $counter ?>][question]" value="<?= $question->question ?>">
                   <div class="enquete-element">
                     <label><?= $question->question ?></label>
                     <? foreach ($question->attributes as $attribute) : ?>
                         <div class="checkbox">
                           <label>
-                            <input type="checkbox" name="question_<?= $question->order; ?>">
+                            <input type="checkbox" name="questions[<?= $counter ?>][answer][]" value="<?= $attribute['attribute']; ?>">
                             <?= $attribute['attribute']; ?>
                           </label>
                         </div>
@@ -84,12 +89,13 @@
                 <? break;
 
                 case "radio": ?>
+                  <input type="hidden" name="questions[<?= $counter ?>][question]" value="<?= $question->question ?>">
                   <div class="enquete-element">
                     <label><?= $question->question ?></label>
                     <? foreach ($question->attributes as $attribute) : ?>
                         <div class="radio">
                           <label>
-                            <input type="radio" name="question_<?= $question->order; ?>">
+                            <input type="radio" name="questions[<?= $counter ?>][answer]" value="<?= $attribute['attribute']; ?>">
                             <?= $attribute['attribute']; ?>
                           </label>
                         </div>
@@ -98,11 +104,12 @@
                 <? break;
 
                 case "select": ?>
+                  <input type="hidden" name="questions[<?= $counter ?>][question]" value="<?= $question->question ?>">
                   <div class="enquete-element">
                     <label><?= $question->question ?></label>
-                    <select class="form-control" name="question_<?= $question->order; ?>">
+                    <select class="form-control" name="questions[<?= $counter ?>][answer]">
                       <? foreach ($question->attributes as $attribute) : ?>
-                        <option><?= $attribute['attribute']; ?></option>
+                        <option value="<?= $attribute['attribute']; ?>"><?= $attribute['attribute']; ?></option>
                       <? endforeach ?>
                     </select>
                   </div>
@@ -113,7 +120,7 @@
             ?>
 
           </div>
-
+            <? $counter++; ?>
   	  		<? endforeach ?>
 
 	  	</div>

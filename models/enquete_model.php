@@ -11,10 +11,11 @@ class Enquete_Model extends Model {
     Enquete::delete($id);
   }
 
-  
-  public function make(){
+
+  public function make() {
     Enquete::make("Naamloze Enquete", '', '', '', Session::get('user_id'));
   }
+
 
   public function edit() {
 
@@ -67,7 +68,35 @@ class Enquete_Model extends Model {
       // mail();
     }
 
-     header("Location: " . URL);
+    header("Location: " . URL);
+  }
+
+
+  public function save() {
+
+    $message = "Hallo, \r\n"
+            . "\r\n"
+            . "De enquete '{$_POST['enquete_name']}' ingevuld. Hieronder de resultaten \r\n \r\n \r\n";
+
+    foreach ($_POST['questions'] as $question) {
+      $message .= $question['question'] . " \r\n";
+
+      if (isset($question['answer']) && is_array($question['answer']) && count($question['answer']) > 0) {
+        foreach ($question['answer'] as $answer) {
+          $message .= $answer . " \r\n";
+        }
+        $message .= "\r\n \r\n";
+      }
+      else {
+        if (isset($question['answer']))
+          $message .= $question['answer'] . " \r\n \r\n \r\n";
+      }
+    }
+
+    $message .= "Met vriendelijke groet, \r\n \r\n";
+    $message .= "Team Dennis";
+
+    // mail("admin@gmail.com", "Er is een enquete ingevuld", $message);
   }
 
 
