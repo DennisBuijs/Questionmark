@@ -2,7 +2,7 @@
 
     <div class="col-md-8 col-md-push-2">
 
-      <h1 class="pull-left">Questionmark?</h1>
+    <h1 class="page-title pull-left"><a href="<?= URL; ?>">Questionmark?</a></h1>
 
       <div class="btn-group btn-group-lg pull-right" style="margin-top:20px;">
 
@@ -50,8 +50,8 @@
                     <?= $enquete->introduction; ?>
                   </div>
                   <div class="col-md-6" style="margin: 0 0 15px 0; padding:0">
-                    <strong>Aantal keer bekeken:</strong> [[AANTAL KEER BEKEKEN]]<br>
-                    <strong>Aantal keer ingevuld:</strong> [[AANTAL KEER INGEVULD]]<br>
+                    <strong>Gemaakt door:</strong> <?= $enquete->creator; ?><br>
+                    <strong>Gemaakt op:</strong> <?= $enquete->creation_date; ?><br>
                   </div>
                   <div class="col-md-6" style="margin: 0 0 15px 0; padding:0">
                     <strong>Gestart op:</strong> <?= $enquete->start_date; ?><br>
@@ -60,7 +60,7 @@
 
                   <div class="button-group">
 
-                    <a class="btn btn-primary btn-sm" href="results/">Resultaten</a>
+                    <a class="btn btn-primary btn-sm" href="results/" style="opacity:0;">Resultaten</a>
 
                     <div class="btn-group pull-right">
                       <a class="btn btn-primary btn-sm" href="enquete/edit/<?= $enquete->id; ?>">Bewerken</a> 
@@ -70,7 +70,7 @@
                   </div>
 
                   <div class="input-group">
-                    <input type="text" class="input-sm form-control" value="<?= URL; ?>enquete/<?= $enquete->id; ?>">
+                    <input type="text" class="input-sm form-control" value="<?= URL; ?>enquete/index/<?= $enquete->id; ?>">
                     <a href="<?= URL . "enquete/send/" . $enquete->id; ?>" class="btn btn-default btn-sm input-group-addon">Verzenden</a>
                   </div> 
                 </div>

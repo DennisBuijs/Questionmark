@@ -8,7 +8,7 @@
 
     <div class="col-md-4">
 
-      <h1>Questionmark?</h1>
+    <h1 class="page-title"><a href="<?= URL ?>">Questionmark?</a></h1>
 
     </div>
 

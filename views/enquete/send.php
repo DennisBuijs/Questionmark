@@ -2,7 +2,11 @@
 
   <div class="row">
 
-    <div class="col-md-2"></div>
+    <div class="col-md-2">
+
+      <h1 class="page-title pull-left"><a href="<?= URL ?>">Questionmark?</a></h1>
+
+    </div>
 
     <div class="col-md-8">
 

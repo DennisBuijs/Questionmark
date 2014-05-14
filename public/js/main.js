@@ -39,9 +39,10 @@ $(document).ready(function() {
       }
     });
 
-    if (iNumOfInvalidValues !== 0)
-      //show_alert("danger", "De logingegevens zijn niet correct.");
-    return false;
+    if (iNumOfInvalidValues !== 0) {
+      show_alert("danger", "De logingegevens zijn niet correct.");
+      return false;
+    }
 
   });
 

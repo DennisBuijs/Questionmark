@@ -2,7 +2,7 @@
 
   <div class="col-md-8 col-md-push-2">
 
-    <h1 class="pull-left">Questionmark?</h1>
+    <h1 class="page-title pull-left"><a href="<?= URL ?>">Questionmark?</a></h1>
 
     <div class="btn-group btn-group-lg pull-right" style="margin-top:20px;">
       <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -32,7 +32,6 @@
         <input type="email" class="form-control" placeholder="Email address" name="email">
         <button type="submit" class="btn btn-default">Registreer</button>
       </form>
-
 
       <table class="table table-hover table-striped">
         <thead>
