@@ -3,6 +3,11 @@
 
 $(document).ready(function() {
 
+  enquete = {};
+  enquete["questions"] = {};
+  enquete["deleted_question"] = [];
+  enquete["deleted_attributes"] = [];
+
   // This function shows an alert
   // type: the type of alert, has the be one of: succes, info, warning, danger
   // message: the message the alert will say
@@ -58,37 +63,50 @@ $(document).ready(function() {
     temp_option_id++;
   });
 
-  $(".add-option").on("click", function() {
+  $(".enquete-container").on("click", ".add-option", function() {
     var add_id = $(this).attr("data-option-add-id");
     $(".enquete-element[data-temp-id="+add_id+"] .option-group").append("<div class=\"input-group\" data-option-temp-id=\""+temp_option_id+"\"><input class=\"form-control\"><span class=\"input-group-btn\"><button class=\"btn btn-default delete-option\" type=\"button\" data-option-delete-id=\""+temp_option_id+"\">&times;</button></span></div>");
     temp_option_id++;
   });
 
   $(".enquete-container").on("click", ".delete-option", function() {
-    var delete_id = $(this).attr("data-option-delete-id");
-    $(".input-group[data-option-temp-id="+delete_id+"]").remove();
+    var delete_id = $(this).parent().parent().attr("data-attribute-id");
+    if(delete_id != null) {
+      enquete["deleted_attributes"].push(delete_id);
+    }
+    
+    var delete_temp_id = $(this).attr("data-option-delete-id");
+    $(".input-group[data-option-temp-id="+delete_temp_id+"]").remove();
   });
 
-  // $(".enquete-container, .enquete-container *").on("focus, click", ".enquete-element", function(e) {
-  //   $(".enquete-container *").blur();
-  //   $("input, select, select *").blur();
-  //   e.preventDefault();
-  // });
+  // HTML voor questions: textfield, textarea
+  question_html = [];
+  question_html["textfield"] = "<div class=\"panel panel-default enquete-element\" style=\"height:249px\" data-type=\"textfield\" placeholder=\"\"><div class=\"panel-heading\"><input class=\"question-label\"></div><div class=\"panel-body\"><strong>Open vraag</strong><br><br><div class=\"form-group\"><label for=\"\">Plaatshouder</label><input class=\"form-control question-placeholder\"></div><div class=\"form-group\"><label for=\"\">Verplicht</label><br><input class=\"question-required-checkbox\" type=\"checkbox\"> Verplicht</div></div>";
+  question_html["textarea"] = "<div class=\"panel panel-default enquete-element\" style=\"height:249px\" data-type=\"textarea\" placeholder=\"\"><div class=\"panel-heading\"><input class=\"question-label\"></div><div class=\"panel-body\"><strong>Open vraag</strong><br><br><div class=\"form-group\"><label for=\"\">Plaatshouder</label><input class=\"form-control question-placeholder\"></div><div class=\"form-group\"><label for=\"\">Verplicht</label><br><input class=\"question-required-checkbox\" type=\"checkbox\"> Verplicht</div></div>";
+  question_html["checkbox"] = "<div class=\"panel panel-default enquete-element\" style=\"height:224px\" data-type=\"checkbox\"> <div class=\"panel-heading\"> <input class=\"question-label\"> </div> <div class=\"panel-body\"> <div class=\"option-group\"> </div> <button class=\"btn btn-default add-option\">Optie toevoegen</button> <hr> <div class=\"question-meta\"> <div class=\"form-group col-md-6\"> <label for=\"\">Type veld</label><br> <select class=\"form-control question-multiplechoice-type\"> <option value=\"checkbox\" selected>Checkbox</option> <option value=\"radio\">Keuzerondje</option> <option value=\"select\">Selectieveld</option> </select> </div> <div class=\"form-group col-md-6\"> <label for=\"\">Verplicht</label><br> <input class=\"question-required-checkbox\" type=\"checkbox\"> Verplicht </div> </div> </div> </div>";
+  question_html["radio"] = "<div class=\"panel panel-default enquete-element\" style=\"height:224px\" data-type=\"radio\"> <div class=\"panel-heading\"> <input class=\"question-label\"> </div> <div class=\"panel-body\"> <div class=\"option-group\"> </div> <button class=\"btn btn-default add-option\">Optie toevoegen</button> <hr> <div class=\"question-meta\"> <div class=\"form-group col-md-6\"> <label for=\"\">Type veld</label><br> <select class=\"form-control question-multiplechoice-type\"> <option value=\"checkbox\">Checkbox</option> <option value=\"radio\" selected>Keuzerondje</option> <option value=\"select\">Selectieveld</option> </select> </div> <div class=\"form-group col-md-6\"> <label for=\"\">Verplicht</label><br> <input class=\"question-required-checkbox\" type=\"checkbox\"> Verplicht </div> </div> </div> </div>";
+  question_html["select"] = "<div class=\"panel panel-default enquete-element\" style=\"height:224px\" data-type=\"select\"> <div class=\"panel-heading\"> <input class=\"question-label\"> </div> <div class=\"panel-body\"> <div class=\"option-group\"> </div> <button class=\"btn btn-default add-option\">Optie toevoegen</button> <hr> <div class=\"question-meta\"> <div class=\"form-group col-md-6\"> <label for=\"\">Type veld</label><br> <select class=\"form-control question-multiplechoice-type\"> <option value=\"checkbox\">Checkbox</option> <option value=\"radio\">Keuzerondje</option> <option value=\"select\" selected>Selectieveld</option> </select> </div> <div class=\"form-group col-md-6\"> <label for=\"\">Verplicht</label><br> <input class=\"question-required-checkbox\" type=\"checkbox\"> Verplicht </div> </div> </div> </div>";
 
   // Functionaliteit voor het slepen van formulierelementen naar het formulier
-  $(".enquete-elements .enquete-element").draggable({
+  $(".enquete-elements .enquete-new-question").draggable({
       connectToSortable: ".enquete-container",
-      revert: "invalid",
-      ghosting: true, 
+      revert: "invalid", 
       appendTo: document.body,
       helper: function(e, ui) {
-        return $(this).clone().css('width', $(".enquete-container").width()-40);
+        new_question_type = $(this).attr("data-add-type");
+        return question_html[new_question_type];
       }
   });
   $(".enquete-container").droppable().sortable({
+    tolerance: "pointer",
     placeholder: "drop-placeholder",
-    start: function (event, ui) {
-      ui.placeholder.height(ui.helper.height());
+    receive: function(event, ui) {
+      $(".enquete-container .enquete-new-question").empty().html(question_html[new_question_type]);
+      $(".enquete-container .enquete-new-question").find(".panel").attr("data-temp-id", temp_question_id);
+      $(".enquete-container .enquete-new-question").find(".panel").find(".add-option").attr("data-option-add-id", temp_question_id);
+      $(".enquete-container .enquete-new-question").removeClass("enquete-element");
+      $(".enquete-container .enquete-new-question").removeClass("enquete-new-question");
+      temp_question_id++;
     }
   });
   $(".enquete-element").disableSelection();
@@ -117,10 +135,8 @@ $(document).ready(function() {
 
 
 $(".enquete-save").on("click", function() {
-  
-  /* THE LOOP */
 
-enquete = {};
+  /* THE LOOP */
 
 var url = window.location.href;
 var id = url.split("/");
@@ -128,10 +144,6 @@ var id = id[id.length-1];
 enquete["id"] = id;
 enquete["name"] = $(".enquete-title").val();
 enquete["introduction"] = $(".enquete-introduction").val();
-
-enquete["questions"] = {};
-enquete["deleted_question"] = {};
-enquete["deleted_attributes"] = {};
 
 var current_question = 0;
 var current_attribute = 0;
@@ -142,15 +154,30 @@ $(".enquete-container .enquete-element").each(function() {
   enquete["questions"][current_question]["id"] = $(this).attr("data-id");
   enquete["questions"][current_question]["question"] = $(this).find(".panel-heading .question-label").val();
   enquete["questions"][current_question]["order"] = current_question+1;
-  enquete["questions"][current_question]["type"] = $(this).attr("data-type");
-  enquete["questions"][current_question]["required"] = $(this).attr("data-required");
+
+  if($(this).attr("data-type") == "textfield" || $(this).attr("data-type") == "textarea") {
+    enquete["questions"][current_question]["type"] = $(this).attr("data-type");
+  } else {
+    console.log($(this).find(".question-multiplechoice-type:selected").val());
+    enquete["questions"][current_question]["type"] = $(this).find(".question-multiplechoice-type").val();
+  }
+
+  if($(this).find(".question-required-checkbox").is(':checked')) {
+    enquete["questions"][current_question]["required"] = 1;
+  } else {
+    enquete["questions"][current_question]["required"] = 0;
+  }
 
   enquete["questions"][current_question]["attributes"] = {};
 
-  enquete["questions"][current_question]["attributes"][current_attribute] = {}
-  enquete["questions"][current_question]["attributes"][current_attribute]["id"] = $(this).attr("data-placeholder-id")
-  enquete["questions"][current_question]["attributes"][current_attribute]["type"] = "placeholder";
-  enquete["questions"][current_question]["attributes"][current_attribute]["attribute"] = $(this).attr("data-placeholder");
+  if($(this).attr("data-type") == "textfield" || $(this).attr("data-type") == "textarea") {
+
+    enquete["questions"][current_question]["attributes"][current_attribute] = {}
+    enquete["questions"][current_question]["attributes"][current_attribute]["id"] = $(this).attr("data-placeholder-id")
+    enquete["questions"][current_question]["attributes"][current_attribute]["type"] = "placeholder";
+    enquete["questions"][current_question]["attributes"][current_attribute]["attribute"] = $(this).find(".question-placeholder").val();
+
+  }
 
   $(this).find(".input-group").each(function() {
     enquete["questions"][current_question]["attributes"][current_attribute] = {}
@@ -175,6 +202,14 @@ $(".enquete-container .enquete-element").each(function() {
   // .done(function( msg ) {
   //   $("body").append("<pre style=\"margin-top: 100px; clear:both; position:absolute; z-index:2000;\">"+msg+"</pre>");
   // });
+  
+  // enquete = {};
+  // enquete["questions"] = {};
+  // enquete["deleted_question"] = [];
+  // enquete["deleted_attributes"] = [];
+
+  location.reload();
+
 });
 
 

@@ -22,7 +22,7 @@
 
   	<div class="col-md-8 col-md-push-2">
   		
-  		<p><?= $enquete->introduction; ?></p>
+  		<p><? echo nl2br($enquete->introduction); ?></p>
 
   	</div>
 
@@ -41,30 +41,42 @@
                 case "textfield": ?>
                   <div class="enquete-element">
                     <label><?= $question->question ?></label>
-                    <input class="form-control" type="text" name="question_<?= $question->order; ?>" 
-                    placeholder="<?php if(!empty($question->attributes['placeholder'][0])) { 
-                      echo $question->attributes['placeholder'][0]; 
-                    } ?>">
+                    <input 
+                      class="form-control" 
+                      type="text" 
+                      name="question_<?= $question->order; ?>"
+                      <?php
+                        foreach($question->attributes as $attribute) {
+                          echo "placeholder=\"".$attribute['attribute']."\"";
+                        }
+                      ?>
+                    >
                   </div>
                 <? break;
 
                 case "textarea": ?>
                   <div class="enquete-element">
                     <label><?= $question->question ?></label>
-                    <textarea class="form-control" name="question_<?= $question->order; ?>" resizable="false" placeholder="<?php if(!empty($question->attributes['placeholder'][0])) { 
-                        echo $question->attributes['placeholder'][0]; 
-                      } ?>"></textarea>
+                    <textarea 
+                      class="form-control" 
+                      name="question_<?= $question->order; ?>" 
+                      resizable="false" 
+                      <?php
+                        foreach($question->attributes as $attribute) {
+                          echo "placeholder=\"".$attribute['attribute']."\"";
+                        }
+                      ?>></textarea>
                   </div>
                 <? break;
 
                 case "checkbox": ?>
                   <div class="enquete-element">
                     <label><?= $question->question ?></label>
-                    <? foreach ($question->attributes['options'] as $attribute) : ?>
+                    <? foreach ($question->attributes as $attribute) : ?>
                         <div class="checkbox">
                           <label>
                             <input type="checkbox" name="question_<?= $question->order; ?>">
-                            <?= $attribute; ?>
+                            <?= $attribute['attribute']; ?>
                           </label>
                         </div>
                     <? endforeach ?>

@@ -30,26 +30,31 @@
 
 				<div class="enquete-elements">
 
-					<div class="enquete-element">
+					<div class="enquete-element enquete-new-question" data-add-type="textfield">
 						<label for="">Open vraag</label>
 						<input class="form-control" type="text">
 					</div>
 
-					<div class="enquete-element">
+					<div class="enquete-element enquete-new-question" data-add-type="textarea">
 						<label for="">Open vraag (lang)</label>
 						<textarea class="form-control" rows="5"></textarea>
 					</div>
 
-					<div class="enquete-element">
-            <label for="">Checkbox</label>
+					<div class="enquete-element enquete-new-question" data-add-type="checkbox">
+            <label for="">Checkbox</label><br>
+            <input type="checkbox"> Checkbox
           </div>
 
-          <div class="enquete-element">
-            <label for="">Radio</label>
+          <div class="enquete-element enquete-new-question" data-add-type="radio">
+            <label for="">Radio</label><br>
+            <input type="radio"> Selectierondje
           </div>
 
-          <div class="enquete-element">
-						<label for="">Select</label>
+          <div class="enquete-element enquete-new-question" data-add-type="select">
+						<label for="">Selectieveld</label><br>
+            <select>
+              <option value="">Selectieveld</option>
+            </select>
 					</div>
 
 				</div>
@@ -74,13 +79,13 @@
               switch($question->type) {
 
                 case "textfield":
+                case "textarea":
 
                   ?>
 
                   <div 
                     class="panel panel-default enquete-element"
                     data-type="<?= $question->type ?>"
-                    data-required="<?= $question->required ?>"
                     data-question="<?= $question->question ?>"
                     data-id="<?= $question->id ?>"
                     <?php
@@ -101,7 +106,7 @@
                       <div class="form-group">
                         <label for="">Plaatshouder</label>
                         <input 
-                          class="form-control"
+                          class="form-control question-placeholder"
                           <?php
                             foreach($question->attributes as $attribute) {
                               if($attribute['attribute_type'] == "placeholder") {
@@ -111,57 +116,33 @@
                           ?>
                         >
                       </div>
-                    </div>
-                  </div>
-                <? break;
-
-                case "textarea": 
-
-                  ?>
-
-                  <div
-                    class="panel panel-default enquete-element"
-                    data-type="<?= $question->type ?>"
-                    data-required="<?= $question->required ?>"
-                    data-question="<?= $question->question ?>"
-                    data-id="<?= $question->id ?>"
-                    <?php
-                      foreach($question->attributes as $attribute) {
-                        if($attribute['attribute_type'] == "placeholder") {
-                          echo "data-placeholder=\"".$attribute['attribute']."\"";
-                          echo "data-placeholder-id=\"".$attribute['id']."\"";                        }
-                      }
-                    ?>>
-                    <div class="panel-heading"><input class="question-label" value="<?= $question->question ?>"></div>
-                    <div class="panel-body">
-                      <strong>Open vraag (lang)</strong><br><br>
 
                       <div class="form-group">
-                        <label for="">Plaatshouder</label>
-                        <input 
-                          class="form-control"
-                          <?php
-                            foreach($question->attributes as $attribute) {
-                              if($attribute['attribute_type'] == "placeholder") {
-                                echo "value=\"".$attribute['attribute']."\"";
-                              }
-                            }
-                          ?>
-                        >
+                        <label for="">Verplicht</label><br>
+                        <?php
+                          if($question->required == 0) {
+                        ?>
+                            <input class="question-required-checkbox" type="checkbox"> Verplicht
+                        <?php
+                          } elseif($question->required == 1) {
+                        ?>
+                            <input class="question-required-checkbox" type="checkbox" checked="checked"> Verplicht
+                        <?php
+                          }
+                        ?>
                       </div>
+
                     </div>
                   </div>
                 <? break;
 
-                
                 case "checkbox":
                 case "radio":
                 case "select": ?>
                   <div 
                     class="panel panel-default enquete-element"
-                    data-type="<?= $question->type ?>"
-                    data-required="<?= $question->required ?>"
-                    data-id="<?= $question->id ?>">
+                    data-type="<?= $question->type; ?>"
+                    data-id="<?= $question->id; ?>">
                     <div class="panel-heading">
                       <input class="question-label" value="<?= $question->question ?>">
                     </div>
@@ -184,16 +165,26 @@
 
                         <div class="form-group col-md-6">
                           <label for="">Type veld</label><br>
-                          <select class="form-control" name="" id="">
-                            <option value="">Checkbox</option>
-                            <option value="">Keuzerondje</option>
-                            <option value="">Select</option>
+                          <select class="form-control question-multiplechoice-type">
+                            <option value="checkbox" <?php echo ($question->type == "checkbox" ? "selected" : "");?>>Checkbox</option>
+                            <option value="radio" <?php echo ($question->type == "radio" ? "selected" : "");?>>Keuzerondje</option>
+                            <option value="select" <?php echo ($question->type == "select" ? "selected" : "");?>>Selectieveld</option>
                           </select>
                         </div>
 
                         <div class="form-group col-md-6">
                           <label for="">Verplicht</label><br>
-                          <input type="checkbox"> Verplicht
+                          <?php
+                            if($question->required == 0) {
+                          ?>
+                              <input class="question-required-checkbox" type="checkbox"> Verplicht
+                          <?php
+                            } elseif($question->required == 1) {
+                          ?>
+                              <input class="question-required-checkbox" type="checkbox" checked="checked"> Verplicht
+                          <?php
+                            }
+                          ?>
                         </div>
 
                       </div>
@@ -211,7 +202,12 @@
 
 	  	</div>
 
-	  	<button class="btn btn-primary enquete-save">Opslaan</button>
+      <div class="enquete-buttons">
+
+  	  	<button class="btn btn-primary enquete-save">Opslaan</button>
+        <a class="btn btn-default" href="<?= URL . "enquete/index/" . $enquete->id; ?>" target="_blank">Enquête bekijken</a>
+
+      </div>
 
     </div>
 
@@ -225,8 +221,6 @@
         <h4 class="modal-title" id="myModalLabel">Bewerk vraag</h4>
       </div>
       <div class="modal-body">
-
-
 
       </div>
       <div class="modal-footer">

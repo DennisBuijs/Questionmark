@@ -130,12 +130,7 @@
 	width: 100%;
 }
 
-.enquete-container .enquete-element:hover,
-.enquete-container .enquete-element *:hover {
-	cursor: pointer;
-}
-
-.enquete-save {
+.enquete-buttons {
 	position: fixed;
 	top: calc(100% - 89px);
 }
