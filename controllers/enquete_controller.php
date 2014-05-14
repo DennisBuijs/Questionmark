@@ -61,5 +61,10 @@ class Enquete_Controller extends Controller {
     }
   }
 
+  public function make(){
+    $this->model->make();
+    header("Location: " . URL);
+  }
+  
 
 }
