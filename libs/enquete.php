@@ -68,7 +68,13 @@ class Enquete {
     global $db;
     $this->id = $id;
 
-    $sql = "SELECT * FROM Enquetes WHERE id = :id";
+    $sql = "SELECT Enquetes.*, Users.name AS username "
+            . "FROM Enquetes "
+            . "LEFT JOIN Users "
+            . "ON Enquetes.Users_id = Users.id "
+            . "WHERE Enquetes.id = :id";
+
+
     $data = $db->select($sql, array(":id" => $this->id));
 
     $this->name = $data[0]['name'];
@@ -76,6 +82,7 @@ class Enquete {
     $this->creation_date = $data[0]['creation_date'];
     $this->start_date = $data[0]['start_date'];
     $this->end_date = $data[0]['end_date'];
+    $this->creator = $data[0]['username'];
     $this->questions = Question::get_questions_by_enquete_id($id);
   }
 
