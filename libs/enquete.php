@@ -97,7 +97,8 @@ class Enquete {
       $enquetes[] = new self($value['id']);
     }
 
-    return $enquetes;
+    if(isset($enquetes))
+      return $enquetes; 
   }
 
 
