@@ -225,7 +225,16 @@ $(".enquete-container .enquete-element").each(function() {
 
 
 
+// Are you sure you want to do this?
+$(".sure").on("click", function() {
 
+  if (confirm("Weet je zeker dat je deze actie wilt uitvoeren?")) {
+    
+  } else {
+      return false;
+  }
+
+});
 
 
 

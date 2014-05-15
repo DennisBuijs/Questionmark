@@ -63,8 +63,9 @@
                   <a class="btn btn-primary btn-sm" href="results/" style="opacity:0;">Resultaten</a>
 
                   <div class="btn-group pull-right">
+                    <a class="btn btn-primary btn-sm" href="enquete/index/<?= $enquete->id; ?>">Bekijken</a> 
                     <a class="btn btn-primary btn-sm" href="enquete/edit/<?= $enquete->id; ?>">Bewerken</a> 
-                    <a class="btn btn-primary btn-sm" href="enquete/delete/<?= $enquete->id; ?>">Verwijderen</a>
+                    <a class="btn btn-primary btn-sm sure" href="enquete/delete/<?= $enquete->id; ?>">Verwijderen</a>
                   </div>
 
                 </div>

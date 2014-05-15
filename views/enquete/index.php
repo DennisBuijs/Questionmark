@@ -32,8 +32,8 @@
           <input type="hidden" name="type" value="normal">
           <input type="hidden" name="enquete_name" value="<?= $enquete->name; ?>">
             <? $counter = 0; ?>
-          <? if(!empty($enquete->questions)): ?>
-  	  		<? foreach ($enquete->questions as $question) : ?> 
+            <? if(!empty($enquete->questions)): ?>
+  	  		  <? foreach ($enquete->questions as $question) : ?> 
             
           <div class="question">
 
@@ -42,7 +42,9 @@
               switch($question->type) {
 
                 case "textfield": ?>
-                  <div class="enquete-element">
+                  <div class="enquete-element"
+                      data-required="<?= $question->required; ?>"
+                      data-type="<?= $question->type; ?>">
                     <label><?= $question->question ?></label>
                   <input type="hidden" name="questions[<?= $counter ?>][question]" value="<?= $question->question ?>">
                     <input 
@@ -59,7 +61,8 @@
                 <? break;
 
                 case "textarea": ?>
-                  <div class="enquete-element">
+                  <div class="enquete-element"
+                      data-required="<?= $question->required; ?>">
                     <label><?= $question->question ?></label>
                   <input type="hidden" name="questions[<?= $counter ?>][question]" value="<?= $question->question ?>">
                     <textarea 
@@ -76,7 +79,8 @@
 
                 case "checkbox": ?>
                   <input type="hidden" name="questions[<?= $counter ?>][question]" value="<?= $question->question ?>">
-                  <div class="enquete-element">
+                  <div class="enquete-element"
+                      data-required="<?= $question->required; ?>">
                     <label><?= $question->question ?></label>
                     <? foreach ($question->attributes as $attribute) : ?>
                         <div class="checkbox">
@@ -91,7 +95,8 @@
 
                 case "radio": ?>
                   <input type="hidden" name="questions[<?= $counter ?>][question]" value="<?= $question->question ?>">
-                  <div class="enquete-element">
+                  <div class="enquete-element"
+                      data-required="<?= $question->required; ?>">
                     <label><?= $question->question ?></label>
                     <? foreach ($question->attributes as $attribute) : ?>
                         <div class="radio">
@@ -106,7 +111,8 @@
 
                 case "select": ?>
                   <input type="hidden" name="questions[<?= $counter ?>][question]" value="<?= $question->question ?>">
-                  <div class="enquete-element">
+                  <div class="enquete-element"
+                      data-required="<?= $question->required; ?>">
                     <label><?= $question->question ?></label>
                     <select class="form-control" name="questions[<?= $counter ?>][answer]">
                       <? foreach ($question->attributes as $attribute) : ?>
