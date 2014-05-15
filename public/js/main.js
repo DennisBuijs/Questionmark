@@ -5,30 +5,56 @@ $(document).ready(function() {
   enquete["deleted_question"] = [];
   enquete["deleted_attributes"] = [];
 
- 
+
  /**
-  * Validation
+  * FORM VALIDATION
+  * Fields with data-required="required" can not be empty
   */
-  $('form').on('submit', function(e) {
-    var iNumOfInvalidValues = 0;
-    $('[data-required=required], [data-required=1]').each(function() {
-      var $parent_of_input = $(this);
-      var $input = $(this).find('input');
+ $('form').on('submit', function() {
 
-      if ($input.val() === '') {
-        $parent_of_input.addClass('has-error');
-        iNumOfInvalidValues++;
-      } else if ($parent_of_input.hasClass('has-error')) {
-        $parent_of_input.removeClass('has-error');
-      }
-      
-    });
+   var number_of_invalid_fields = 0;
 
-    if (iNumOfInvalidValues !== 0) {
-      return false;
-    }
+   $('[data-required=required], [data-required=1]').each(function() {
 
-  });
+     var $parent_of_input = $(this);
+     var $input = $(this).find('input').not('[type=hidden]');
+
+     if ($input.length > 1) {
+
+       var is_checked;
+       $input.each(function() {
+         if (this.checked)
+           is_checked = true;
+       });
+
+       if (!is_checked) {
+
+         $parent_of_input.addClass('has-error');
+         number_of_invalid_fields++;
+
+       } else {        
+         if ($parent_of_input.hasClass('has-error')) {
+           $parent_of_input.removeClass('has-error');
+         }        
+       }      
+     } else {
+
+       if ($input.val() === '') {
+         $parent_of_input.addClass('has-error');
+         number_of_invalid_fields++;
+       } else if ($parent_of_input.hasClass('has-error')) {
+         $parent_of_input.removeClass('has-error');
+       }
+
+     }
+
+   });
+
+   if (number_of_invalid_fields !== 0) {
+     return false;
+   }
+
+ });
 
 
   /**
