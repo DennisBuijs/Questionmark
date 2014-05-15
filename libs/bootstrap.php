@@ -25,26 +25,41 @@ class Bootstrap {
   }
 
 
+  /**
+   * Sets the path to the model folder
+   * @param string $path Name of the model folder
+   */
   public function set_model_path($path) {
     $this->_model_path = trim($path, "/") . "/";
   }
 
-
+  /**
+   * Sets the path to the controller folder
+   * @param string $path Name of the controller folder
+   */
   public function set_controller_path($path) {
     $this->_controller_path = trim($path, "/") . "/";
   }
 
-
+  /**
+   * Sets the path to the error controller
+   * @param string $path path to the error controller
+   */
   public function set_error_file($path) {
     $this->_error_file = trim($path, "/");
   }
 
-
+  /**
+   * Sets the path to the default controller
+   * @param string $path Path to the default controller
+   */
   public function set_default_file($path) {
     $this->_default_file = trim($path, "/");
   }
 
-
+  /**
+   * Gets URL from $_GET parameters
+   */
   private function _get_URL() {
     $this->_input = Input::create_from_globals();
     if ($this->_input->get("url"))
@@ -56,6 +71,9 @@ class Bootstrap {
   }
 
 
+  /**
+   * Loads the default controller
+   */
   private function _load_default_controller() {
     require $this->_controller_path . $this->_default_file;
     $this->_controller = new Index_Controller();
@@ -63,7 +81,10 @@ class Bootstrap {
     $this->_controller->index();
   }
 
-
+  /**
+   * Loads existing controller   
+   * @return boolean When it can not include the controller file, it return false
+   */
   private function _load_existing_controller() {
     $file = $this->_controller_path . $this->_URL[0] . "_controller.php";
 
@@ -80,7 +101,10 @@ class Bootstrap {
     }
   }
 
-
+  
+  /**
+   * Calls the method en passes arguments from $_GET Parameters 
+   */
   private function _call_controller_method() {
 
     $length = count($this->_URL);
@@ -108,7 +132,9 @@ class Bootstrap {
     }
   }
 
-
+  /**
+   * Loads Errorpage
+   */
   private function _error() {
     require_once $this->_controller_path . "/" . $this->_error_file;
     $this->_controller = new Error_Controller();

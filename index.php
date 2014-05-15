@@ -12,8 +12,6 @@ require_once 'libs/session.php';
 require_once 'libs/hash.php';
 require_once 'libs/debug.php';
 require_once 'libs/input.php';
-require_once 'libs/form.php';
-require_once 'libs/Form/val.php';
 require_once 'util/auth.php';
 
 

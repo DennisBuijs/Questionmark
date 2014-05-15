@@ -8,7 +8,7 @@ class Database extends PDO {
 
 
   /**
-   * Select
+   * Select data from database
    * @param string $sql The Select statement
    * @param array $array The paramenters to bind
    * @param string $fetch_mode The mode to fetch
@@ -68,7 +68,7 @@ class Database extends PDO {
 
 
   /**
-   * Delete
+   * Delete records from database
    * @param string $table the table name
    * @param string $where the where part of query
    * @param int $limit number of rows to delete

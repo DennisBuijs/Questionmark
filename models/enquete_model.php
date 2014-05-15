@@ -2,24 +2,37 @@
 
 class Enquete_Model extends Model {
 
+  /**
+   * Gets enquete to by id
+   * @param int $id The id of the enqeute
+   * @return object Enquete object
+   */
   public function get_enquete_by_id($id) {
     return Enquete::get_enquete_by_id($id);
   }
 
 
+  /**
+   * Deletes enquete
+   * @param int $id The id of the enqeute
+   */
   public function delete($id) {
     Enquete::delete($id);
   }
 
 
+  /**
+   * Makes enquete
+   */
   public function make() {
     Enquete::make("Naamloze Enquete", '', '', '', Session::get('user_id'));
   }
 
 
+  /**
+   * edits enqeute
+   */
   public function edit() {
-
-
     $json = $_POST['json'];
     $enquete = json_decode($json, true);
 
@@ -37,16 +50,9 @@ class Enquete_Model extends Model {
   }
 
 
-  public function get_all_contacts() {
-    return $this->db->select("SELECT id, first_name, last_name, email FROM Contacts");
-  }
-
-
-  public function get_contact_by_id($id) {
-    return $this->db->select("SELECT id, first_name, last_name, email FROM Contacts WHERE id = :id", array(":id" => $id))[0];
-  }
-
-
+  /**
+   * sends enquete to contacts
+   */
   public function send() {
 
     $message = $_POST['message'];
@@ -65,7 +71,7 @@ class Enquete_Model extends Model {
       $message_temp = str_replace("{{email}}", $email, $message_temp);
       $message_temp = str_replace("{{id}}", $last_name, $message_temp);
 
-      // mail();
+      mail($email, "Eqnuete", $message_temp);
     }
 
     header("Location: " . URL);
@@ -97,6 +103,25 @@ class Enquete_Model extends Model {
     $message .= "Team Dennis";
 
     // mail("admin@gmail.com", "Er is een enquete ingevuld", $message);
+  }
+
+
+  /**
+   * Gets all the contacts
+   * @return array contacts
+   */
+  public function get_all_contacts() {
+    return $this->db->select("SELECT id, first_name, last_name, email FROM Contacts");
+  }
+
+
+  /**
+   * Gets contact by id
+   * @param int $id Id of the contact to get
+   * @return type
+   */
+  public function get_contact_by_id($id) {
+    return $this->db->select("SELECT id, first_name, last_name, email FROM Contacts WHERE id = :id", array(":id" => $id))[0];
   }
 
 

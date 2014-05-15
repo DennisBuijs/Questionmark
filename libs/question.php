@@ -1,8 +1,5 @@
 <?php
 
-/**
- * @todo set all properties!!
- */
 class Question {
 
   public $question, $type, $attributes, $required, $order;
@@ -12,6 +9,10 @@ class Question {
   }
 
 
+  /**
+   * Initializes question object
+   * @param int $id Id of the question
+   */
   private function init($id) {
     $this->id = $id;
     $this->question = $this->get_question();
@@ -22,6 +23,12 @@ class Question {
   }
 
 
+  /**
+   * Edits a question
+   * @global object $db Database object used to communicate with MySQL database
+   * @param array $question
+   * @param array $deleted_attributes the ids of the deleted attributes
+   */
   public static function edit($question, $deleted_attributes) {
     global $db;
 
@@ -51,6 +58,12 @@ class Question {
   }
 
 
+  /**
+   * Makes question
+   * @global object $db Database object used to communicate with MySQL database
+   * @param array $question
+   * @param int $enquete_id The id of the enquete
+   */
   public static function make($question, $enquete_id) {
     global $db;
     $data = array(
@@ -60,8 +73,6 @@ class Question {
         "Question_Types_id" => $db->select("SELECT id FROM Question_Types WHERE type = '{$question['type']}'")[0]['id'],
         "Enquetes_id" => $enquete_id
     );
-
-
 
     $db->insert("Questions", $data, "Enquetes_id = $enquete_id");
     $question_id = $db->lastInsertId();
@@ -73,6 +84,11 @@ class Question {
   }
 
 
+  /**
+   * Deletes question 
+   * @global object $db Database object used to communicate with MySQL database
+   * @param int $id The id of the question
+   */
   public static function delete($id) {
     global $db;
     $db->delete("Questions", " id = $id");
@@ -80,6 +96,12 @@ class Question {
   }
 
 
+  /**
+   * Makes attribute
+   * @global object $db Database object used to communicate with MySQL database
+   * @param array $attr 
+   * @param id $question_id Id of the question
+   */
   private static function make_attribute($attr, $question_id) {
     global $db;
     $data = array(
@@ -91,6 +113,12 @@ class Question {
   }
 
 
+  /**
+   * Edits attribute
+   * @global object $db Database object used to communicate with MySQL database
+   * @param array $attr 
+   * @param int $question_id Id of the question
+   */
   private static function edit_attribute($attr, $question_id) {
     global $db;
     $data = array(
@@ -102,12 +130,23 @@ class Question {
   }
 
 
+  /**
+   * Delete attribute
+   * @global object $db Database object used to communicate with MySQL database
+   * @param int $attr_id Id of the attribute
+   */
   private static function delete_attribute($attr_id) {
     global $db;
     $db->delete("Question_Attributes", "id = $attr_id");
   }
 
 
+  /**
+   * Gets question by enqeute id
+   * @global object $db Database object used to communicate with MySQL database
+   * @param int $id Id of the enqeute
+   * @return self
+   */
   public static function get_questions_by_enquete_id($id) {
     global $db;
 
@@ -122,11 +161,21 @@ class Question {
   }
 
 
+  /**
+   * Gets question by id
+   * @param int $id Id of the question
+   * @return \self
+   */
   public function get_question_by_id($id) {
     return new self($id);
   }
 
 
+  /**
+   * Gets question
+   * @global object $db Database object used to communicate with MySQL database
+   * @return string Question
+   */
   private function get_question() {
     global $db;
     $sql = "SELECT question FROM Questions where id = :id";
@@ -135,6 +184,11 @@ class Question {
   }
 
 
+  /**
+   * Gets question type
+   * @global object $db Database object used to communicate with MySQL database
+   * @return string question type
+   */
   private function get_type() {
     global $db;
     $sql = "SELECT Question_Types.type "
@@ -147,6 +201,11 @@ class Question {
   }
 
 
+  /**
+   * Gets question attribuets
+   * @global object $db Database object used to communicate with MySQL database
+   * @return array attributes
+   */
   private function get_attributes() {
     global $db;
     $sql = "SELECT attr_types.attribute_type, question_attrs.attribute, question_attrs.id "
@@ -160,6 +219,11 @@ class Question {
   }
 
 
+  /**
+   * Gets order
+   * @global object $db Database object used to communicate with MySQL database
+   * @return int The order
+   */
   private function get_order() {
     global $db;
     $sql = "SELECT `order` FROM Questions WHERE id = :id";
@@ -168,6 +232,11 @@ class Question {
   }
 
 
+  /**
+   * checks if question is required
+   * @global object $db Database object used to communicate with MySQL database
+   * @return bool
+   */
   private function get_required() {
     global $db;
     $sql = "SELECT `required` FROM Questions WHERE id = :id";

@@ -6,9 +6,14 @@ class View {
     
   }
 
-  public function render($name) {
 
+  /**
+   * Render
+   * @param string $name name of the folder en file
+   */
+  public function render($name) {
     require 'views/' . $name . '.php';
   }
+
 
 }

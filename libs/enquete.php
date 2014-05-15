@@ -5,13 +5,22 @@
  */
 class Enquete {
 
-  public $id, $name, $introduction, $creation_date, $start_date, $end_date, $questions; // SESSIEONS G
+  public $id, $name, $introduction, $creation_date, $start_date, $end_date, $questions, $creator;
 
   public function __construct($id) {
     $this->init($id);
   }
 
 
+  /**
+   * Insert enquete to database
+   * @global object $db Database object used to communicate with MySQL database
+   * @param string $name Name of enquete
+   * @param string $introduction Introductiontext.
+   * @param date $start_date The date on which it start
+   * @param date $end_date The date on which it ends
+   * @param int $user_id The id from de user who made the enquete
+   */
   static function make($name, $introduction, $start_date, $end_date, $user_id) {
     global $db;
     $data = array(
@@ -26,12 +35,30 @@ class Enquete {
   }
 
 
+  /**
+   * Deletes Enquete from database
+   * @global object $db  Database object used to communicate with MySQL database
+   * @param int $id Enquete id that will be deleted
+   */
   static function delete($id) {
     global $db;
     $db->delete("Enquetes", " id = $id");
   }
 
 
+  /**
+   * Edit enquete
+   * @global object $db  Database object used to communicate with MySQL database
+   * @param string $name New name of the enquete
+   * @param string $introduction New introduction o
+   * @param date $start_date New start date on which the enquete will start
+   * @param date $end_date New end date on which the enquete wil end
+   * @param array$questions New questions of the enquete
+   * @param array $deleted_questions Ids of the deleted questions
+   * @param array $deleted_attributes Ids of the deleted attributes
+   * @param int $enquete_id The id of the enquete 
+   * @param int $user_id The id of the user who edited the enquete
+   */
   static function edit($name, $introduction, $start_date, $end_date, $questions, $deleted_questions, $deleted_attributes, $enquete_id, $user_id) {
 
     global $db;
@@ -64,6 +91,11 @@ class Enquete {
   }
 
 
+  /**
+   * Initializes Enquete object
+   * @global object $db  Database object used to communicate with MySQL database
+   * @param int $id id of enquete to initialize
+   */
   private function init($id) {
     global $db;
     $this->id = $id;
@@ -87,6 +119,11 @@ class Enquete {
   }
 
 
+  /**
+   * Gets all enquetes
+   * @global object $db  Database object used to communicate with MySQL database
+   * @return array of enquete objects
+   */
   public static function get_all() {
     global $db;
 
@@ -97,11 +134,16 @@ class Enquete {
       $enquetes[] = new self($value['id']);
     }
 
-    if(isset($enquetes))
-      return $enquetes; 
+    if (isset($enquetes))
+      return $enquetes;
   }
 
 
+  /**
+   * Gets a enquete by enqeute id
+   * @param int $id the Id of the enquete to initialize
+   * @return self
+   */
   public static function get_enquete_by_id($id) {
     return new self($id);
   }
