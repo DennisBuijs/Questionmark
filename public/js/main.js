@@ -11,7 +11,7 @@ $(document).ready(function() {
   */
   $('form').on('submit', function(e) {
     var iNumOfInvalidValues = 0;
-    $('[data-required=required]').each(function() {
+    $('[data-required=required], [data-required=1]').each(function() {
       var $parent_of_input = $(this);
       var $input = $(this).find('input');
 
