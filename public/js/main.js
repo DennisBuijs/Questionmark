@@ -51,6 +51,7 @@ $(document).ready(function() {
 
   $(".enquete-container .enquete-element").each(function() {
     $(this).attr("data-temp-id", temp_question_id);
+    $(this).find(".delete-question").attr("data-question-delete-id", temp_question_id);
     $(this).find(".add-option").attr("data-option-add-id", temp_question_id);
     temp_question_id++;
   });
@@ -59,6 +60,16 @@ $(document).ready(function() {
     $(this).attr("data-option-temp-id", temp_option_id);
     $(this).find(".delete-option").attr("data-option-delete-id", temp_option_id);
     temp_option_id++;
+  });
+
+  $(".enquete-container").on("click", ".delete-question", function() {
+    var delete_id = $(this).parent().parent().parent().parent().attr("data-id"); // GOEDE ID
+    if(delete_id != null) {
+      enquete["deleted_question"].push(delete_id);
+    }
+    
+    var delete_temp_id = $(this).attr("data-question-delete-id");
+    $(".panel[data-temp-id="+delete_temp_id+"]").remove();
   });
 
   $(".enquete-container").on("click", ".add-option", function() {
@@ -79,11 +90,11 @@ $(document).ready(function() {
 
   // HTML voor questions: textfield, textarea
   question_html = [];
-  question_html["textfield"] = "<div class=\"panel panel-default enquete-element\" style=\"height:249px\" data-type=\"textfield\" placeholder=\"\"><div class=\"panel-heading\"><input class=\"question-label\"></div><div class=\"panel-body\"><strong>Open vraag</strong><br><br><div class=\"form-group\"><label for=\"\">Plaatshouder</label><input class=\"form-control question-placeholder\"></div><div class=\"form-group\"><label for=\"\">Verplicht</label><br><input class=\"question-required-checkbox\" type=\"checkbox\"> Verplicht</div></div>";
-  question_html["textarea"] = "<div class=\"panel panel-default enquete-element\" style=\"height:249px\" data-type=\"textarea\" placeholder=\"\"><div class=\"panel-heading\"><input class=\"question-label\"></div><div class=\"panel-body\"><strong>Open vraag</strong><br><br><div class=\"form-group\"><label for=\"\">Plaatshouder</label><input class=\"form-control question-placeholder\"></div><div class=\"form-group\"><label for=\"\">Verplicht</label><br><input class=\"question-required-checkbox\" type=\"checkbox\"> Verplicht</div></div>";
-  question_html["checkbox"] = "<div class=\"panel panel-default enquete-element\" style=\"height:224px\" data-type=\"checkbox\"> <div class=\"panel-heading\"> <input class=\"question-label\"> </div> <div class=\"panel-body\"> <div class=\"option-group\"> </div> <button class=\"btn btn-default add-option\">Optie toevoegen</button> <hr> <div class=\"question-meta\"> <div class=\"form-group col-md-6\"> <label for=\"\">Type veld</label><br> <select class=\"form-control question-multiplechoice-type\"> <option value=\"checkbox\" selected>Checkbox</option> <option value=\"radio\">Keuzerondje</option> <option value=\"select\">Selectieveld</option> </select> </div> <div class=\"form-group col-md-6\"> <label for=\"\">Verplicht</label><br> <input class=\"question-required-checkbox\" type=\"checkbox\"> Verplicht </div> </div> </div> </div>";
-  question_html["radio"] = "<div class=\"panel panel-default enquete-element\" style=\"height:224px\" data-type=\"radio\"> <div class=\"panel-heading\"> <input class=\"question-label\"> </div> <div class=\"panel-body\"> <div class=\"option-group\"> </div> <button class=\"btn btn-default add-option\">Optie toevoegen</button> <hr> <div class=\"question-meta\"> <div class=\"form-group col-md-6\"> <label for=\"\">Type veld</label><br> <select class=\"form-control question-multiplechoice-type\"> <option value=\"checkbox\">Checkbox</option> <option value=\"radio\" selected>Keuzerondje</option> <option value=\"select\">Selectieveld</option> </select> </div> <div class=\"form-group col-md-6\"> <label for=\"\">Verplicht</label><br> <input class=\"question-required-checkbox\" type=\"checkbox\"> Verplicht </div> </div> </div> </div>";
-  question_html["select"] = "<div class=\"panel panel-default enquete-element\" style=\"height:224px\" data-type=\"select\"> <div class=\"panel-heading\"> <input class=\"question-label\"> </div> <div class=\"panel-body\"> <div class=\"option-group\"> </div> <button class=\"btn btn-default add-option\">Optie toevoegen</button> <hr> <div class=\"question-meta\"> <div class=\"form-group col-md-6\"> <label for=\"\">Type veld</label><br> <select class=\"form-control question-multiplechoice-type\"> <option value=\"checkbox\">Checkbox</option> <option value=\"radio\">Keuzerondje</option> <option value=\"select\" selected>Selectieveld</option> </select> </div> <div class=\"form-group col-md-6\"> <label for=\"\">Verplicht</label><br> <input class=\"question-required-checkbox\" type=\"checkbox\"> Verplicht </div> </div> </div> </div>";
+  question_html["textfield"] = "<div class=\"panel panel-default enquete-element\" style=\"height:249px\" data-type=\"textfield\" placeholder=\"\"><div class=\"panel-heading\"><input class=\"question-label\"></div><div class=\"panel-body\"><strong>Open vraag</strong><br><br><div class=\"form-group\"><label for=\"\">Plaatshouder</label><input class=\"form-control question-placeholder\"></div><div class=\"form-group col-md-6\"><label for=\"\">Verplicht</label><br><input class=\"question-required-checkbox\" type=\"checkbox\"> Verplicht</div><div class=\"col-md-6\"><div class=\"form-group\"><button class=\"btn btn-primary btn-sm pull-right delete-question\">&times;</button></div></div></div>";
+  question_html["textarea"] = "<div class=\"panel panel-default enquete-element\" style=\"height:249px\" data-type=\"textarea\" placeholder=\"\"><div class=\"panel-heading\"><input class=\"question-label\"></div><div class=\"panel-body\"><strong>Open vraag</strong><br><br><div class=\"form-group\"><label for=\"\">Plaatshouder</label><input class=\"form-control question-placeholder\"></div><div class=\"form-group col-md-6\"><label for=\"\">Verplicht</label><br><input class=\"question-required-checkbox\" type=\"checkbox\"> Verplicht</div><div class=\"col-md-6\"><div class=\"form-group\"><button class=\"btn btn-primary btn-sm pull-right delete-question\">&times;</button></div></div></div>";
+  question_html["checkbox"] = "<div class=\"panel panel-default enquete-element\" style=\"height:224px\" data-type=\"checkbox\"> <div class=\"panel-heading\"> <input class=\"question-label\"> </div> <div class=\"panel-body\"> <div class=\"option-group\"> </div> <button class=\"btn btn-default add-option\">Optie toevoegen</button> <hr> <div class=\"question-meta\"> <div class=\"form-group col-md-6\"> <label for=\"\">Type veld</label><br> <select class=\"form-control question-multiplechoice-type\"> <option value=\"checkbox\" selected>Checkbox</option> <option value=\"radio\">Keuzerondje</option> <option value=\"select\">Selectieveld</option> </select> </div> <div class=\"form-group col-md-3\"> <label for=\"\">Verplicht</label><br> <input class=\"question-required-checkbox\" type=\"checkbox\"> Verplicht </div><div class=\"col-md-3\"><button class=\"btn btn-primary btn-sm pull-right delete-question\">&times;</button></div></div> </div> </div> </div>";
+  question_html["radio"] = "<div class=\"panel panel-default enquete-element\" style=\"height:224px\" data-type=\"radio\"> <div class=\"panel-heading\"> <input class=\"question-label\"> </div> <div class=\"panel-body\"> <div class=\"option-group\"> </div> <button class=\"btn btn-default add-option\">Optie toevoegen</button> <hr> <div class=\"question-meta\"> <div class=\"form-group col-md-6\"> <label for=\"\">Type veld</label><br> <select class=\"form-control question-multiplechoice-type\"> <option value=\"checkbox\">Checkbox</option> <option value=\"radio\" selected>Keuzerondje</option> <option value=\"select\">Selectieveld</option> </select> </div> <div class=\"form-group col-md-3\"> <label for=\"\">Verplicht</label><br> <input class=\"question-required-checkbox\" type=\"checkbox\"> Verplicht </div> <div class=\"col-md-3\"><button class=\"btn btn-primary btn-sm pull-right delete-question\">&times;</button></div></div> </div> </div>";
+  question_html["select"] = "<div class=\"panel panel-default enquete-element\" style=\"height:224px\" data-type=\"select\"> <div class=\"panel-heading\"> <input class=\"question-label\"> </div> <div class=\"panel-body\"> <div class=\"option-group\"> </div> <button class=\"btn btn-default add-option\">Optie toevoegen</button> <hr> <div class=\"question-meta\"> <div class=\"form-group col-md-6\"> <label for=\"\">Type veld</label><br> <select class=\"form-control question-multiplechoice-type\"> <option value=\"checkbox\">Checkbox</option> <option value=\"radio\">Keuzerondje</option> <option value=\"select\" selected>Selectieveld</option> </select> </div> <div class=\"form-group col-md-3\"> <label for=\"\">Verplicht</label><br> <input class=\"question-required-checkbox\" type=\"checkbox\"> Verplicht </div> <div class=\"col-md-3\"><button class=\"btn btn-primary btn-sm pull-right delete-question\">&times;</button></div></div> </div> </div>";
 
   // Functionaliteit voor het slepen van formulierelementen naar het formulier
   $(".enquete-elements .enquete-new-question").draggable({
@@ -102,6 +113,7 @@ $(document).ready(function() {
       $(".enquete-container .enquete-new-question").empty().html(question_html[new_question_type]);
       $(".enquete-container .enquete-new-question").find(".panel").attr("data-temp-id", temp_question_id);
       $(".enquete-container .enquete-new-question").find(".panel").find(".add-option").attr("data-option-add-id", temp_question_id);
+      $(".enquete-container .enquete-new-question").find(".panel").find(".delete-question").attr("data-question-delete-id", temp_question_id);
       $(".enquete-container .enquete-new-question").removeClass("enquete-element");
       $(".enquete-container .enquete-new-question").removeClass("enquete-new-question");
       temp_question_id++;

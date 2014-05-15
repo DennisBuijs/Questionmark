@@ -150,6 +150,15 @@ body {
 	height: 100px;
 }
 
+.enquete-element .delete-question {
+	display: none;
+	margin-top: 30px;
+}
+
+.enquete-element:hover .delete-question {
+	display: block;
+}
+
 /* Alerts */
 
 .alert-fixed-top {

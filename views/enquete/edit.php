@@ -139,7 +139,6 @@
                     >
                     <div class="panel-heading"><input class="question-label" value="<?= $question->question ?>"></label></div>
                     <div class="panel-body">
-                      <strong>Open vraag</strong><br><br>
 
                       <div class="form-group">
                         <label for="">Plaatshouder</label>
@@ -155,7 +154,7 @@
                         >
                       </div>
 
-                      <div class="form-group">
+                      <div class="form-group col-md-6">
                         <label for="">Verplicht</label><br>
                         <?php
                           if($question->required == 0) {
@@ -168,6 +167,16 @@
                         <?php
                           }
                         ?>
+                      </div>
+
+                      <div class="col-md-6">
+
+                        <div class="form-group">
+
+                          <button class="btn btn-primary btn-sm pull-right delete-question">&times;</button>
+
+                        </div>
+
                       </div>
 
                     </div>
@@ -210,7 +219,7 @@
                           </select>
                         </div>
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-3">
                           <label for="">Verplicht</label><br>
                           <?php
                             if($question->required == 0) {
@@ -224,6 +233,8 @@
                             }
                           ?>
                         </div>
+
+                        <div class="col-md-3"><button class="btn btn-primary btn-sm pull-right delete-question">&times;</button></div>
 
                       </div>
                     
