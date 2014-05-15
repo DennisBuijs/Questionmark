@@ -56,15 +56,15 @@ class Enquete_Controller extends Controller {
         break;
       case 'normal' :
         $this->model->save();
-        header("Location: " . URL . "enquete/thankyou");
+        header("Location: " . URL . "enquete/bedankt");
         break;
     }
   }
 
 
-  public function thankyou() {
+  public function bedankt() {
     $this->view->render('header');
-    $this->view->render('enquete/thankyou');
+    $this->view->render('enquete/bedankt');
     $this->view->render('footer');
   }
 
