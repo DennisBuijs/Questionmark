@@ -28,8 +28,8 @@
 
       <form class="form-inline" role="form" method="post" action="<?= URL ?>user/save">
         <input type="hidden" class="form-control" name="type" value="create">
-        <input type="text" class="form-control" placeholder="Naam" name="name"><!-- required -->
-        <input type="email" class="form-control" placeholder="Email address" name="email">
+        <span data-required="required"><input type="text" class="form-control" placeholder="Naam" name="name"><!-- required --></span>
+        <span data-required="required"><input type="email" class="form-control" placeholder="Email address" name="email"></span>
         <button type="submit" class="btn btn-default">Registreer</button>
       </form>
 
@@ -50,7 +50,7 @@
               <td><?= $user['name'] ?></td>
               <td><?= $user['email'] ?></td>
               <td><a href="<?= URL . "user/edit/" . $user['id']; ?>">bewerk</a></td>
-              <td><? if (!$user['admin']) : ?><a href="<?= URL . "user/delete/" . $user['id']; ?>">verwijder</a><? endif; ?></td>
+              <td><? if (!$user['admin']) : ?><a href="<?= URL . "user/delete/" . $user['id']; ?>" class="sure">verwijder</a><? endif; ?></td>
             </tr>
           <? endforeach; ?>
         </tbody>

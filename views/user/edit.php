@@ -25,9 +25,9 @@
     <div>
       <form class="form-inline" role="form" method="post" action="<?= URL ?>user/save">
         <input type="hidden" class="form-control" name="type" value="edit">
-        <input type="hidden" class="form-control" name="id" value="<?= $this->user['id'] ?>">
-        <input type="text" class="form-control" placeholder="Naam" value="<?= $this->user['name'] ?>" name="name"><!-- required -->
-        <input type="email" class="form-control" placeholder="Email address" value="<?= $this->user['email'] ?>" name="email">
+        <span><input type="hidden"  class="form-control" name="id" value="<?= $this->user['id'] ?>"></span>
+        <span data-required="required"><input type="text" class="form-control" placeholder="Naam" value="<?= $this->user['name'] ?>" name="name"><!-- required --></span>
+        <span data-required="required"><input type="email" class="form-control" placeholder="Email address" value="<?= $this->user['email'] ?>" name="email"></span>
         <button type="submit" class="btn btn-default">opslaan</button>
       </form>
 

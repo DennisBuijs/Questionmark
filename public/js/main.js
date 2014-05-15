@@ -5,47 +5,36 @@ $(document).ready(function() {
   enquete["deleted_question"] = [];
   enquete["deleted_attributes"] = [];
 
-  // This function shows an alert
-  // type: the type of alert, has the be one of: succes, info, warning, danger
-  // message: the message the alert will say
-  show_alert = function(type, message) {
-
-    $(".alert-fixed-top").remove();
-    $("body").prepend("<div class=\"alert alert-" + type + " alert-dismissable alert-fixed-top\"><button type=\"button\" class=\"close close-alert-fixed-top\" aria-hidden=\"true\">&times;</button>" + message + "</div>");
-    $(".alert-fixed-top").slideDown();
-
-    $(".close-alert-fixed-top").on("click", function() {
-
-      $(".alert-fixed-top").slideUp();
-
-    });
-
-  }
-
-  $('form').on('submit', function() {
+ 
+ /**
+  * Validation
+  */
+  $('form').on('submit', function(e) {
     var iNumOfInvalidValues = 0;
     $('[data-required=required]').each(function() {
-      var $this = $(this);
+      var $parent_of_input = $(this);
+      var $input = $(this).find('input');
 
-      if (this.value === '') {
-        $this.parent().addClass('has-error');
-
+      if ($input.val() === '') {
+        $parent_of_input.addClass('has-error');
         iNumOfInvalidValues++;
-
+      } else if ($parent_of_input.hasClass('has-error')) {
+        $parent_of_input.removeClass('has-error');
       }
-      else if ($this.hasClass('invalid-value')) {
-        $this.removeClass('invalid-value');
-        $('+ div', this).remove();
-      }
+      
     });
 
     if (iNumOfInvalidValues !== 0) {
-      show_alert("danger", "De logingegevens zijn niet correct.");
       return false;
     }
 
   });
 
+
+  /**
+   * 
+   * @type Number
+   */
   var temp_question_id = 1;
   var temp_option_id = 1;
 

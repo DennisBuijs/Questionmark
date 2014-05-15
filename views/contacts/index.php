@@ -27,9 +27,9 @@
 
       <form class="form-inline" role="form" method="post" action="<?= URL ?>contacts/save">
         <input type="hidden" class="form-control" name="type" value="create">
-        <input type="text" class="form-control" placeholder="Voornaam" name="first_name"><!-- required -->
-        <input type="text" class="form-control" placeholder="Achternaam" name="last_name"><!-- required -->
-        <input type="email" class="form-control" placeholder="Email address" name="email">
+        <span data-required="required"><input type="text" class="form-control" placeholder="Voornaam" name="first_name"><!-- required --></span>
+        <span data-required="required"><input type="text" class="form-control" placeholder="Achternaam" name="last_name"><!-- required --></span>
+        <span data-required="required"><input type="email" class="form-control" placeholder="Email address" name="email"></span>
         <button type="submit" class="btn btn-default">Registreer</button>
       </form>
 
@@ -53,7 +53,7 @@
               <td><?= $contact['last_name']; ?></td>
               <td><?= $contact['email']; ?></td>
               <td><a href="<?= URL . "contacts/edit/" . $contact['id']; ?>">bewerk</a></td>
-              <td><a href="<?= URL . "contacts/delete/" . $contact['id']; ?>">verwijder</a></td>
+              <td><a href="<?= URL . "contacts/delete/" . $contact['id']; ?>" class="sure">verwijder</a></td>
 
 
             </tr>
