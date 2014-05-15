@@ -32,6 +32,7 @@
           <input type="hidden" name="type" value="normal">
           <input type="hidden" name="enquete_name" value="<?= $enquete->name; ?>">
             <? $counter = 0; ?>
+          <? if(!empty($enquete->questions)): ?>
   	  		<? foreach ($enquete->questions as $question) : ?> 
             
           <div class="question">
@@ -121,7 +122,8 @@
 
           </div>
             <? $counter++; ?>
-  	  		<? endforeach ?>
+  	  		<? endforeach; ?>
+          <? endif; ?>
 
 	  	</div>
 

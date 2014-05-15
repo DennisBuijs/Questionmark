@@ -110,7 +110,10 @@
 
     	<div class="enquete-container">
 
-				<? foreach ($enquete->questions as $question) : ?>
+				<? 
+
+        if(!empty($enquete->questions)):
+        foreach ($enquete->questions as $question) : ?>
 
             <?php
 
@@ -247,7 +250,8 @@
 
             ?>
 
-          <? endforeach ?>
+          <? endforeach; ?>
+          <? endif; ?>
 
 	  	</div>
 
