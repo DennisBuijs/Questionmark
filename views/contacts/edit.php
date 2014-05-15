@@ -10,7 +10,7 @@
       </button>
       <ul class="dropdown-menu">
         <li><a href="<?= URL ?>">Home</a></li>
-        <li><a href="<?= URL . "user/index"?>">Bewerk contacten</a></li>
+        <li><a href="<?= URL . "user/index"?>">Bewerk gebruikers</a></li>
         <li><a href="<?= URL . "index/logout"?>">Log uit</a></li>
       </ul>
     </div>
