@@ -51,6 +51,7 @@
                       class="form-control" 
                       type="text" 
                       name="questions[<?= $counter ?>][answer] ?>]"
+                      data-type="<?= $question->type; ?>"
                       <?php
                         foreach($question->attributes as $attribute) {
                           echo "placeholder=\"".$attribute['attribute']."\"";
@@ -69,6 +70,7 @@
                       class="form-control" 
                       name="questions[<?= $counter ?>][answer]" 
                       resizable="false" 
+                      data-type="<?= $question->type; ?>"
                       <?php
                         foreach($question->attributes as $attribute) {
                           echo "placeholder=\"".$attribute['attribute']."\"";
