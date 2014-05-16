@@ -27,20 +27,17 @@
   <div class="row">
     
     <div class="col-md-8 col-md-push-2 content">
-      
-      <ul class="list-group">
         <form class="main-form" action="<?= URL ?>enquete/run" method="post">
-          <textarea name="message"  class="form-control" rows="12">
-          </textarea>
+          <textarea name="message"  class="form-control" rows="12" data-required="required"></textarea>
           <div>U kunt de volgende tags gebruiken: <b>{{first_name}}</b>, <b>{{last_name}}</b> en <b>{{email}}</b></div><br>
           <input type="hidden" class="form-control" name="type" value="send">
           <input type="hidden" class="form-control" name="form_id" value="<?= $this->form_id ?>">
+          <ul class="form-group" data-required="required">
           <? foreach ($this->contacts as $contact) : ?>   
             <li class="list-group-item"><input type="checkbox" name="contacts[]" value="<?= $contact['id'] ?>"> - <?= $contact['first_name'] . " " . $contact['first_name']; ?> <small><?= $contact['email'] ?></small></li>        
           <? endforeach; ?>
+          </ul>
         </form>
-
-      </ul>
 
     </div>
 
