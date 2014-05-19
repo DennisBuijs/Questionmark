@@ -84,25 +84,30 @@ class Enquete_Model extends Model {
             . "\r\n"
             . "De enquete '{$_POST['enquete_name']}' ingevuld. Hieronder de resultaten \r\n \r\n \r\n";
 
-    foreach ($_POST['questions'] as $question) {
-      $message .= $question['question'] . " \r\n";
+    if (isset($_POST['questions']) && count($_POST['questions']) > 0) {
+      foreach ($_POST['questions'] as $question) {
+        $message .= $question['question'] . " \r\n";
 
-      if (isset($question['answer']) && is_array($question['answer']) && count($question['answer']) > 0) {
-        foreach ($question['answer'] as $answer) {
-          $message .= $answer . " \r\n";
+        if (isset($question['answer']) && is_array($question['answer']) && count($question['answer']) > 0) {
+          foreach ($question['answer'] as $answer) {
+            $message .= $answer . " \r\n";
+          }
+          $message .= "\r\n \r\n";
         }
-        $message .= "\r\n \r\n";
-      }
-      else {
-        if (isset($question['answer']))
-          $message .= $question['answer'] . " \r\n \r\n \r\n";
+        else {
+          if (isset($question['answer']))
+            $message .= $question['answer'] . " \r\n \r\n \r\n";
+        }
       }
     }
 
     $message .= "Met vriendelijke groet, \r\n \r\n";
     $message .= "Team Dennis";
 
-    // mail("admin@gmail.com", "Er is een enquete ingevuld", $message);
+    $data = $this->db->select("SELECT email FROM Users WHERE admin = 1");
+    $emailaddress = $data[0]['email'];
+
+    mail($emailaddress, "Er is een enquete ingevuld", $message);
   }
 
 
