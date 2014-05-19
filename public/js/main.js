@@ -103,7 +103,7 @@ $(document).ready(function() {
     $(".input-group[data-option-temp-id="+delete_temp_id+"]").remove();
   });
 
-  // HTML voor questions: textfield, textarea
+  // HTML for new questions
   question_html = [];
   question_html["textfield"] = "<div class=\"panel panel-default enquete-element\" style=\"height:209px\" data-type=\"textfield\" placeholder=\"\"><div class=\"panel-heading\"><input class=\"question-label\"></div><div class=\"panel-body\"><div class=\"form-group\"><label for=\"\">Plaatshouder</label><input class=\"form-control question-placeholder\"></div><div class=\"form-group col-md-6\"><label for=\"\">Verplicht</label><br><input class=\"question-required-checkbox\" type=\"checkbox\"> Verplicht</div><div class=\"col-md-6\"><div class=\"form-group\"><button class=\"btn btn-primary btn-sm pull-right delete-question\">&times;</button></div></div></div>";
   question_html["textarea"] = "<div class=\"panel panel-default enquete-element\" style=\"height:209px\" data-type=\"textarea\" placeholder=\"\"><div class=\"panel-heading\"><input class=\"question-label\"></div><div class=\"panel-body\"><div class=\"form-group\"><label for=\"\">Plaatshouder</label><input class=\"form-control question-placeholder\"></div><div class=\"form-group col-md-6\"><label for=\"\">Verplicht</label><br><input class=\"question-required-checkbox\" type=\"checkbox\"> Verplicht</div><div class=\"col-md-6\"><div class=\"form-group\"><button class=\"btn btn-primary btn-sm pull-right delete-question\">&times;</button></div></div></div>";
@@ -111,7 +111,7 @@ $(document).ready(function() {
   question_html["radio"] = "<div class=\"panel panel-default enquete-element\" style=\"min-height:224px\" data-type=\"radio\"> <div class=\"panel-heading\"> <input class=\"question-label\"> </div> <div class=\"panel-body\"> <div class=\"option-group\"> </div> <button class=\"btn btn-default add-option\">Optie toevoegen</button> <hr> <div class=\"question-meta\"> <div class=\"form-group col-md-6\"> <label for=\"\">Type veld</label><br> <select class=\"form-control question-multiplechoice-type\"> <option value=\"checkbox\">Checkbox</option> <option value=\"radio\" selected>Keuzerondje</option> <option value=\"select\">Selectieveld</option> </select> </div> <div class=\"form-group col-md-3\"> <label for=\"\">Verplicht</label><br> <input class=\"question-required-checkbox\" type=\"checkbox\"> Verplicht </div> <div class=\"col-md-3\"><button class=\"btn btn-primary btn-sm pull-right delete-question\">&times;</button></div></div> </div> </div>";
   question_html["select"] = "<div class=\"panel panel-default enquete-element\" style=\"min-height:224px\" data-type=\"select\"> <div class=\"panel-heading\"> <input class=\"question-label\"> </div> <div class=\"panel-body\"> <div class=\"option-group\"> </div> <button class=\"btn btn-default add-option\">Optie toevoegen</button> <hr> <div class=\"question-meta\"> <div class=\"form-group col-md-6\"> <label for=\"\">Type veld</label><br> <select class=\"form-control question-multiplechoice-type\"> <option value=\"checkbox\">Checkbox</option> <option value=\"radio\">Keuzerondje</option> <option value=\"select\" selected>Selectieveld</option> </select> </div> <div class=\"form-group col-md-3\"> <label for=\"\">Verplicht</label><br> <input class=\"question-required-checkbox\" type=\"checkbox\"> Verplicht </div> <div class=\"col-md-3\"><button class=\"btn btn-primary btn-sm pull-right delete-question\">&times;</button></div></div> </div> </div>";
 
-  // Functionaliteit voor het slepen van formulierelementen naar het formulier
+  // Dragging new questions into .enquete-container
   $(".enquete-elements .enquete-new-question").draggable({
       connectToSortable: ".enquete-container",
       revert: "invalid", 
@@ -223,7 +223,7 @@ $(".enquete-container .enquete-element").each(function() {
 
   $.ajax({
     type: "POST",
-    url: "http://localhost:8888/Questionmark/enquete/run",
+    url: document.domain+"/enquete/run",
     data: { type: "edit", json: json }
   })
   .done(function( msg ) {
