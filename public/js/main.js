@@ -238,7 +238,7 @@ $(".enquete-container .enquete-element").each(function() {
 
 });
 
-
+url = document.domain+"/questionmark/enquete/run";
 
 // Are you sure you want to do this?
 $(".sure").on("click", function() {

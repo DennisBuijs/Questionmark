@@ -4,7 +4,7 @@ class Enquete_Model extends Model {
 
   /**
    * Gets enquete to by id
-   * @param int $id The id of the enqeute
+   * @param int $id The id of the enquete
    * @return object Enquete object
    */
   public function get_enquete_by_id($id) {
@@ -14,7 +14,7 @@ class Enquete_Model extends Model {
 
   /**
    * Deletes enquete
-   * @param int $id The id of the enqeute
+   * @param int $id The id of the enquete
    */
   public function delete($id) {
     Enquete::delete($id);
@@ -30,7 +30,7 @@ class Enquete_Model extends Model {
 
 
   /**
-   * edits enqeute
+   * edits enquete
    */
   public function edit() {
     $json = $_POST['json'];

@@ -140,7 +140,7 @@ class Enquete {
 
 
   /**
-   * Gets a enquete by enqeute id
+   * Gets a enquete by enquete id
    * @param int $id the Id of the enquete to initialize
    * @return self
    */
