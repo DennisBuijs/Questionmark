@@ -223,7 +223,7 @@ $(".enquete-container .enquete-element").each(function() {
 
   $.ajax({
     type: "POST",
-    url: "http://localhost:8888/questionmark/enquete/run",
+    url: window.location.origin + "/questionmark/enquete/run",
     data: { type: "edit", json: json }
   })
   .done(function( msg ) {
@@ -238,7 +238,7 @@ $(".enquete-container .enquete-element").each(function() {
 
 });
 
-
+url = document.domain+"/questionmark/enquete/run";
 
 // Are you sure you want to do this?
 $(".sure").on("click", function() {
