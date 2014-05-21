@@ -223,7 +223,7 @@ $(".enquete-container .enquete-element").each(function() {
 
   $.ajax({
     type: "POST",
-    url: document.domain+"/enquete/run",
+    url: "http://localhost:8888/questionmark/enquete/run",
     data: { type: "edit", json: json }
   })
   .done(function( msg ) {
