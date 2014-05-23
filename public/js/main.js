@@ -148,6 +148,25 @@ $(document).ready(function() {
 
 
 
+<<<<<<< HEAD
+=======
+  json = JSON.stringify(enquete);
+
+  $.ajax({
+    type: "POST",
+    url: window.location.origin + "/questionmark/enquete/run",
+    data: { type: "edit", json: json }
+  })
+  .done(function( msg ) {
+  //   $("body").append("<pre style=\"margin-top: 100px; clear:both; position:absolute; z-index:2000;\">"+msg+"</pre>");
+    location.reload();
+  });
+  
+  // enquete = {};
+  // enquete["questions"] = {};
+  // enquete["deleted_question"] = [];
+  // enquete["deleted_attributes"] = [];
+>>>>>>> FETCH_HEAD
 
 
 
