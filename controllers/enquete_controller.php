@@ -12,7 +12,7 @@ class Enquete_Controller extends Controller {
 
     $this->view->enquete = $this->model->get_enquete_by_id($id);
 
-    $this->view->render('header');
+    $this->view->render('enquete/header');
     $this->view->render('enquete/index');
     $this->view->render('footer');
   }
@@ -63,7 +63,7 @@ class Enquete_Controller extends Controller {
 
 
   public function bedankt() {
-    $this->view->render('header');
+    $this->view->render('enquete/header');
     $this->view->render('enquete/bedankt');
     $this->view->render('footer');
   }
