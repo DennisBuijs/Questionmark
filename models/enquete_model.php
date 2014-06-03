@@ -108,6 +108,10 @@ class Enquete_Model extends Model {
     $emailaddress = $data[0]['email'];
 
     mail($emailaddress, "Er is een enquete ingevuld", $message);
+
+    $data = 
+    $insert = $this->db->insert("Answers", $data);
+
   }
 
 
@@ -127,6 +131,13 @@ class Enquete_Model extends Model {
    */
   public function get_contact_by_id($id) {
     return $this->db->select("SELECT id, first_name, last_name, email FROM Contacts WHERE id = :id", array(":id" => $id))[0];
+  }
+
+
+  public function get_results($id) {
+    
+    return $this->db->select("SELECT * FROM Answers WHERE");
+    
   }
 
 

@@ -75,4 +75,14 @@ class Enquete_Controller extends Controller {
   }
 
 
+  public function results($id) {
+
+    $this->view->enquete = $this->model->get_results($id);
+
+    $this->view->render('header');
+    $this->view->render('enquete/results');
+    $this->view->render('footer');
+  }
+
+
 }
