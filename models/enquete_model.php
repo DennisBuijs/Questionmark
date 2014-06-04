@@ -125,6 +125,8 @@ class Enquete_Model extends Model {
 
     mail($emailaddress, "Er is een enquete ingevuld", $message);
 
+  }
+
 
   /**
    * Gets all the contacts
@@ -148,8 +150,9 @@ class Enquete_Model extends Model {
 
   public function get_sessions($enquete_id) {
 
-    return $this->db->select("SELECT * FROM Sessions WHERE id = :enquete_id", array("enquete_id" => $enquete_id));
+    return $this->db->select("SELECT * FROM Sessions WHERE Enquete_id = :enquete_id", array("enquete_id" => $enquete_id));
 
+  }
 
   public function get_results($enquete_id, $sessions_id) {
     

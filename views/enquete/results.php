@@ -17,19 +17,15 @@
 
 	?>
 
-	<pre><? print_r($results); ?></pre>
-
 	<div class="col-md-4">
 
 		<ul class="list-group">
-
-			<?php $counter = 1; ?>
 		
 			<?php foreach($sessions as $session) { ?>
 
 				<a href="<?= URL; ?>enquete/results/<?= $session['Enquete_id']; ?>/<?= $session['id']; ?>" class="list-group-item">Ingevulde enquête <?= $session['id']; ?></a>
 
-			<?php $counter++; } ?>
+			<?php } ?>
 
 		</ul>
 
@@ -41,7 +37,17 @@
 
 			<div class="panel panel-default">
 				
-				
+				<div class="panel-heading">
+					
+					<?= $result['question']; ?>
+
+				</div>
+
+				<div class="panel-body">
+					
+					<?= $result['answer']; ?>
+
+				</div>
 
 			</div>
 
