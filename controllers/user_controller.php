@@ -31,7 +31,6 @@ class User_Controller extends Controller {
     $password = $this->model->generate_password();
 
     $this->model->mail($_POST['email'], $_POST['name'], $password);
-    die();
     $data = array(
         "name" => $_POST['name'],
         "email" => $_POST['email'],
