@@ -58,20 +58,26 @@ class Enquete_Model extends Model {
     $message = $_POST['message'];
     foreach ($_POST['contacts'] as $contact_id) {
 
-      $message_temp = $message;
       $data = $this->get_contact_by_id($contact_id);
 
       $first_name = $data["first_name"];
       $last_name = $data['last_name'];
       $email = $data['email'];
       $id = $data['id'];
-
-      $message_temp = str_replace("{{first_name}}", $first_name, $message_temp);
-      $message_temp = str_replace("{{last_name}}", $last_name, $message_temp);
-      $message_temp = str_replace("{{email}}", $email, $message_temp);
-      $message_temp = str_replace("{{id}}", $last_name, $message_temp);
-
-      mail($email, "Eqnuete", $message_temp);
+      
+      $message = str_replace("{{first_name}}", $first_name, $message);
+      $message = str_replace("{{last_name}}", $last_name, $message);
+      $message = str_replace("{{email}}", $email, $message);
+      $message = str_replace("{{id}}", $last_name, $message);
+      $message = str_replace("\r\n", "<br />", $message);     
+      
+      $message = "<div style=\"font-family:'helvetica neue', helvetica, arial, sans-serif; font-weight: 300; font-size: 16px;\">" . $message . "<br /><img src=\"http://www.biobeaker.nl/questionmark/public/images/logo.png\" alt=\"Logo van Bio Beaker\"/> </div>";
+      
+      $headers = 'MIME-Version: 1.0' . "\r\n";
+      $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+      $headers .= 'From: Bio Beaker - QuestionMark <no-reply@biobeaker.com>' . "\r\n";
+      
+      mail($email, "Equete uitnodiging Bio Beaker", $message, $headers);
     }
 
     header("Location: " . URL);
@@ -110,7 +116,7 @@ class Enquete_Model extends Model {
     mail($emailaddress, "Er is een enquete ingevuld", $message);
 
     $data = 
-    $insert = $this->db->insert("Answers", $data);
+   $insert = $this->db->insert("Answers", $data);
 
   }
 
@@ -130,7 +136,7 @@ class Enquete_Model extends Model {
    * @return type
    */
   public function get_contact_by_id($id) {
-    return $this->db->select("SELECT id, first_name, last_name, email FROM Contacts WHERE id = :id", array(":id" => $id))[0];
+   return $this->db->select("SELECT id, first_name, last_name, email FROM Contacts WHERE id = :id", array(":id" => $id))[0];
   }
 
 
