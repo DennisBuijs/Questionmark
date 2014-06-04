@@ -77,8 +77,13 @@ class Enquete_Controller extends Controller {
 
   public function results($enquete_id, $sessions_id) {
 
+    $this->view->first_session = $this->model->get_first_sessions($enquete_id);
     $this->view->sessions = $this->model->get_sessions($enquete_id);
     $this->view->results = $this->model->get_results($enquete_id, $sessions_id);
+
+    if(!isset($sessions_id)) {
+      header('Location: '.URL.'enquete/results/{$enquete_id}/{$this->view->first_session'});
+    }
 
     $this->view->render('header');
     $this->view->render('enquete/results');
