@@ -84,18 +84,15 @@ class User_Model extends Model {
    * @param string $name
    * @param string $password
    */
-  public function mail($mailadres, $name, $password) {
-    $mail = "Beste $name, \r\n"
-            . "\r\n"
-            . "Er is voor u een account aangemaakt. Hieronder staan de gegevens."
-            . "Naam: $name \r\n"
-            . "Wachtwoord: $password \r\n"
-            . "\r\n"
-            . "Met vriendelijke groet, \r\n"
-            . "\r\n"
-            . "Team Dennis";
+  public function mail($mailaddress, $name, $password) {
+    $mail = file_get_contents("mails/user.html");
+    $mail = str_replace('$name', $name, $mail);
+    $mail = str_replace('$password', $name, $mail);
 
-    mail($mailadres, 'Account gegevens - Questionmark?', $mail);
+    $headers = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    $headers .= 'From: Bio Beaker - QuestionMark <no-reply@biobeaker.com>' . "\r\n";
+    mail($mailaddress, 'Account gegevens - Questionmark?', $mail, $headers);
   }
 
 

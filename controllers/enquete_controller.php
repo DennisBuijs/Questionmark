@@ -75,9 +75,10 @@ class Enquete_Controller extends Controller {
   }
 
 
-  public function results($id) {
+  public function results($enquete_id, $sessions_id) {
 
-    $this->view->enquete = $this->model->get_results($id);
+    $this->view->sessions = $this->model->get_sessions($enquete_id);
+    $this->view->results = $this->model->get_results($enquete_id, $sessions_id);
 
     $this->view->render('header');
     $this->view->render('enquete/results');

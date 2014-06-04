@@ -58,20 +58,26 @@ class Enquete_Model extends Model {
     $message = $_POST['message'];
     foreach ($_POST['contacts'] as $contact_id) {
 
-      $message_temp = $message;
       $data = $this->get_contact_by_id($contact_id);
 
       $first_name = $data["first_name"];
       $last_name = $data['last_name'];
       $email = $data['email'];
       $id = $data['id'];
-
-      $message_temp = str_replace("{{first_name}}", $first_name, $message_temp);
-      $message_temp = str_replace("{{last_name}}", $last_name, $message_temp);
-      $message_temp = str_replace("{{email}}", $email, $message_temp);
-      $message_temp = str_replace("{{id}}", $last_name, $message_temp);
-
-      mail($email, "Eqnuete", $message_temp);
+      
+      $message = str_replace("{{first_name}}", $first_name, $message);
+      $message = str_replace("{{last_name}}", $last_name, $message);
+      $message = str_replace("{{email}}", $email, $message);
+      $message = str_replace("{{id}}", $last_name, $message);
+      $message = str_replace("\r\n", "<br />", $message);     
+      
+      $message = "<div style=\"font-family:'helvetica neue', helvetica, arial, sans-serif; font-weight: 300; font-size: 16px;\">" . $message . "<br /><img src=\"http://www.biobeaker.nl/questionmark/public/images/logo.png\" alt=\"Logo van Bio Beaker\"/> </div>";
+      
+      $headers = 'MIME-Version: 1.0' . "\r\n";
+      $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+      $headers .= 'From: Bio Beaker - QuestionMark <no-reply@biobeaker.com>' . "\r\n";
+      
+      mail($email, "Equete uitnodiging Bio Beaker", $message, $headers);
     }
 
     header("Location: " . URL);
@@ -80,23 +86,33 @@ class Enquete_Model extends Model {
 
   public function save() {
 
+    $this->db->insert("Sessions", array("Enquete_id" => $_POST['enquete_id']));
+    $session_id = $this->db->lastInsertId();
+
     $message = "Hallo, \r\n"
             . "\r\n"
             . "De enquete '{$_POST['enquete_name']}' ingevuld. Hieronder de resultaten \r\n \r\n \r\n";
 
     if (isset($_POST['questions']) && count($_POST['questions']) > 0) {
+
       foreach ($_POST['questions'] as $question) {
         $message .= $question['question'] . " \r\n";
 
         if (isset($question['answer']) && is_array($question['answer']) && count($question['answer']) > 0) {
           foreach ($question['answer'] as $answer) {
             $message .= $answer . " \r\n";
+
+            $this->db->insert("Answers", array("answer" => $answer, "Questions_id" => $question['id'], "Sessions_id" => $session_id));
+
           }
+
           $message .= "\r\n \r\n";
+
         }
         else {
           if (isset($question['answer']))
             $message .= $question['answer'] . " \r\n \r\n \r\n";
+            $this->db->insert("Answers", array("answer" => $question['answer'], "Questions_id" => $question['id'], "Sessions_id" => $session_id));
         }
       }
     }
@@ -109,9 +125,12 @@ class Enquete_Model extends Model {
 
     mail($emailaddress, "Er is een enquete ingevuld", $message);
 
+<<<<<<< HEAD
+=======
     $data = 
-    $insert = $this->db->insert("Answers", $data);
+   $insert = $this->db->insert("Answers", $data);
 
+>>>>>>> FETCH_HEAD
   }
 
 
@@ -130,13 +149,28 @@ class Enquete_Model extends Model {
    * @return type
    */
   public function get_contact_by_id($id) {
-    return $this->db->select("SELECT id, first_name, last_name, email FROM Contacts WHERE id = :id", array(":id" => $id))[0];
+   return $this->db->select("SELECT id, first_name, last_name, email FROM Contacts WHERE id = :id", array(":id" => $id))[0];
   }
 
 
-  public function get_results($id) {
+  public function get_sessions($enquete_id) {
+
+    return $this->db->select("SELECT * FROM Sessions WHERE id = :enquete_id", array("enquete_id" => $enquete_id));
+
+  }
+
+
+  public function get_results($enquete_id, $sessions_id) {
     
-    return $this->db->select("SELECT * FROM Answers WHERE");
+    $sql = "SELECT Answers.*, Sessions.*, Questions.question
+            FROM (Answers, Sessions)
+            LEFT JOIN Questions
+            ON Questions.id = Answers.Questions_id
+            WHERE Answers.Sessions_id = Sessions.id
+            AND Sessions.Enquete_id = :enquete_id
+            AND Sessions.id = :sessions_id";
+
+    return $this->db->select($sql, array(":enquete_id" => $enquete_id, ":sessions_id" => $sessions_id));
     
   }
 
