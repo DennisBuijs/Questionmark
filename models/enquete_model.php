@@ -125,14 +125,6 @@ class Enquete_Model extends Model {
 
     mail($emailaddress, "Er is een enquete ingevuld", $message);
 
-<<<<<<< HEAD
-=======
-    $data = 
-   $insert = $this->db->insert("Answers", $data);
-
->>>>>>> FETCH_HEAD
-  }
-
 
   /**
    * Gets all the contacts
@@ -150,14 +142,13 @@ class Enquete_Model extends Model {
    */
   public function get_contact_by_id($id) {
    return $this->db->select("SELECT id, first_name, last_name, email FROM Contacts WHERE id = :id", array(":id" => $id))[0];
+
   }
 
 
   public function get_sessions($enquete_id) {
 
     return $this->db->select("SELECT * FROM Sessions WHERE id = :enquete_id", array("enquete_id" => $enquete_id));
-
-  }
 
 
   public function get_results($enquete_id, $sessions_id) {
