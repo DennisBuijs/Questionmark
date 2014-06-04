@@ -89,39 +89,41 @@ class Enquete_Model extends Model {
     $this->db->insert("Sessions", array("Enquete_id" => $_POST['enquete_id']));
     $session_id = $this->db->lastInsertId();
 
-    $message = "Hallo, \r\n"
-            . "\r\n"
-            . "De enquete '{$_POST['enquete_name']}' ingevuld. Hieronder de resultaten \r\n \r\n \r\n";
+    $message = "Hallo, <br /><br />De enquete '{$_POST['enquete_name']}' is ingevuld. Hieronder de resultaten <br /><br /><br />";
 
     if (isset($_POST['questions']) && count($_POST['questions']) > 0) {
 
       foreach ($_POST['questions'] as $question) {
-        $message .= $question['question'] . " \r\n";
+        $message .= $question['question'] . " <br />";
 
         if (isset($question['answer']) && is_array($question['answer']) && count($question['answer']) > 0) {
           foreach ($question['answer'] as $answer) {
-            $message .= $answer . " \r\n";
+            $message .= $answer . " <br />";
 
             $this->db->insert("Answers", array("answer" => $answer, "Questions_id" => $question['id'], "Sessions_id" => $session_id));
 
           }
 
-          $message .= "\r\n \r\n";
+          $message .= "<br /><br />";
 
         }
         else {
           if (isset($question['answer']))
-            $message .= $question['answer'] . " \r\n \r\n \r\n";
+            $message .= $question['answer'] . "<br /><br /><br />";
             $this->db->insert("Answers", array("answer" => $question['answer'], "Questions_id" => $question['id'], "Sessions_id" => $session_id));
         }
       }
     }
 
-    $message .= "Met vriendelijke groet, \r\n \r\n";
-    $message .= "Team Dennis";
+    $message .= "Met vriendelijke groet,<br /><br />Bio Beaker";    
+    $message = "<div style=\"font-family:'helvetica neue', helvetica, arial, sans-serif; font-weight: 300; font-size: 16px;\">" . $message . "<br /><img src=\"http://www.biobeaker.nl/questionmark/public/images/logo.png\" alt=\"Logo van Bio Beaker\"/> </div>";
 
     $data = $this->db->select("SELECT email FROM Users WHERE admin = 1");
     $emailaddress = $data[0]['email'];
+
+    $headers = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    $headers .= 'From: Bio Beaker - QuestionMark <no-reply@biobeaker.com>' . "\r\n";
 
     mail($emailaddress, "Er is een enquete ingevuld", $message);
 
@@ -143,8 +145,8 @@ class Enquete_Model extends Model {
    * @return type
    */
   public function get_contact_by_id($id) {
-   return $this->db->select("SELECT id, first_name, last_name, email FROM Contacts WHERE id = :id", array(":id" => $id))[0];
-
+   $data =  $this->db->select("SELECT id, first_name, last_name, email FROM Contacts WHERE id = :id", array(":id" => $id));
+   return $data[0];
   }
 
 
