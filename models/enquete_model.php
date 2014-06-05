@@ -34,6 +34,7 @@ class Enquete_Model extends Model {
    */
   public function edit() {
     $json = $_POST['json'];
+    $json = stripslashes($json);
     $enquete = json_decode($json, true);
 
     $name = $enquete['name'];
@@ -52,7 +53,7 @@ class Enquete_Model extends Model {
 
   /**
    * sends enquete to contacts
-   */
+   */  
   public function send() {
 
     $message = $_POST['message'];
@@ -108,9 +109,10 @@ class Enquete_Model extends Model {
 
         }
         else {
-          if (isset($question['answer']))
+          if (isset($question['answer'])){
             $message .= $question['answer'] . "<br /><br /><br />";
-            $this->db->insert("Answers", array("answer" => $question['answer'], "Questions_id" => $question['id'], "Sessions_id" => $session_id));
+            $this->db->insert("Answers", array("answer" => $question['answer'], "Questions_id" => $question['id'], "Sessions_id" => $session_id));          
+          }
         }
       }
     }
@@ -125,7 +127,7 @@ class Enquete_Model extends Model {
     $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
     $headers .= 'From: Bio Beaker - QuestionMark <no-reply@biobeaker.com>' . "\r\n";
 
-    mail($emailaddress, "Er is een enquete ingevuld", $message);
+    mail($emailaddress, "Er is een enquete ingevuld", $message, $headers);
 
   }
 

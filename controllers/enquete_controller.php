@@ -45,13 +45,13 @@ class Enquete_Controller extends Controller {
   }
 
 
-  public function run() {
+  public function run() {       
     switch ($_POST['type']) {
       case 'send' :
         $this->model->send();
         header("Location: " . URL);
         break;
-      case 'edit' :
+      case 'edit' :       
         $this->model->edit();
         break;
       case 'normal' :
