@@ -20,6 +20,8 @@
 	<div class="col-md-4">
 
 		<ul class="list-group">
+
+			<li class="list-group-item"><strong>Enquête:</strong><br><span class="lead"><?= $results[0]['enquete_name']; ?></span></li>
 		
 			<?php foreach($sessions as $session) { ?>
 

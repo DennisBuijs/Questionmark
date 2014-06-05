@@ -152,6 +152,13 @@ class Enquete_Model extends Model {
   }
 
 
+  public function get_first_session($enquete_id) {
+
+    return $this->db->select("SELECT MIN(id) FROM Sessions WHERE Enquete_id = :enquete_id", array("enquete_id" => $enquete_id));
+
+  }
+
+
   public function get_sessions($enquete_id) {
 
     return $this->db->select("SELECT * FROM Sessions WHERE Enquete_id = :enquete_id", array("enquete_id" => $enquete_id));
@@ -160,10 +167,12 @@ class Enquete_Model extends Model {
 
   public function get_results($enquete_id, $sessions_id) {
     
-    $sql = "SELECT Answers.*, Sessions.*, Questions.question
+    $sql = "SELECT Answers.*, Sessions.*, Questions.question, Enquetes.name as enquete_name
             FROM (Answers, Sessions)
             LEFT JOIN Questions
             ON Questions.id = Answers.Questions_id
+            LEFT JOIN Enquetes
+            ON Enquetes.id = Sessions.Enquete_id
             WHERE Answers.Sessions_id = Sessions.id
             AND Sessions.Enquete_id = :enquete_id
             AND Sessions.id = :sessions_id";
