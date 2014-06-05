@@ -87,7 +87,7 @@ class User_Model extends Model {
   public function mail($mailaddress, $name, $password) {
     $mail = file_get_contents("mails/user.html");
     $mail = str_replace('$name', $name, $mail);
-    $mail = str_replace('$password', $name, $mail);
+    $mail = str_replace('$password', $name, $password);
 
     $headers = 'MIME-Version: 1.0' . "\r\n";
     $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
